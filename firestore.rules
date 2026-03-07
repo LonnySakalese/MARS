@@ -6,6 +6,24 @@ service cloud.firestore {
     match /users/{userId} {
       allow read: if request.auth != null;
       allow write: if request.auth != null && request.auth.uid == userId;
+      
+      // Completions subcollection (habits tracking)
+      match /completions/{docId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+      
+      // Stats subcollection
+      match /stats/{docId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
+      
+      // Habits subcollection
+      match /habits/{habitId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
     }
     
     // Groups collection
