@@ -457,11 +457,20 @@ async function performMigration() {
             console.log('✅ Noms personnalisés migrés');
         }
 
+        // Attendre un peu pour s'assurer que Firestore a bien synchronisé
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Vérification finale : au moins quelques docs existent dans Firestore
+        const testQuery = await db.collection('users').doc(user.uid).collection('completions').limit(3).get();
+        if (testQuery.size === 0) {
+            throw new Error('Aucune donnée trouvée dans Firestore après migration - annulation');
+        }
+
         localStorage.removeItem('warriorTracker');
 
         closeMigrationModal();
         showPopup('Migration réussie ! Toutes tes données ont été transférées.', 'success');
-        console.log('✅ Migration complète');
+        console.log('✅ Migration complète - vérifiée');
 
     } catch (error) {
         console.error('❌ Erreur de migration:', error);
