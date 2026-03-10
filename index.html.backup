@@ -31,7 +31,7 @@
     <!-- Favicon SVG intégré directement dans le HTML -->
     <link rel="apple-touch-icon" href="favicon.svg">
     <!-- Icône pour l'écran d'accueil sur les appareils Apple -->
-    <title>PROJET FEVRIER</title>
+    <title>PROJET MARS</title>
     <!-- Titre de la page qui s'affiche dans l'onglet du navigateur -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Inclusion de la bibliothèque Chart.js pour les graphiques -->
@@ -57,7 +57,7 @@
                     <path d="M 66 16 L 77 18 L 75 29" fill="none" stroke="#F5F5F0" stroke-width="6"
                         stroke-linecap="round" />
                 </svg>
-                <h1>PROJET FEVRIER</h1>
+                <h1>PROJET MARS</h1>
             </div>
 
             <div class="auth-tabs">
@@ -91,7 +91,7 @@
 
     <!-- En-tête principal de l'application -->
     <div class="header">
-        <h1>PROJET FEVRIER</h1>
+        <h1>PROJET MARS</h1>
         <div class="quote">TEXTE</div>
     </div>
 
@@ -621,7 +621,7 @@
                 <div class="tutorial-subtitle typewriter">Tu viens de rejoindre un groupe très fermé...</div>
                 <div class="tutorial-content">
                     <p class="tutorial-text fade-in-delay">
-                        <strong>PROJET FEVRIER</strong> n'est pas une simple application.<br>
+                        <strong>PROJET MARS</strong> n'est pas une simple application.<br>
                         C'est un <span class="highlight">Système</span> conçu pour forger ta discipline et atteindre tes
                         objectifs.
                     </p>

@@ -1,125 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0A0A0A">
-    <title>CGU - PROJET FEVRIER</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <title>CGU - PROJET MARS</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: #0A0A0A;
-            color: #C5C5C0;
-            min-height: 100vh;
-            padding: 20px;
-            padding-top: env(safe-area-inset-top, 20px);
-            line-height: 1.7;
-        }
-        .container { max-width: 640px; margin: 0 auto; }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 10px;
-            color: #F5F5F0;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            transition: background 0.2s;
-        }
-        .back-link:active { background: rgba(255,255,255,0.1); }
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #F5F5F0;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-        .subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 30px;
-        }
-        h2 {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #F5F5F0;
-            margin: 24px 0 10px;
-            letter-spacing: 1px;
-        }
-        p, li { font-size: 0.85rem; margin-bottom: 10px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 6px; }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.3);
-            text-align: center;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+          sans-serif;
+        background: #0a0a0a;
+        color: #c5c5c0;
+        min-height: 100vh;
+        padding: 20px;
+        padding-top: env(safe-area-inset-top, 20px);
+        line-height: 1.7;
+      }
+      .container {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        color: #f5f5f0;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        transition: background 0.2s;
+      }
+      .back-link:active {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #f5f5f0;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #f5f5f0;
+        margin: 24px 0 10px;
+        letter-spacing: 1px;
+      }
+      p,
+      li {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      .footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <a href="#" class="back-link" onclick="event.preventDefault(); if(window.history.length > 1) history.back(); else window.location.href='index.html';">← Retour</a>
-        
-        <h1>CONDITIONS GÉNÉRALES D'UTILISATION</h1>
-        <p class="subtitle">Dernière mise à jour : 23 février 2026</p>
+      <a
+        href="#"
+        class="back-link"
+        onclick="
+          event.preventDefault();
+          if (window.history.length > 1) history.back();
+          else window.location.href = 'index.html';
+        "
+        >← Retour</a
+      >
 
-        <h2>1. Objet</h2>
-        <p>Les présentes CGU régissent l'utilisation de l'application web « PROJET FEVRIER » (ci-après « l'Application »), accessible à l'adresse https://lonnysakalese.github.io/FEVRIER/. L'Application est un outil gratuit de suivi d'habitudes personnelles.</p>
+      <h1>CONDITIONS GÉNÉRALES D'UTILISATION</h1>
+      <p class="subtitle">Dernière mise à jour : 23 février 2026</p>
 
-        <h2>2. Acceptation</h2>
-        <p>L'utilisation de l'Application implique l'acceptation pleine et entière des présentes CGU. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'Application.</p>
+      <h2>1. Objet</h2>
+      <p>
+        Les présentes CGU régissent l'utilisation de l'application web « PROJET
+        MARS » (ci-après « l'Application »), accessible à l'adresse
+        https://lonnysakalese.github.io/FEVRIER/. L'Application est un outil
+        gratuit de suivi d'habitudes personnelles.
+      </p>
 
-        <h2>3. Description du service</h2>
-        <p>L'Application permet de :</p>
-        <ul>
-            <li>Créer et suivre des habitudes quotidiennes</li>
-            <li>Visualiser ses statistiques et sa progression</li>
-            <li>Rejoindre des groupes et interagir avec d'autres utilisateurs</li>
-            <li>Participer à des challenges et classements</li>
-        </ul>
+      <h2>2. Acceptation</h2>
+      <p>
+        L'utilisation de l'Application implique l'acceptation pleine et entière
+        des présentes CGU. Si vous n'acceptez pas ces conditions, veuillez ne
+        pas utiliser l'Application.
+      </p>
 
-        <h2>4. Inscription et compte</h2>
-        <p>L'accès à certaines fonctionnalités nécessite la création d'un compte via Firebase Authentication (email/mot de passe). L'utilisateur s'engage à fournir des informations exactes et à maintenir la confidentialité de ses identifiants.</p>
+      <h2>3. Description du service</h2>
+      <p>L'Application permet de :</p>
+      <ul>
+        <li>Créer et suivre des habitudes quotidiennes</li>
+        <li>Visualiser ses statistiques et sa progression</li>
+        <li>Rejoindre des groupes et interagir avec d'autres utilisateurs</li>
+        <li>Participer à des challenges et classements</li>
+      </ul>
 
-        <h2>5. Données personnelles</h2>
-        <p>Le traitement des données personnelles est décrit dans notre <a href="privacy.html" style="color: #2ECC71;">Politique de Confidentialité</a>.</p>
+      <h2>4. Inscription et compte</h2>
+      <p>
+        L'accès à certaines fonctionnalités nécessite la création d'un compte
+        via Firebase Authentication (email/mot de passe). L'utilisateur s'engage
+        à fournir des informations exactes et à maintenir la confidentialité de
+        ses identifiants.
+      </p>
 
-        <h2>6. Comportement des utilisateurs</h2>
-        <p>Les utilisateurs s'engagent à :</p>
-        <ul>
-            <li>Utiliser l'Application de manière loyale et conforme à sa finalité</li>
-            <li>Ne pas publier de contenu offensant, illégal ou inapproprié dans les chats de groupe</li>
-            <li>Respecter les autres utilisateurs</li>
-            <li>Ne pas tenter de perturber le fonctionnement de l'Application</li>
-        </ul>
+      <h2>5. Données personnelles</h2>
+      <p>
+        Le traitement des données personnelles est décrit dans notre
+        <a href="privacy.html" style="color: #2ecc71"
+          >Politique de Confidentialité</a
+        >.
+      </p>
 
-        <h2>7. Propriété intellectuelle</h2>
-        <p>L'ensemble des éléments de l'Application (design, code, textes, images) sont protégés par le droit d'auteur. Toute reproduction non autorisée est interdite.</p>
+      <h2>6. Comportement des utilisateurs</h2>
+      <p>Les utilisateurs s'engagent à :</p>
+      <ul>
+        <li>
+          Utiliser l'Application de manière loyale et conforme à sa finalité
+        </li>
+        <li>
+          Ne pas publier de contenu offensant, illégal ou inapproprié dans les
+          chats de groupe
+        </li>
+        <li>Respecter les autres utilisateurs</li>
+        <li>Ne pas tenter de perturber le fonctionnement de l'Application</li>
+      </ul>
 
-        <h2>8. Limitation de responsabilité</h2>
-        <p>L'Application est fournie « en l'état ». L'éditeur ne garantit pas l'absence d'interruptions ou d'erreurs. L'éditeur ne saurait être tenu responsable des pertes de données ou de tout dommage indirect lié à l'utilisation de l'Application.</p>
+      <h2>7. Propriété intellectuelle</h2>
+      <p>
+        L'ensemble des éléments de l'Application (design, code, textes, images)
+        sont protégés par le droit d'auteur. Toute reproduction non autorisée
+        est interdite.
+      </p>
 
-        <h2>9. Gratuité</h2>
-        <p>L'Application est actuellement gratuite. Des fonctionnalités premium payantes pourront être proposées ultérieurement.</p>
+      <h2>8. Limitation de responsabilité</h2>
+      <p>
+        L'Application est fournie « en l'état ». L'éditeur ne garantit pas
+        l'absence d'interruptions ou d'erreurs. L'éditeur ne saurait être tenu
+        responsable des pertes de données ou de tout dommage indirect lié à
+        l'utilisation de l'Application.
+      </p>
 
-        <h2>10. Modification des CGU</h2>
-        <p>L'éditeur se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs seront informés des modifications via l'Application.</p>
+      <h2>9. Gratuité</h2>
+      <p>
+        L'Application est actuellement gratuite. Des fonctionnalités premium
+        payantes pourront être proposées ultérieurement.
+      </p>
 
-        <h2>11. Droit applicable</h2>
-        <p>Les présentes CGU sont soumises au droit français. En cas de litige, les tribunaux de Lyon (France) seront seuls compétents.</p>
+      <h2>10. Modification des CGU</h2>
+      <p>
+        L'éditeur se réserve le droit de modifier les présentes CGU à tout
+        moment. Les utilisateurs seront informés des modifications via
+        l'Application.
+      </p>
 
-        <h2>12. Contact</h2>
-        <p>Pour toute question relative aux présentes CGU, vous pouvez nous contacter via l'Application.</p>
+      <h2>11. Droit applicable</h2>
+      <p>
+        Les présentes CGU sont soumises au droit français. En cas de litige, les
+        tribunaux de Lyon (France) seront seuls compétents.
+      </p>
 
-        <div class="footer">PROJET FEVRIER © 2026 — Tous droits réservés</div>
+      <h2>12. Contact</h2>
+      <p>
+        Pour toute question relative aux présentes CGU, vous pouvez nous
+        contacter via l'Application.
+      </p>
+
+      <div class="footer">PROJET MARS © 2026 — Tous droits réservés</div>
     </div>
-</body>
+  </body>
 </html>

@@ -1,2150 +1,2492 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJET FEVRIER — Forge ta discipline</title>
-    <meta name="description" content="PROJET FEVRIER : l'application de suivi d'habitudes qui forge ta discipline. Crée tes habitudes, maintiens tes streaks, évolue chaque jour.">
-    <meta property="og:title" content="PROJET FEVRIER — Forge ta discipline">
-    <meta property="og:description" content="Suivi d'habitudes minimaliste. Streaks, rangs, badges et statistiques pour devenir meilleur chaque jour.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://lonnysakalese.github.io/FEVRIER/">
-    <meta property="og:image" content="https://lonnysakalese.github.io/FEVRIER/icons/icon-512.png">
-    <meta property="og:locale" content="fr_FR">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PROJET FEVRIER — Forge ta discipline">
-    <meta name="twitter:description" content="Suivi d'habitudes minimaliste. Streaks, rangs, badges et statistiques pour devenir meilleur chaque jour.">
-    <meta name="twitter:image" content="https://lonnysakalese.github.io/FEVRIER/icons/icon-512.png">
-    <meta name="theme-color" content="#0A0A0A">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A0A' width='100' height='100' rx='20'/><path d='M 23 74 Q 27 70 31 66 Q 39 58 47 54 Q 55 50 62 39 Q 68 29 74 19' fill='none' stroke='%23F5F5F0' stroke-width='6' stroke-linecap='round'/><path d='M 66 16 L 77 18 L 75 29' fill='none' stroke='%23F5F5F0' stroke-width='6' stroke-linecap='round'/></svg>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PROJET MARS — Forge ta discipline</title>
+    <meta
+      name="description"
+      content="PROJET MARS : l'application de suivi d'habitudes qui forge ta discipline. Crée tes habitudes, maintiens tes streaks, évolue chaque jour."
+    />
+    <meta property="og:title" content="PROJET MARS — Forge ta discipline" />
+    <meta
+      property="og:description"
+      content="Suivi d'habitudes minimaliste. Streaks, rangs, badges et statistiques pour devenir meilleur chaque jour."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://lonnysakalese.github.io/FEVRIER/"
+    />
+    <meta
+      property="og:image"
+      content="https://lonnysakalese.github.io/FEVRIER/icons/icon-512.png"
+    />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PROJET MARS — Forge ta discipline" />
+    <meta
+      name="twitter:description"
+      content="Suivi d'habitudes minimaliste. Streaks, rangs, badges et statistiques pour devenir meilleur chaque jour."
+    />
+    <meta
+      name="twitter:image"
+      content="https://lonnysakalese.github.io/FEVRIER/icons/icon-512.png"
+    />
+    <meta name="theme-color" content="#0A0A0A" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A0A' width='100' height='100' rx='20'/><path d='M 23 74 Q 27 70 31 66 Q 39 58 47 54 Q 55 50 62 39 Q 68 29 74 19' fill='none' stroke='%23F5F5F0' stroke-width='6' stroke-linecap='round'/><path d='M 66 16 L 77 18 L 75 29' fill='none' stroke='%23F5F5F0' stroke-width='6' stroke-linecap='round'/></svg>"
+    />
     <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --black: #0A0A0A;
-            --accent: #F5F5F0;
-            --accent-dim: #8A8A85;
-            --accent-green: #19E639;
-            --card-bg: #141414;
-            --border: #222;
-        }
+      :root {
+        --black: #0a0a0a;
+        --accent: #f5f5f0;
+        --accent-dim: #8a8a85;
+        --accent-green: #19e639;
+        --card-bg: #141414;
+        --border: #222;
+      }
 
-        html {
-            scroll-behavior: smooth;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: var(--black);
-            color: var(--accent);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: var(--black);
+        color: var(--accent);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
 
-        /* ===== FADE-IN ===== */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
+      /* ===== FADE-IN ===== */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease-out,
+          transform 0.7s ease-out;
+      }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            overflow: hidden;
-        }
+      /* ===== HERO ===== */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+        position: relative;
+        overflow: hidden;
+      }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 120px;
-            background: linear-gradient(to bottom, transparent, var(--black));
-            pointer-events: none;
-        }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background: linear-gradient(to bottom, transparent, var(--black));
+        pointer-events: none;
+      }
 
-        /* ===== PARTICLES ===== */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
+      /* ===== PARTICLES ===== */
+      .particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            opacity: 0;
-            animation: particleFloat linear infinite;
-        }
+      .particle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: var(--accent-green);
+        border-radius: 50%;
+        opacity: 0;
+        animation: particleFloat linear infinite;
+      }
 
-        .particle:nth-child(odd) {
-            background: var(--accent);
-            width: 2px;
-            height: 2px;
-        }
+      .particle:nth-child(odd) {
+        background: var(--accent);
+        width: 2px;
+        height: 2px;
+      }
 
-        @keyframes particleFloat {
-            0% {
-                opacity: 0;
-                transform: translateY(0) translateX(0);
-            }
-            10% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) translateX(50px);
-            }
+      @keyframes particleFloat {
+        0% {
+          opacity: 0;
+          transform: translateY(0) translateX(0);
         }
-
-        .hero-logo {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 32px;
-            animation: float 3s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
+        10% {
+          opacity: 0.4;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        90% {
+          opacity: 0.4;
         }
-
-        .hero h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 800;
-            letter-spacing: 6px;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
+        100% {
+          opacity: 0;
+          transform: translateY(-100vh) translateX(50px);
         }
+      }
 
-        .hero-tagline {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--accent);
-            position: relative;
-            z-index: 1;
+      .hero-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 32px;
+        animation: float 3s ease-in-out infinite;
+        position: relative;
+        z-index: 1;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
         }
-
-        .hero-subtext {
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
-            color: var(--accent-dim);
-            max-width: 480px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
+        50% {
+          transform: translateY(-8px);
         }
+      }
 
-        .cta-btn {
-            display: inline-block;
-            padding: 16px 40px;
-            background: var(--accent);
-            color: var(--black);
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            z-index: 1;
+      .hero h1 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: 6px;
+        margin-bottom: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-dim) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-tagline {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: var(--accent);
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-subtext {
+        font-size: clamp(0.9rem, 2vw, 1.05rem);
+        color: var(--accent-dim);
+        max-width: 480px;
+        margin: 0 auto 40px;
+        line-height: 1.7;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        padding: 16px 40px;
+        background: var(--accent);
+        color: var(--black);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-decoration: none;
+        border-radius: 8px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(245, 245, 240, 0.15);
+      }
+
+      .cta-btn:active {
+        transform: translateY(0);
+      }
+
+      .cta-btn--green {
+        background: var(--accent-green);
+        color: var(--black);
+        animation: ctaPulse 2.5s ease-in-out infinite;
+      }
+
+      .cta-btn--green:hover {
+        box-shadow: 0 8px 30px rgba(25, 230, 57, 0.2);
+        animation: none;
+      }
+
+      @keyframes ctaPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(25, 230, 57, 0.4);
         }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(245, 245, 240, 0.15);
+        50% {
+          box-shadow: 0 0 0 12px rgba(25, 230, 57, 0);
         }
+      }
 
-        .cta-btn:active {
-            transform: translateY(0);
-        }
+      /* ===== SECTION COMMON ===== */
+      section {
+        padding: 80px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
 
-        .cta-btn--green {
-            background: var(--accent-green);
-            color: var(--black);
-            animation: ctaPulse 2.5s ease-in-out infinite;
-        }
+      .section-heading {
+        font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-align: center;
+        margin-bottom: 48px;
+      }
 
-        .cta-btn--green:hover {
-            box-shadow: 0 8px 30px rgba(25, 230, 57, 0.2);
-            animation: none;
-        }
+      /* ===== FEATURES ===== */
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
 
-        @keyframes ctaPulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(25, 230, 57, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 12px rgba(25, 230, 57, 0);
-            }
-        }
-
-        /* ===== SECTION COMMON ===== */
-        section {
-            padding: 80px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .section-heading {
-            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        /* ===== FEATURES ===== */
+      @media (min-width: 600px) {
         .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
         }
+      }
 
-        @media (min-width: 600px) {
-            .features-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
-        }
+      .feature-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 28px 24px;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px 24px;
-            transition: border-color 0.3s, transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 12px 12px 0 0;
+      }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            border-radius: 12px 12px 0 0;
-        }
+      .feature-card:nth-child(1)::before {
+        background: linear-gradient(90deg, #19e639, #0fa82a);
+      }
 
-        .feature-card:nth-child(1)::before {
-            background: linear-gradient(90deg, #19E639, #0fa82a);
-        }
+      .feature-card:nth-child(2)::before {
+        background: linear-gradient(90deg, #ff6b35, #e64a19);
+      }
 
-        .feature-card:nth-child(2)::before {
-            background: linear-gradient(90deg, #FF6B35, #E64A19);
-        }
+      .feature-card:nth-child(3)::before {
+        background: linear-gradient(90deg, #ffd700, #ffa000);
+      }
 
-        .feature-card:nth-child(3)::before {
-            background: linear-gradient(90deg, #FFD700, #FFA000);
-        }
+      .feature-card:nth-child(4)::before {
+        background: linear-gradient(90deg, #19a3e6, #1565c0);
+      }
 
-        .feature-card:nth-child(4)::before {
-            background: linear-gradient(90deg, #19A3E6, #1565C0);
-        }
+      .feature-card:hover {
+        border-color: var(--accent-dim);
+        transform: translateY(-3px);
+      }
 
-        .feature-card:hover {
-            border-color: var(--accent-dim);
-            transform: translateY(-3px);
-        }
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 14px;
+        display: block;
+      }
 
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 14px;
-            display: block;
-        }
+      .feature-title {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
 
-        .feature-title {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
+      .feature-desc {
+        font-size: 0.9rem;
+        color: var(--accent-dim);
+        line-height: 1.6;
+      }
 
-        .feature-desc {
-            font-size: 0.9rem;
-            color: var(--accent-dim);
-            line-height: 1.6;
-        }
+      /* ===== STATS NUMBERS ===== */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 48px;
+      }
 
-        /* ===== STATS NUMBERS ===== */
+      @media (min-width: 600px) {
         .stats-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 48px;
+          grid-template-columns: repeat(4, 1fr);
         }
+      }
 
-        @media (min-width: 600px) {
-            .stats-row {
-                grid-template-columns: repeat(4, 1fr);
-            }
+      .stat-item {
+        text-align: center;
+        padding: 20px 10px;
+      }
+
+      .stat-number {
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        font-weight: 800;
+        color: var(--accent-green);
+        letter-spacing: 2px;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+        color: var(--accent-dim);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* ===== HOW IT WORKS ===== */
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .step-number {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid var(--accent-green);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--accent-green);
+      }
+
+      .step-text {
+        font-size: 1.05rem;
+        font-weight: 500;
+      }
+
+      /* ===== DEMO SECTION ===== */
+      .demo-section {
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .phone-frame {
+        display: inline-block;
+        width: 100%;
+        max-width: 340px;
+        background: #111;
+        border: 2px solid #333;
+        border-radius: 36px;
+        padding: 20px 16px 24px;
+        position: relative;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      .phone-notch {
+        width: 100px;
+        height: 6px;
+        background: #333;
+        border-radius: 3px;
+        margin: 0 auto 20px;
+      }
+
+      .phone-screen {
+        background: var(--black);
+        border-radius: 16px;
+        padding: 20px 16px;
+        text-align: left;
+      }
+
+      .demo-header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .demo-date {
+        font-size: 0.75rem;
+        color: var(--accent-dim);
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .demo-score {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--accent);
+        transition: color 0.3s;
+      }
+
+      .demo-score.perfect {
+        color: var(--accent-green);
+      }
+
+      .demo-percentage {
+        font-size: 0.85rem;
+        color: var(--accent-dim);
+        margin-top: 2px;
+      }
+
+      .demo-rank {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        border: 1px solid var(--border);
+        color: var(--accent-dim);
+        transition: all 0.4s ease;
+      }
+
+      .demo-rank.rank-apprenti {
+        border-color: #e6a519;
+        color: #e6a519;
+      }
+
+      .demo-rank.rank-confirme {
+        border-color: #19a3e6;
+        color: #19a3e6;
+      }
+
+      .demo-rank.rank-maitre {
+        border-color: var(--accent-green);
+        color: var(--accent-green);
+        box-shadow: 0 0 12px rgba(25, 230, 57, 0.3);
+      }
+
+      .demo-streak {
+        font-size: 0.85rem;
+        color: var(--accent-dim);
+        margin-top: 6px;
+        transition: color 0.3s;
+      }
+
+      .demo-streak.active {
+        color: #ff6b35;
+      }
+
+      .demo-habits {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .demo-habit {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 14px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .demo-habit:active {
+        transform: scale(0.98);
+      }
+
+      .demo-habit.checked {
+        border-color: var(--accent-green);
+        background: rgba(25, 230, 57, 0.05);
+      }
+
+      .demo-checkbox {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #444;
+        border-radius: 6px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .demo-habit.checked .demo-checkbox {
+        background: var(--accent-green);
+        border-color: var(--accent-green);
+        animation: checkPop 0.4s cubic-bezier(0.17, 0.67, 0.21, 1.3);
+      }
+
+      @keyframes checkPop {
+        0% {
+          transform: scale(1);
         }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px 10px;
+        40% {
+          transform: scale(1.3);
         }
-
-        .stat-number {
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 800;
-            color: var(--accent-green);
-            letter-spacing: 2px;
-            line-height: 1;
-            margin-bottom: 6px;
+        100% {
+          transform: scale(1);
         }
+      }
 
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--accent-dim);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+      .demo-checkbox svg {
+        width: 14px;
+        height: 14px;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.2s ease;
+      }
+
+      .demo-habit.checked .demo-checkbox svg {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .demo-habit-emoji {
+        font-size: 1.3rem;
+      }
+
+      .demo-habit-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--accent);
+        transition: opacity 0.3s;
+      }
+
+      .demo-habit.checked .demo-habit-label {
+        opacity: 0.6;
+      }
+
+      .demo-ripple {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--accent-green);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .demo-ripple.animate {
+        animation: rippleOut 0.6s ease-out;
+      }
+
+      @keyframes rippleOut {
+        0% {
+          transform: scale(0.5);
+          opacity: 0.5;
         }
-
-        /* ===== HOW IT WORKS ===== */
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-            max-width: 500px;
-            margin: 0 auto;
+        100% {
+          transform: scale(3);
+          opacity: 0;
         }
+      }
 
-        .step {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+      .demo-perfect-msg {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--accent-green);
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.5s cubic-bezier(0.17, 0.67, 0.21, 1.3);
+        letter-spacing: 1px;
+      }
+
+      .demo-perfect-msg.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .demo-reset {
+        display: block;
+        margin: 16px auto 0;
+        padding: 8px 20px;
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--accent-dim);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: inherit;
+      }
+
+      .demo-reset:hover {
+        border-color: var(--accent-dim);
+        color: var(--accent);
+      }
+
+      /* ===== CONFETTI ===== */
+      .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+        overflow: hidden;
+      }
+
+      .confetti-piece {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        top: -10px;
+        animation: confettiFall linear forwards;
+      }
+
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 1;
         }
-
-        .step-number {
-            flex-shrink: 0;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent-green);
+        100% {
+          transform: translateY(100vh) rotate(720deg) scale(0.3);
+          opacity: 0;
         }
+      }
 
-        .step-text {
-            font-size: 1.05rem;
-            font-weight: 500;
-        }
+      /* ===== QUOTE ===== */
+      .quote-section {
+        text-align: center;
+        padding: 100px 20px;
+      }
 
-        /* ===== DEMO SECTION ===== */
-        .demo-section {
-            max-width: 900px;
-            text-align: center;
-        }
+      .quote-text {
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        font-style: italic;
+        font-weight: 300;
+        line-height: 1.8;
+        max-width: 650px;
+        margin: 0 auto 16px;
+        color: var(--accent);
+      }
 
-        .phone-frame {
-            display: inline-block;
-            width: 100%;
-            max-width: 340px;
-            background: #111;
-            border: 2px solid #333;
-            border-radius: 36px;
-            padding: 20px 16px 24px;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-        }
+      .quote-author {
+        font-size: 0.9rem;
+        color: var(--accent-dim);
+        letter-spacing: 1px;
+      }
 
-        .phone-notch {
-            width: 100px;
-            height: 6px;
-            background: #333;
-            border-radius: 3px;
-            margin: 0 auto 20px;
-        }
+      /* ===== COMMUNITY STATS ===== */
+      .community-section {
+        text-align: center;
+        padding: 80px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
 
-        .phone-screen {
-            background: var(--black);
-            border-radius: 16px;
-            padding: 20px 16px;
-            text-align: left;
-        }
+      .community-section .section-heading {
+        margin-bottom: 32px;
+      }
 
-        .demo-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+      .community-counter {
+        font-size: clamp(2.5rem, 7vw, 4rem);
+        font-weight: 800;
+        color: var(--accent-green);
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
 
-        .demo-date {
-            font-size: 0.75rem;
-            color: var(--accent-dim);
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
+      .community-label {
+        font-size: 1rem;
+        color: var(--accent-dim);
+        letter-spacing: 1px;
+      }
 
-        .demo-score {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--accent);
-            transition: color 0.3s;
-        }
+      /* ===== FINAL CTA ===== */
+      .final-cta {
+        text-align: center;
+        padding: 80px 20px 100px;
+      }
 
-        .demo-score.perfect {
-            color: var(--accent-green);
-        }
+      .final-cta h2 {
+        font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+        font-weight: 700;
+        margin-bottom: 32px;
+        letter-spacing: 2px;
+      }
 
-        .demo-percentage {
-            font-size: 0.85rem;
-            color: var(--accent-dim);
-            margin-top: 2px;
-        }
+      /* ===== AVAILABLE EVERYWHERE ===== */
+      .available-section {
+        text-align: center;
+        max-width: 900px;
+      }
 
-        .demo-rank {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            border: 1px solid var(--border);
-            color: var(--accent-dim);
-            transition: all 0.4s ease;
-        }
+      .platforms-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        max-width: 500px;
+        margin: 0 auto;
+      }
 
-        .demo-rank.rank-apprenti {
-            border-color: #E6A519;
-            color: #E6A519;
-        }
-
-        .demo-rank.rank-confirme {
-            border-color: #19A3E6;
-            color: #19A3E6;
-        }
-
-        .demo-rank.rank-maitre {
-            border-color: var(--accent-green);
-            color: var(--accent-green);
-            box-shadow: 0 0 12px rgba(25, 230, 57, 0.3);
-        }
-
-        .demo-streak {
-            font-size: 0.85rem;
-            color: var(--accent-dim);
-            margin-top: 6px;
-            transition: color 0.3s;
-        }
-
-        .demo-streak.active {
-            color: #FF6B35;
-        }
-
-        .demo-habits {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .demo-habit {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 14px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .demo-habit:active {
-            transform: scale(0.98);
-        }
-
-        .demo-habit.checked {
-            border-color: var(--accent-green);
-            background: rgba(25, 230, 57, 0.05);
-        }
-
-        .demo-checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid #444;
-            border-radius: 6px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .demo-habit.checked .demo-checkbox {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            animation: checkPop 0.4s cubic-bezier(0.17, 0.67, 0.21, 1.3);
-        }
-
-        @keyframes checkPop {
-            0% { transform: scale(1); }
-            40% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-
-        .demo-checkbox svg {
-            width: 14px;
-            height: 14px;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.2s ease;
-        }
-
-        .demo-habit.checked .demo-checkbox svg {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .demo-habit-emoji {
-            font-size: 1.3rem;
-        }
-
-        .demo-habit-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--accent);
-            transition: opacity 0.3s;
-        }
-
-        .demo-habit.checked .demo-habit-label {
-            opacity: 0.6;
-        }
-
-        .demo-ripple {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent-green);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .demo-ripple.animate {
-            animation: rippleOut 0.6s ease-out;
-        }
-
-        @keyframes rippleOut {
-            0% { transform: scale(0.5); opacity: 0.5; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-
-        .demo-perfect-msg {
-            text-align: center;
-            margin-top: 16px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.5s cubic-bezier(0.17, 0.67, 0.21, 1.3);
-            letter-spacing: 1px;
-        }
-
-        .demo-perfect-msg.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .demo-reset {
-            display: block;
-            margin: 16px auto 0;
-            padding: 8px 20px;
-            background: none;
-            border: 1px solid var(--border);
-            color: var(--accent-dim);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
-        }
-
-        .demo-reset:hover {
-            border-color: var(--accent-dim);
-            color: var(--accent);
-        }
-
-        /* ===== CONFETTI ===== */
-        .confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-            overflow: hidden;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            top: -10px;
-            animation: confettiFall linear forwards;
-        }
-
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg) scale(0.3);
-                opacity: 0;
-            }
-        }
-
-        /* ===== QUOTE ===== */
-        .quote-section {
-            text-align: center;
-            padding: 100px 20px;
-        }
-
-        .quote-text {
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
-            font-style: italic;
-            font-weight: 300;
-            line-height: 1.8;
-            max-width: 650px;
-            margin: 0 auto 16px;
-            color: var(--accent);
-        }
-
-        .quote-author {
-            font-size: 0.9rem;
-            color: var(--accent-dim);
-            letter-spacing: 1px;
-        }
-
-        /* ===== COMMUNITY STATS ===== */
-        .community-section {
-            text-align: center;
-            padding: 80px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .community-section .section-heading {
-            margin-bottom: 32px;
-        }
-
-        .community-counter {
-            font-size: clamp(2.5rem, 7vw, 4rem);
-            font-weight: 800;
-            color: var(--accent-green);
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .community-label {
-            font-size: 1rem;
-            color: var(--accent-dim);
-            letter-spacing: 1px;
-        }
-
-        /* ===== FINAL CTA ===== */
-        .final-cta {
-            text-align: center;
-            padding: 80px 20px 100px;
-        }
-
-        .final-cta h2 {
-            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
-            font-weight: 700;
-            margin-bottom: 32px;
-            letter-spacing: 2px;
-        }
-
-        /* ===== AVAILABLE EVERYWHERE ===== */
-        .available-section {
-            text-align: center;
-            max-width: 900px;
-        }
-
+      @media (min-width: 500px) {
         .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            max-width: 500px;
-            margin: 0 auto;
+          grid-template-columns: repeat(4, 1fr);
+          max-width: 700px;
         }
+      }
 
-        @media (min-width: 500px) {
-            .platforms-grid {
-                grid-template-columns: repeat(4, 1fr);
-                max-width: 700px;
-            }
+      .platform-item {
+        padding: 24px 16px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+      }
+
+      .platform-item:hover {
+        border-color: var(--accent-dim);
+        transform: translateY(-3px);
+      }
+
+      .platform-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .platform-name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+
+      .platform-desc {
+        font-size: 0.7rem;
+        color: var(--accent-dim);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        text-align: center;
+        padding: 30px 20px;
+        color: var(--accent-dim);
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .footer-brand {
+        color: var(--accent-dim);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 16px;
+      }
+
+      .footer-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--accent-dim);
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: color 0.2s;
+      }
+
+      .footer-link:hover {
+        color: var(--accent);
+      }
+
+      .footer-link svg {
+        flex-shrink: 0;
+      }
+
+      /* ============================================================ */
+      /* LANDING RESPONSIVE — Mobile/Tablet/Desktop                   */
+      /* ============================================================ */
+
+      /* Prevent horizontal overflow */
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      /* Small mobile (≤360px) */
+      @media (max-width: 360px) {
+        .hero {
+          padding: 30px 15px;
         }
-
-        .platform-item {
-            padding: 24px 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: border-color 0.3s, transform 0.3s;
+        .hero-logo {
+          width: 60px;
+          height: 60px;
         }
-
-        .platform-item:hover {
-            border-color: var(--accent-dim);
-            transform: translateY(-3px);
+        .cta-btn {
+          padding: 14px 28px;
+          font-size: 0.85rem;
         }
-
-        .platform-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .feature-card {
+          padding: 20px 16px;
         }
-
-        .platform-name {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+        .feature-title {
+          font-size: 0.9rem;
         }
-
-        .platform-desc {
-            font-size: 0.7rem;
-            color: var(--accent-dim);
+        .feature-desc {
+          font-size: 0.82rem;
         }
-
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--accent-dim);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            border-top: 1px solid var(--border);
+        section {
+          padding: 50px 15px;
         }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+        .section-heading {
+          font-size: 1.2rem;
+          letter-spacing: 2px;
+          margin-bottom: 32px;
         }
-
-        .footer-brand {
-            color: var(--accent-dim);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .footer-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--accent-dim);
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: color 0.2s;
-        }
-
-        .footer-link:hover {
-            color: var(--accent);
-        }
-
-        .footer-link svg {
-            flex-shrink: 0;
-        }
-
-        /* ============================================================ */
-        /* LANDING RESPONSIVE — Mobile/Tablet/Desktop                   */
-        /* ============================================================ */
-
-        /* Prevent horizontal overflow */
-        html, body {
-            overflow-x: hidden;
-            max-width: 100vw;
-        }
-
-        /* Small mobile (≤360px) */
-        @media (max-width: 360px) {
-            .hero {
-                padding: 30px 15px;
-            }
-            .hero-logo {
-                width: 60px;
-                height: 60px;
-            }
-            .cta-btn {
-                padding: 14px 28px;
-                font-size: 0.85rem;
-            }
-            .feature-card {
-                padding: 20px 16px;
-            }
-            .feature-title {
-                font-size: 0.9rem;
-            }
-            .feature-desc {
-                font-size: 0.82rem;
-            }
-            section {
-                padding: 50px 15px;
-            }
-            .section-heading {
-                font-size: 1.2rem;
-                letter-spacing: 2px;
-                margin-bottom: 32px;
-            }
-            .phone-frame,
-            .auto-phone-frame {
-                max-width: 260px;
-            }
-            .testimonial-card {
-                padding: 20px 16px;
-            }
-            .testimonial-name {
-                font-size: 0.85rem;
-            }
-            .testimonial-text {
-                font-size: 0.82rem;
-            }
-            .quote-section {
-                padding: 60px 15px;
-            }
-            .quote-text {
-                font-size: 1rem;
-            }
-            .step-text {
-                font-size: 0.9rem;
-            }
-            .step-number {
-                width: 40px;
-                height: 40px;
-                font-size: 0.95rem;
-            }
-            .platform-item {
-                padding: 18px 12px;
-            }
-            .community-counter {
-                font-size: 2rem;
-            }
-        }
-
-        /* Standard mobile (≤480px) */
-        @media (max-width: 480px) {
-            .hero {
-                min-height: 90vh;
-            }
-            .phone-frame {
-                max-width: 280px;
-            }
-        }
-
-        /* Tablet (768px+) */
-        @media (min-width: 768px) {
-            section {
-                padding: 100px 40px;
-            }
-            .hero {
-                padding: 60px 40px;
-            }
-            .features-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 28px;
-            }
-            .testimonials-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
-            .stats-row {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 24px;
-            }
-            .steps {
-                max-width: 600px;
-            }
-
-            /* Hover states */
-            .feature-card:hover {
-                cursor: pointer;
-            }
-            .testimonial-card:hover {
-                cursor: pointer;
-            }
-            .platform-item:hover {
-                cursor: pointer;
-            }
-            .cta-btn:hover {
-                cursor: pointer;
-            }
-        }
-
-        /* Desktop (1024px+) */
-        @media (min-width: 1024px) {
-            section {
-                padding: 120px 40px;
-                max-width: 1100px;
-            }
-            .hero {
-                padding: 80px 60px;
-            }
-            .hero-subtext {
-                max-width: 560px;
-            }
-            .features-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 20px;
-            }
-            .testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 28px;
-            }
-            .platforms-grid {
-                grid-template-columns: repeat(4, 1fr);
-                max-width: 800px;
-            }
-
-            /* Steps side by side text */
-            .steps {
-                max-width: 700px;
-            }
-            .step {
-                gap: 24px;
-            }
-
-            /* Phone demo bigger */
-            .phone-frame {
-                max-width: 360px;
-            }
-            .auto-phone-frame {
-                max-width: 320px;
-            }
-
-            /* Quote wider */
-            .quote-text {
-                max-width: 750px;
-            }
-
-            .community-section {
-                max-width: 1100px;
-            }
-
-            .available-section {
-                max-width: 1100px;
-            }
-
-            .demo-section {
-                max-width: 1100px;
-            }
-
-            .auto-demo-section {
-                max-width: 1100px;
-            }
-
-            .final-cta {
-                padding: 100px 40px 120px;
-            }
-        }
-
-        /* Large desktop (1200px+) — max comfort */
-        @media (min-width: 1200px) {
-            .features-grid {
-                gap: 24px;
-            }
-            .feature-card {
-                padding: 32px 28px;
-            }
-            .testimonial-card {
-                padding: 32px 28px;
-            }
-        }
-
-        /* ===== AUTO DEMO SECTION (Animated Phone Mockup) ===== */
-        .auto-demo-section {
-            max-width: 900px;
-            text-align: center;
-            position: relative;
-            overflow: visible;
-        }
-
-        .auto-demo-wrapper {
-            perspective: 1000px;
-            display: inline-block;
-        }
-
+        .phone-frame,
         .auto-phone-frame {
-            display: inline-block;
-            width: 100%;
-            max-width: 300px;
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-            border: 2.5px solid #333;
-            border-radius: 44px;
-            padding: 16px 14px 20px;
-            position: relative;
-            box-shadow:
-                0 25px 80px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(255,255,255,0.04),
-                inset 0 1px 0 rgba(255,255,255,0.06);
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
+          max-width: 260px;
         }
-
-        .auto-phone-frame::before {
-            content: '';
-            position: absolute;
-            top: -2.5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 28px;
-            background: #1a1a1a;
-            border-radius: 0 0 18px 18px;
-            border: 2.5px solid #333;
-            border-top: none;
-            z-index: 5;
-        }
-
-        /* Dynamic island */
-        .auto-phone-frame::after {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 8px;
-            background: #000;
-            border-radius: 10px;
-            z-index: 6;
-        }
-
-        .auto-phone-screen {
-            background: var(--black);
-            border-radius: 28px;
-            padding: 32px 14px 18px;
-            text-align: left;
-            overflow: hidden;
-            position: relative;
-            min-height: 420px;
-        }
-
-        .auto-demo-header {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .auto-demo-date {
-            font-size: 0.65rem;
-            color: var(--accent-dim);
-            letter-spacing: 1.5px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
-        .auto-demo-score-display {
-            position: relative;
-            display: inline-block;
-        }
-
-        .auto-demo-score {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--accent);
-            line-height: 1;
-            transition: color 0.5s ease;
-        }
-
-        .auto-demo-score.glow-green {
-            color: var(--accent-green);
-            text-shadow: 0 0 20px rgba(25, 230, 57, 0.5);
-        }
-
-        .auto-demo-pct {
-            font-size: 0.75rem;
-            color: var(--accent-dim);
-            margin-top: 2px;
-            transition: color 0.5s ease;
-        }
-
-        .auto-demo-pct.glow-green {
-            color: var(--accent-green);
-        }
-
-        /* Progress ring */
-        .auto-progress-ring {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 8px;
-            position: relative;
-        }
-
-        .auto-progress-ring svg {
-            transform: rotate(-90deg);
-        }
-
-        .auto-progress-ring .ring-bg {
-            fill: none;
-            stroke: #222;
-            stroke-width: 4;
-        }
-
-        .auto-progress-ring .ring-fill {
-            fill: none;
-            stroke: var(--accent-green);
-            stroke-width: 4;
-            stroke-linecap: round;
-            stroke-dasharray: 226;
-            stroke-dashoffset: 226;
-            transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 0 4px rgba(25, 230, 57, 0.4));
-        }
-
-        .auto-progress-ring .ring-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--accent);
-            transition: color 0.5s ease;
-        }
-
-        .auto-progress-ring .ring-text.glow-green {
-            color: var(--accent-green);
-        }
-
-        /* Auto demo habits */
-        .auto-demo-habits {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .auto-demo-habit {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .auto-demo-habit.auto-checked {
-            border-color: var(--accent-green);
-            background: rgba(25, 230, 57, 0.06);
-        }
-
-        .auto-demo-cb {
-            width: 22px;
-            height: 22px;
-            border: 2px solid #444;
-            border-radius: 6px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s cubic-bezier(0.17, 0.67, 0.21, 1.3);
-            position: relative;
-        }
-
-        .auto-demo-habit.auto-checked .auto-demo-cb {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            animation: autoCheckPop 0.5s cubic-bezier(0.17, 0.67, 0.21, 1.3);
-        }
-
-        @keyframes autoCheckPop {
-            0% { transform: scale(1); }
-            35% { transform: scale(1.35); }
-            100% { transform: scale(1); }
-        }
-
-        .auto-demo-cb svg {
-            width: 13px;
-            height: 13px;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
-        }
-
-        .auto-demo-habit.auto-checked .auto-demo-cb svg {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .auto-demo-habit-emoji {
-            font-size: 1.15rem;
-        }
-
-        .auto-demo-habit-label {
-            font-size: 0.82rem;
-            font-weight: 500;
-            color: var(--accent);
-            transition: opacity 0.4s;
-        }
-
-        .auto-demo-habit.auto-checked .auto-demo-habit-label {
-            opacity: 0.55;
-            text-decoration: line-through;
-            text-decoration-color: rgba(25, 230, 57, 0.4);
-        }
-
-        /* Auto demo perfect message */
-        .auto-demo-perfect {
-            text-align: center;
-            margin-top: 14px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            opacity: 0;
-            transform: scale(0.7) translateY(10px);
-            transition: all 0.6s cubic-bezier(0.17, 0.67, 0.21, 1.3);
-            letter-spacing: 1px;
-        }
-
-        .auto-demo-perfect.show {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        /* Mini confetti inside phone */
-        .mini-confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            border-radius: 28px;
-            z-index: 10;
-        }
-
-        .mini-confetti {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: -10px;
-            opacity: 0;
-        }
-
-        .mini-confetti.animate {
-            animation: miniConfettiFall linear forwards;
-        }
-
-        @keyframes miniConfettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(1);
-                opacity: 1;
-            }
-            80% { opacity: 0.8; }
-            100% {
-                transform: translateY(450px) rotate(600deg) scale(0.2);
-                opacity: 0;
-            }
-        }
-
-        /* Parallax container */
-        .parallax-demo-container {
-            position: relative;
-        }
-
-        .parallax-glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(25, 230, 57, 0.08) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* ===== TESTIMONIALS SECTION ===== */
-        .testimonials-section {
-            max-width: 900px;
-            text-align: center;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 600px) {
-            .testimonials-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (min-width: 800px) {
-            .testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         .testimonial-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px 24px;
-            text-align: left;
-            position: relative;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+          padding: 20px 16px;
         }
-
-        .testimonial-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-dim);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .testimonial-info {
-            flex: 1;
-        }
-
         .testimonial-name {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 2px;
+          font-size: 0.85rem;
         }
-
-        .testimonial-streak {
-            font-size: 0.75rem;
-            color: var(--accent-green);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .testimonial-stars {
-            display: flex;
-            gap: 3px;
-            margin-bottom: 12px;
-        }
-
-        .testimonial-star {
-            font-size: 0.9rem;
-            color: #FFD700;
-        }
-
         .testimonial-text {
-            font-size: 0.9rem;
-            color: var(--accent-dim);
-            line-height: 1.7;
-            font-style: italic;
+          font-size: 0.82rem;
+        }
+        .quote-section {
+          padding: 60px 15px;
+        }
+        .quote-text {
+          font-size: 1rem;
+        }
+        .step-text {
+          font-size: 0.9rem;
+        }
+        .step-number {
+          width: 40px;
+          height: 40px;
+          font-size: 0.95rem;
+        }
+        .platform-item {
+          padding: 18px 12px;
+        }
+        .community-counter {
+          font-size: 2rem;
+        }
+      }
+
+      /* Standard mobile (≤480px) */
+      @media (max-width: 480px) {
+        .hero {
+          min-height: 90vh;
+        }
+        .phone-frame {
+          max-width: 280px;
+        }
+      }
+
+      /* Tablet (768px+) */
+      @media (min-width: 768px) {
+        section {
+          padding: 100px 40px;
+        }
+        .hero {
+          padding: 60px 40px;
+        }
+        .features-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+        }
+        .testimonials-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+        .stats-row {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+        }
+        .steps {
+          max-width: 600px;
         }
 
-        .testimonial-text::before {
-            content: '"';
-            font-size: 1.6rem;
-            color: var(--accent-green);
-            font-weight: 800;
-            line-height: 0;
-            vertical-align: -0.3em;
-            margin-right: 2px;
+        /* Hover states */
+        .feature-card:hover {
+          cursor: pointer;
+        }
+        .testimonial-card:hover {
+          cursor: pointer;
+        }
+        .platform-item:hover {
+          cursor: pointer;
+        }
+        .cta-btn:hover {
+          cursor: pointer;
+        }
+      }
+
+      /* Desktop (1024px+) */
+      @media (min-width: 1024px) {
+        section {
+          padding: 120px 40px;
+          max-width: 1100px;
+        }
+        .hero {
+          padding: 80px 60px;
+        }
+        .hero-subtext {
+          max-width: 560px;
+        }
+        .features-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+        }
+        .testimonials-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px;
+        }
+        .platforms-grid {
+          grid-template-columns: repeat(4, 1fr);
+          max-width: 800px;
         }
 
-        .testimonial-badge {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        /* Steps side by side text */
+        .steps {
+          max-width: 700px;
+        }
+        .step {
+          gap: 24px;
         }
 
-        .testimonial-badge.rank-maitre {
-            border: 1px solid var(--accent-green);
-            color: var(--accent-green);
+        /* Phone demo bigger */
+        .phone-frame {
+          max-width: 360px;
+        }
+        .auto-phone-frame {
+          max-width: 320px;
         }
 
-        .testimonial-badge.rank-confirme {
-            border: 1px solid #19A3E6;
-            color: #19A3E6;
+        /* Quote wider */
+        .quote-text {
+          max-width: 750px;
         }
 
-        .testimonial-badge.rank-expert {
-            border: 1px solid #FFD700;
-            color: #FFD700;
+        .community-section {
+          max-width: 1100px;
         }
 
-        .testimonial-badge.rank-apprenti {
-            border: 1px solid #FF6B35;
-            color: #FF6B35;
+        .available-section {
+          max-width: 1100px;
         }
+
+        .demo-section {
+          max-width: 1100px;
+        }
+
+        .auto-demo-section {
+          max-width: 1100px;
+        }
+
+        .final-cta {
+          padding: 100px 40px 120px;
+        }
+      }
+
+      /* Large desktop (1200px+) — max comfort */
+      @media (min-width: 1200px) {
+        .features-grid {
+          gap: 24px;
+        }
+        .feature-card {
+          padding: 32px 28px;
+        }
+        .testimonial-card {
+          padding: 32px 28px;
+        }
+      }
+
+      /* ===== AUTO DEMO SECTION (Animated Phone Mockup) ===== */
+      .auto-demo-section {
+        max-width: 900px;
+        text-align: center;
+        position: relative;
+        overflow: visible;
+      }
+
+      .auto-demo-wrapper {
+        perspective: 1000px;
+        display: inline-block;
+      }
+
+      .auto-phone-frame {
+        display: inline-block;
+        width: 100%;
+        max-width: 300px;
+        background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+        border: 2.5px solid #333;
+        border-radius: 44px;
+        padding: 16px 14px 20px;
+        position: relative;
+        box-shadow:
+          0 25px 80px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(255, 255, 255, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transform-style: preserve-3d;
+        transition: transform 0.1s ease-out;
+      }
+
+      .auto-phone-frame::before {
+        content: "";
+        position: absolute;
+        top: -2.5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 28px;
+        background: #1a1a1a;
+        border-radius: 0 0 18px 18px;
+        border: 2.5px solid #333;
+        border-top: none;
+        z-index: 5;
+      }
+
+      /* Dynamic island */
+      .auto-phone-frame::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 8px;
+        background: #000;
+        border-radius: 10px;
+        z-index: 6;
+      }
+
+      .auto-phone-screen {
+        background: var(--black);
+        border-radius: 28px;
+        padding: 32px 14px 18px;
+        text-align: left;
+        overflow: hidden;
+        position: relative;
+        min-height: 420px;
+      }
+
+      .auto-demo-header {
+        text-align: center;
+        margin-bottom: 16px;
+      }
+
+      .auto-demo-date {
+        font-size: 0.65rem;
+        color: var(--accent-dim);
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+
+      .auto-demo-score-display {
+        position: relative;
+        display: inline-block;
+      }
+
+      .auto-demo-score {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: var(--accent);
+        line-height: 1;
+        transition: color 0.5s ease;
+      }
+
+      .auto-demo-score.glow-green {
+        color: var(--accent-green);
+        text-shadow: 0 0 20px rgba(25, 230, 57, 0.5);
+      }
+
+      .auto-demo-pct {
+        font-size: 0.75rem;
+        color: var(--accent-dim);
+        margin-top: 2px;
+        transition: color 0.5s ease;
+      }
+
+      .auto-demo-pct.glow-green {
+        color: var(--accent-green);
+      }
+
+      /* Progress ring */
+      .auto-progress-ring {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 8px;
+        position: relative;
+      }
+
+      .auto-progress-ring svg {
+        transform: rotate(-90deg);
+      }
+
+      .auto-progress-ring .ring-bg {
+        fill: none;
+        stroke: #222;
+        stroke-width: 4;
+      }
+
+      .auto-progress-ring .ring-fill {
+        fill: none;
+        stroke: var(--accent-green);
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-dasharray: 226;
+        stroke-dashoffset: 226;
+        transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        filter: drop-shadow(0 0 4px rgba(25, 230, 57, 0.4));
+      }
+
+      .auto-progress-ring .ring-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--accent);
+        transition: color 0.5s ease;
+      }
+
+      .auto-progress-ring .ring-text.glow-green {
+        color: var(--accent-green);
+      }
+
+      /* Auto demo habits */
+      .auto-demo-habits {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .auto-demo-habit {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 12px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .auto-demo-habit.auto-checked {
+        border-color: var(--accent-green);
+        background: rgba(25, 230, 57, 0.06);
+      }
+
+      .auto-demo-cb {
+        width: 22px;
+        height: 22px;
+        border: 2px solid #444;
+        border-radius: 6px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.17, 0.67, 0.21, 1.3);
+        position: relative;
+      }
+
+      .auto-demo-habit.auto-checked .auto-demo-cb {
+        background: var(--accent-green);
+        border-color: var(--accent-green);
+        animation: autoCheckPop 0.5s cubic-bezier(0.17, 0.67, 0.21, 1.3);
+      }
+
+      @keyframes autoCheckPop {
+        0% {
+          transform: scale(1);
+        }
+        35% {
+          transform: scale(1.35);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .auto-demo-cb svg {
+        width: 13px;
+        height: 13px;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.3s ease;
+      }
+
+      .auto-demo-habit.auto-checked .auto-demo-cb svg {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .auto-demo-habit-emoji {
+        font-size: 1.15rem;
+      }
+
+      .auto-demo-habit-label {
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--accent);
+        transition: opacity 0.4s;
+      }
+
+      .auto-demo-habit.auto-checked .auto-demo-habit-label {
+        opacity: 0.55;
+        text-decoration: line-through;
+        text-decoration-color: rgba(25, 230, 57, 0.4);
+      }
+
+      /* Auto demo perfect message */
+      .auto-demo-perfect {
+        text-align: center;
+        margin-top: 14px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--accent-green);
+        opacity: 0;
+        transform: scale(0.7) translateY(10px);
+        transition: all 0.6s cubic-bezier(0.17, 0.67, 0.21, 1.3);
+        letter-spacing: 1px;
+      }
+
+      .auto-demo-perfect.show {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      /* Mini confetti inside phone */
+      .mini-confetti-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 28px;
+        z-index: 10;
+      }
+
+      .mini-confetti {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        top: -10px;
+        opacity: 0;
+      }
+
+      .mini-confetti.animate {
+        animation: miniConfettiFall linear forwards;
+      }
+
+      @keyframes miniConfettiFall {
+        0% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 1;
+        }
+        80% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(450px) rotate(600deg) scale(0.2);
+          opacity: 0;
+        }
+      }
+
+      /* Parallax container */
+      .parallax-demo-container {
+        position: relative;
+      }
+
+      .parallax-glow {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(25, 230, 57, 0.08) 0%,
+          transparent 70%
+        );
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* ===== TESTIMONIALS SECTION ===== */
+      .testimonials-section {
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      @media (min-width: 600px) {
+        .testimonials-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (min-width: 800px) {
+        .testimonials-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .testimonial-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px 24px;
+        text-align: left;
+        position: relative;
+        transition:
+          transform 0.3s,
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent-dim);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .testimonial-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .testimonial-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .testimonial-info {
+        flex: 1;
+      }
+
+      .testimonial-name {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 2px;
+      }
+
+      .testimonial-streak {
+        font-size: 0.75rem;
+        color: var(--accent-green);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .testimonial-stars {
+        display: flex;
+        gap: 3px;
+        margin-bottom: 12px;
+      }
+
+      .testimonial-star {
+        font-size: 0.9rem;
+        color: #ffd700;
+      }
+
+      .testimonial-text {
+        font-size: 0.9rem;
+        color: var(--accent-dim);
+        line-height: 1.7;
+        font-style: italic;
+      }
+
+      .testimonial-text::before {
+        content: '"';
+        font-size: 1.6rem;
+        color: var(--accent-green);
+        font-weight: 800;
+        line-height: 0;
+        vertical-align: -0.3em;
+        margin-right: 2px;
+      }
+
+      .testimonial-badge {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .testimonial-badge.rank-maitre {
+        border: 1px solid var(--accent-green);
+        color: var(--accent-green);
+      }
+
+      .testimonial-badge.rank-confirme {
+        border: 1px solid #19a3e6;
+        color: #19a3e6;
+      }
+
+      .testimonial-badge.rank-expert {
+        border: 1px solid #ffd700;
+        color: #ffd700;
+      }
+
+      .testimonial-badge.rank-apprenti {
+        border: 1px solid #ff6b35;
+        color: #ff6b35;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- SCROLL PROGRESS BAR -->
 
     <!-- HERO -->
     <section class="hero">
-        <div class="particles" id="particles"></div>
-        <svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <rect fill="#0A0A0A" width="100" height="100" rx="20"/>
-            <path d="M 23 74 Q 27 70 31 66 Q 39 58 47 54 Q 55 50 62 39 Q 68 29 74 19" fill="none" stroke="#F5F5F0" stroke-width="6" stroke-linecap="round"/>
-            <path d="M 66 16 L 77 18 L 75 29" fill="none" stroke="#F5F5F0" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-        <h1>PROJET FEVRIER</h1>
-        <p class="hero-tagline">Forge ta discipline. Deviens meilleur chaque jour.</p>
-        <p class="hero-subtext">Une application minimaliste de suivi d'habitudes conçue pour bâtir ta discipline quotidienne, suivre ta progression et ne jamais lâcher.</p>
-        <a href="index.html" class="cta-btn">COMMENCER MAINTENANT</a>
+      <div class="particles" id="particles"></div>
+      <svg
+        class="hero-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+      >
+        <rect fill="#0A0A0A" width="100" height="100" rx="20" />
+        <path
+          d="M 23 74 Q 27 70 31 66 Q 39 58 47 54 Q 55 50 62 39 Q 68 29 74 19"
+          fill="none"
+          stroke="#F5F5F0"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+        <path
+          d="M 66 16 L 77 18 L 75 29"
+          fill="none"
+          stroke="#F5F5F0"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+      </svg>
+      <h1>PROJET MARS</h1>
+      <p class="hero-tagline">
+        Forge ta discipline. Deviens meilleur chaque jour.
+      </p>
+      <p class="hero-subtext">
+        Une application minimaliste de suivi d'habitudes conçue pour bâtir ta
+        discipline quotidienne, suivre ta progression et ne jamais lâcher.
+      </p>
+      <a href="index.html" class="cta-btn">COMMENCER MAINTENANT</a>
     </section>
 
     <!-- FEATURES -->
     <section class="fade-in">
-        <h2 class="section-heading">CE QUE TU OBTIENS</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">🎯</span>
-                <div class="feature-title">Habitudes quotidiennes</div>
-                <div class="feature-desc">Crée et personnalise tes habitudes. Valide-les chaque jour.</div>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">🔥</span>
-                <div class="feature-title">Streaks &amp; Scores</div>
-                <div class="feature-desc">Maintiens ta série. Ne brise jamais la chaîne.</div>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">🏆</span>
-                <div class="feature-title">Rangs &amp; Badges</div>
-                <div class="feature-desc">Évolue de Débutant à Maître. Débloque 24 badges.</div>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">📊</span>
-                <div class="feature-title">Statistiques</div>
-                <div class="feature-desc">Suis ta progression avec des graphiques détaillés.</div>
-            </div>
+      <h2 class="section-heading">CE QUE TU OBTIENS</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-title">Habitudes quotidiennes</div>
+          <div class="feature-desc">
+            Crée et personnalise tes habitudes. Valide-les chaque jour.
+          </div>
         </div>
-        <div class="stats-row fade-in" id="statsRow">
-            <div class="stat-item">
-                <div class="stat-number" data-target="6" data-suffix="+">0</div>
-                <div class="stat-label">Habitudes</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="24" data-suffix="">0</div>
-                <div class="stat-label">Badges</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="5" data-suffix="">0</div>
-                <div class="stat-label">Rangs</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" data-target="0" data-suffix="" data-infinity="true">∞</div>
-                <div class="stat-label">Possibilités</div>
-            </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔥</span>
+          <div class="feature-title">Streaks &amp; Scores</div>
+          <div class="feature-desc">
+            Maintiens ta série. Ne brise jamais la chaîne.
+          </div>
         </div>
+        <div class="feature-card">
+          <span class="feature-icon">🏆</span>
+          <div class="feature-title">Rangs &amp; Badges</div>
+          <div class="feature-desc">
+            Évolue de Débutant à Maître. Débloque 24 badges.
+          </div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <div class="feature-title">Statistiques</div>
+          <div class="feature-desc">
+            Suis ta progression avec des graphiques détaillés.
+          </div>
+        </div>
+      </div>
+      <div class="stats-row fade-in" id="statsRow">
+        <div class="stat-item">
+          <div class="stat-number" data-target="6" data-suffix="+">0</div>
+          <div class="stat-label">Habitudes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="24" data-suffix="">0</div>
+          <div class="stat-label">Badges</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="5" data-suffix="">0</div>
+          <div class="stat-label">Rangs</div>
+        </div>
+        <div class="stat-item">
+          <div
+            class="stat-number"
+            data-target="0"
+            data-suffix=""
+            data-infinity="true"
+          >
+            ∞
+          </div>
+          <div class="stat-label">Possibilités</div>
+        </div>
+      </div>
     </section>
 
     <!-- HOW IT WORKS -->
     <section class="fade-in">
-        <h2 class="section-heading">COMMENT ÇA MARCHE</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-text">Crée ton compte</div>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-text">Définis tes habitudes</div>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-text">Valide chaque jour et progresse</div>
-            </div>
+      <h2 class="section-heading">COMMENT ÇA MARCHE</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-text">Crée ton compte</div>
         </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-text">Définis tes habitudes</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-text">Valide chaque jour et progresse</div>
+        </div>
+      </div>
     </section>
 
     <!-- AUTO DEMO - Animated Phone Mockup -->
     <section class="auto-demo-section fade-in" id="autoDemoSection">
-        <h2 class="section-heading">📱 DÉMO EN ACTION</h2>
-        <p style="color: var(--accent-dim); margin-bottom: 40px; font-size: 0.95rem;">Regarde comment ça fonctionne. Automatiquement.</p>
+      <h2 class="section-heading">📱 DÉMO EN ACTION</h2>
+      <p
+        style="
+          color: var(--accent-dim);
+          margin-bottom: 40px;
+          font-size: 0.95rem;
+        "
+      >
+        Regarde comment ça fonctionne. Automatiquement.
+      </p>
 
-        <div class="parallax-demo-container" id="parallaxContainer">
-            <div class="parallax-glow"></div>
-            <div class="auto-demo-wrapper">
-                <div class="auto-phone-frame" id="autoPhoneFrame">
-                    <div class="auto-phone-screen">
-                        <div class="mini-confetti-container" id="miniConfettiContainer"></div>
+      <div class="parallax-demo-container" id="parallaxContainer">
+        <div class="parallax-glow"></div>
+        <div class="auto-demo-wrapper">
+          <div class="auto-phone-frame" id="autoPhoneFrame">
+            <div class="auto-phone-screen">
+              <div
+                class="mini-confetti-container"
+                id="miniConfettiContainer"
+              ></div>
 
-                        <div class="auto-demo-header">
-                            <div class="auto-demo-date">10 FÉVRIER 2026</div>
-                            <div class="auto-progress-ring">
-                                <svg width="80" height="80" viewBox="0 0 80 80">
-                                    <circle class="ring-bg" cx="40" cy="40" r="36"/>
-                                    <circle class="ring-fill" id="autoRingFill" cx="40" cy="40" r="36"/>
-                                </svg>
-                                <div class="ring-text" id="autoRingText">0%</div>
-                            </div>
-                            <div class="auto-demo-score" id="autoScore">0/5</div>
-                            <div class="auto-demo-pct" id="autoPct">Commence ta journée !</div>
-                        </div>
-
-                        <ul class="auto-demo-habits" id="autoDemoHabits">
-                            <li class="auto-demo-habit" data-auto="0">
-                                <div class="auto-demo-cb">
-                                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <span class="auto-demo-habit-emoji">🧊</span>
-                                <span class="auto-demo-habit-label">Douche froide</span>
-                            </li>
-                            <li class="auto-demo-habit" data-auto="1">
-                                <div class="auto-demo-cb">
-                                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <span class="auto-demo-habit-emoji">💪</span>
-                                <span class="auto-demo-habit-label">Entraînement</span>
-                            </li>
-                            <li class="auto-demo-habit" data-auto="2">
-                                <div class="auto-demo-cb">
-                                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <span class="auto-demo-habit-emoji">📚</span>
-                                <span class="auto-demo-habit-label">30min de lecture</span>
-                            </li>
-                            <li class="auto-demo-habit" data-auto="3">
-                                <div class="auto-demo-cb">
-                                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <span class="auto-demo-habit-emoji">🧘</span>
-                                <span class="auto-demo-habit-label">Méditation</span>
-                            </li>
-                            <li class="auto-demo-habit" data-auto="4">
-                                <div class="auto-demo-cb">
-                                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <span class="auto-demo-habit-emoji">🥗</span>
-                                <span class="auto-demo-habit-label">Manger sain</span>
-                            </li>
-                        </ul>
-
-                        <div class="auto-demo-perfect" id="autoPerfect">JOURNÉE PARFAITE ! 🏆🔥</div>
-                    </div>
+              <div class="auto-demo-header">
+                <div class="auto-demo-date">10 FÉVRIER 2026</div>
+                <div class="auto-progress-ring">
+                  <svg width="80" height="80" viewBox="0 0 80 80">
+                    <circle class="ring-bg" cx="40" cy="40" r="36" />
+                    <circle
+                      class="ring-fill"
+                      id="autoRingFill"
+                      cx="40"
+                      cy="40"
+                      r="36"
+                    />
+                  </svg>
+                  <div class="ring-text" id="autoRingText">0%</div>
                 </div>
+                <div class="auto-demo-score" id="autoScore">0/5</div>
+                <div class="auto-demo-pct" id="autoPct">
+                  Commence ta journée !
+                </div>
+              </div>
+
+              <ul class="auto-demo-habits" id="autoDemoHabits">
+                <li class="auto-demo-habit" data-auto="0">
+                  <div class="auto-demo-cb">
+                    <svg viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 7.5L5.5 11L12 3"
+                        stroke="#0A0A0A"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span class="auto-demo-habit-emoji">🧊</span>
+                  <span class="auto-demo-habit-label">Douche froide</span>
+                </li>
+                <li class="auto-demo-habit" data-auto="1">
+                  <div class="auto-demo-cb">
+                    <svg viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 7.5L5.5 11L12 3"
+                        stroke="#0A0A0A"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span class="auto-demo-habit-emoji">💪</span>
+                  <span class="auto-demo-habit-label">Entraînement</span>
+                </li>
+                <li class="auto-demo-habit" data-auto="2">
+                  <div class="auto-demo-cb">
+                    <svg viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 7.5L5.5 11L12 3"
+                        stroke="#0A0A0A"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span class="auto-demo-habit-emoji">📚</span>
+                  <span class="auto-demo-habit-label">30min de lecture</span>
+                </li>
+                <li class="auto-demo-habit" data-auto="3">
+                  <div class="auto-demo-cb">
+                    <svg viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 7.5L5.5 11L12 3"
+                        stroke="#0A0A0A"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span class="auto-demo-habit-emoji">🧘</span>
+                  <span class="auto-demo-habit-label">Méditation</span>
+                </li>
+                <li class="auto-demo-habit" data-auto="4">
+                  <div class="auto-demo-cb">
+                    <svg viewBox="0 0 14 14" fill="none">
+                      <path
+                        d="M2 7.5L5.5 11L12 3"
+                        stroke="#0A0A0A"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <span class="auto-demo-habit-emoji">🥗</span>
+                  <span class="auto-demo-habit-label">Manger sain</span>
+                </li>
+              </ul>
+
+              <div class="auto-demo-perfect" id="autoPerfect">
+                JOURNÉE PARFAITE ! 🏆🔥
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- TESTIMONIALS -->
     <section class="testimonials-section fade-in">
-        <h2 class="section-heading">ILS ONT CHANGÉ LEUR VIE</h2>
-        <p style="color: var(--accent-dim); margin-bottom: 40px; font-size: 0.95rem;">Des guerriers qui forgent leur discipline chaque jour</p>
+      <h2 class="section-heading">ILS ONT CHANGÉ LEUR VIE</h2>
+      <p
+        style="
+          color: var(--accent-dim);
+          margin-bottom: 40px;
+          font-size: 0.95rem;
+        "
+      >
+        Des guerriers qui forgent leur discipline chaque jour
+      </p>
 
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">🔥</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Karim D.</div>
-                        <div class="testimonial-streak">🔥 Série de 47 jours</div>
-                    </div>
-                </div>
-                <div class="testimonial-stars">
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                </div>
-                <p class="testimonial-text">J'ai essayé plein d'apps de suivi, mais aucune ne m'a donné cette sensation de progression. Quand je vois mon streak monter, impossible de lâcher. Je me lève à 5h maintenant.</p>
-                <span class="testimonial-badge rank-maitre">MAÎTRE</span>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">🔥</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Karim D.</div>
+              <div class="testimonial-streak">🔥 Série de 47 jours</div>
             </div>
-
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">💎</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Sarah M.</div>
-                        <div class="testimonial-streak">🔥 Série de 32 jours</div>
-                    </div>
-                </div>
-                <div class="testimonial-stars">
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                </div>
-                <p class="testimonial-text">Le système de rangs et badges, c'est addictif. J'ai atteint le rang Confirmé en 3 semaines. Le design minimaliste me motive à ouvrir l'app chaque matin.</p>
-                <span class="testimonial-badge rank-confirme">CONFIRMÉ</span>
-            </div>
-
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">⚡</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Thomas L.</div>
-                        <div class="testimonial-streak">🔥 Série de 21 jours</div>
-                    </div>
-                </div>
-                <div class="testimonial-stars">
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                </div>
-                <p class="testimonial-text">Douche froide, sport, lecture — je faisais rien de tout ça avant. Maintenant c'est devenu automatique. Le confetti quand tu finis ta journée, ça rend accro 😂</p>
-                <span class="testimonial-badge rank-expert">EXPERT</span>
-            </div>
-
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-header">
-                    <div class="testimonial-avatar">🌟</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Amina B.</div>
-                        <div class="testimonial-streak">🔥 Série de 14 jours</div>
-                    </div>
-                </div>
-                <div class="testimonial-stars">
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star">★</span>
-                    <span class="testimonial-star" style="color: #444;">★</span>
-                </div>
-                <p class="testimonial-text">2 semaines que j'utilise Projet Février et je sens déjà la différence. Simple, beau, efficace. Pas de bullshit, juste toi contre toi-même.</p>
-                <span class="testimonial-badge rank-apprenti">APPRENTI</span>
-            </div>
+          </div>
+          <div class="testimonial-stars">
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+          </div>
+          <p class="testimonial-text">
+            J'ai essayé plein d'apps de suivi, mais aucune ne m'a donné cette
+            sensation de progression. Quand je vois mon streak monter,
+            impossible de lâcher. Je me lève à 5h maintenant.
+          </p>
+          <span class="testimonial-badge rank-maitre">MAÎTRE</span>
         </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">💎</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Sarah M.</div>
+              <div class="testimonial-streak">🔥 Série de 32 jours</div>
+            </div>
+          </div>
+          <div class="testimonial-stars">
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+          </div>
+          <p class="testimonial-text">
+            Le système de rangs et badges, c'est addictif. J'ai atteint le rang
+            Confirmé en 3 semaines. Le design minimaliste me motive à ouvrir
+            l'app chaque matin.
+          </p>
+          <span class="testimonial-badge rank-confirme">CONFIRMÉ</span>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">⚡</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Thomas L.</div>
+              <div class="testimonial-streak">🔥 Série de 21 jours</div>
+            </div>
+          </div>
+          <div class="testimonial-stars">
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+          </div>
+          <p class="testimonial-text">
+            Douche froide, sport, lecture — je faisais rien de tout ça avant.
+            Maintenant c'est devenu automatique. Le confetti quand tu finis ta
+            journée, ça rend accro 😂
+          </p>
+          <span class="testimonial-badge rank-expert">EXPERT</span>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">🌟</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">Amina B.</div>
+              <div class="testimonial-streak">🔥 Série de 14 jours</div>
+            </div>
+          </div>
+          <div class="testimonial-stars">
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star">★</span>
+            <span class="testimonial-star" style="color: #444">★</span>
+          </div>
+          <p class="testimonial-text">
+            2 semaines que j'utilise Projet Février et je sens déjà la
+            différence. Simple, beau, efficace. Pas de bullshit, juste toi
+            contre toi-même.
+          </p>
+          <span class="testimonial-badge rank-apprenti">APPRENTI</span>
+        </div>
+      </div>
     </section>
 
     <!-- DEMO INTERACTIVE -->
     <section class="demo-section fade-in">
-        <h2 class="section-heading">ESSAIE MAINTENANT</h2>
-        <p style="color: var(--accent-dim); margin-bottom: 32px; font-size: 0.95rem;">Coche tes habitudes. Ressens la satisfaction.</p>
+      <h2 class="section-heading">ESSAIE MAINTENANT</h2>
+      <p
+        style="
+          color: var(--accent-dim);
+          margin-bottom: 32px;
+          font-size: 0.95rem;
+        "
+      >
+        Coche tes habitudes. Ressens la satisfaction.
+      </p>
 
-        <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-                <div class="demo-header">
-                    <div class="demo-date" id="demoDate"></div>
-                    <div class="demo-score" id="demoScore">0/4</div>
-                    <div class="demo-percentage" id="demoPercentage">0%</div>
-                    <div class="demo-rank" id="demoRank">DÉBUTANT</div>
-                    <div class="demo-streak" id="demoStreak">🔥 Série: 0 jours</div>
-                </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="demo-header">
+            <div class="demo-date" id="demoDate"></div>
+            <div class="demo-score" id="demoScore">0/4</div>
+            <div class="demo-percentage" id="demoPercentage">0%</div>
+            <div class="demo-rank" id="demoRank">DÉBUTANT</div>
+            <div class="demo-streak" id="demoStreak">🔥 Série: 0 jours</div>
+          </div>
 
-                <ul class="demo-habits" id="demoHabits">
-                    <li class="demo-habit" data-index="0">
-                        <div class="demo-checkbox">
-                            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <div class="demo-ripple"></div>
-                        </div>
-                        <span class="demo-habit-emoji">🧊</span>
-                        <span class="demo-habit-label">Douche froide</span>
-                    </li>
-                    <li class="demo-habit" data-index="1">
-                        <div class="demo-checkbox">
-                            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <div class="demo-ripple"></div>
-                        </div>
-                        <span class="demo-habit-emoji">📚</span>
-                        <span class="demo-habit-label">30min de lecture</span>
-                    </li>
-                    <li class="demo-habit" data-index="2">
-                        <div class="demo-checkbox">
-                            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <div class="demo-ripple"></div>
-                        </div>
-                        <span class="demo-habit-emoji">💪</span>
-                        <span class="demo-habit-label">Entraînement</span>
-                    </li>
-                    <li class="demo-habit" data-index="3">
-                        <div class="demo-checkbox">
-                            <svg viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <div class="demo-ripple"></div>
-                        </div>
-                        <span class="demo-habit-emoji">🥗</span>
-                        <span class="demo-habit-label">Manger sain</span>
-                    </li>
-                </ul>
+          <ul class="demo-habits" id="demoHabits">
+            <li class="demo-habit" data-index="0">
+              <div class="demo-checkbox">
+                <svg viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2 7.5L5.5 11L12 3"
+                    stroke="#0A0A0A"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="demo-ripple"></div>
+              </div>
+              <span class="demo-habit-emoji">🧊</span>
+              <span class="demo-habit-label">Douche froide</span>
+            </li>
+            <li class="demo-habit" data-index="1">
+              <div class="demo-checkbox">
+                <svg viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2 7.5L5.5 11L12 3"
+                    stroke="#0A0A0A"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="demo-ripple"></div>
+              </div>
+              <span class="demo-habit-emoji">📚</span>
+              <span class="demo-habit-label">30min de lecture</span>
+            </li>
+            <li class="demo-habit" data-index="2">
+              <div class="demo-checkbox">
+                <svg viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2 7.5L5.5 11L12 3"
+                    stroke="#0A0A0A"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="demo-ripple"></div>
+              </div>
+              <span class="demo-habit-emoji">💪</span>
+              <span class="demo-habit-label">Entraînement</span>
+            </li>
+            <li class="demo-habit" data-index="3">
+              <div class="demo-checkbox">
+                <svg viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2 7.5L5.5 11L12 3"
+                    stroke="#0A0A0A"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="demo-ripple"></div>
+              </div>
+              <span class="demo-habit-emoji">🥗</span>
+              <span class="demo-habit-label">Manger sain</span>
+            </li>
+          </ul>
 
-                <div class="demo-perfect-msg" id="demoPerfect">JOURNÉE PARFAITE ! 🏆</div>
-                <button class="demo-reset" id="demoReset">↺ RÉESSAYER</button>
-            </div>
+          <div class="demo-perfect-msg" id="demoPerfect">
+            JOURNÉE PARFAITE ! 🏆
+          </div>
+          <button class="demo-reset" id="demoReset">↺ RÉESSAYER</button>
         </div>
+      </div>
     </section>
 
     <!-- MOTIVATION QUOTE -->
     <section class="quote-section fade-in">
-        <p class="quote-text">"La discipline est le pont entre les objectifs et l'accomplissement"</p>
-        <p class="quote-author">— Jim Rohn</p>
+      <p class="quote-text">
+        "La discipline est le pont entre les objectifs et l'accomplissement"
+      </p>
+      <p class="quote-author">— Jim Rohn</p>
     </section>
 
     <!-- COMMUNITY STATS -->
     <section class="community-section fade-in">
-        <h2 class="section-heading">REJOINS LES GUERRIERS</h2>
-        <p style="color: var(--accent-dim); margin-bottom: 40px; font-size: 0.95rem;">Qui deviennent meilleurs chaque jour</p>
-        <div class="community-counter" id="communityCounter">0</div>
-        <div class="community-label">habitudes validées</div>
+      <h2 class="section-heading">REJOINS LES GUERRIERS</h2>
+      <p
+        style="
+          color: var(--accent-dim);
+          margin-bottom: 40px;
+          font-size: 0.95rem;
+        "
+      >
+        Qui deviennent meilleurs chaque jour
+      </p>
+      <div class="community-counter" id="communityCounter">0</div>
+      <div class="community-label">habitudes validées</div>
     </section>
 
     <!-- DISPONIBLE PARTOUT -->
     <section class="available-section fade-in">
-        <h2 class="section-heading">📱 DISPONIBLE PARTOUT</h2>
-        <p style="color: var(--accent-dim); text-align: center; margin-bottom: 40px; font-size: 0.95rem;">Installe l'app sur n'importe quel appareil. Aucun store nécessaire.</p>
-        <div class="platforms-grid">
-            <div class="platform-item">
-                <div class="platform-icon">🌐</div>
-                <div class="platform-name">PWA</div>
-                <div class="platform-desc">Progressive Web App</div>
-            </div>
-            <div class="platform-item">
-                <div class="platform-icon">🔵</div>
-                <div class="platform-name">Chrome</div>
-                <div class="platform-desc">Desktop & Android</div>
-            </div>
-            <div class="platform-item">
-                <div class="platform-icon">🧭</div>
-                <div class="platform-name">Safari</div>
-                <div class="platform-desc">iOS & macOS</div>
-            </div>
-            <div class="platform-item">
-                <div class="platform-icon">📱</div>
-                <div class="platform-name">Mobile</div>
-                <div class="platform-desc">Écran d'accueil</div>
-            </div>
+      <h2 class="section-heading">📱 DISPONIBLE PARTOUT</h2>
+      <p
+        style="
+          color: var(--accent-dim);
+          text-align: center;
+          margin-bottom: 40px;
+          font-size: 0.95rem;
+        "
+      >
+        Installe l'app sur n'importe quel appareil. Aucun store nécessaire.
+      </p>
+      <div class="platforms-grid">
+        <div class="platform-item">
+          <div class="platform-icon">🌐</div>
+          <div class="platform-name">PWA</div>
+          <div class="platform-desc">Progressive Web App</div>
         </div>
+        <div class="platform-item">
+          <div class="platform-icon">🔵</div>
+          <div class="platform-name">Chrome</div>
+          <div class="platform-desc">Desktop & Android</div>
+        </div>
+        <div class="platform-item">
+          <div class="platform-icon">🧭</div>
+          <div class="platform-name">Safari</div>
+          <div class="platform-desc">iOS & macOS</div>
+        </div>
+        <div class="platform-item">
+          <div class="platform-icon">📱</div>
+          <div class="platform-name">Mobile</div>
+          <div class="platform-desc">Écran d'accueil</div>
+        </div>
+      </div>
     </section>
 
     <!-- FINAL CTA -->
     <section class="final-cta fade-in">
-        <h2>Prêt à devenir meilleur ?</h2>
-        <a href="index.html" class="cta-btn cta-btn--green">REJOINDRE PROJET FEVRIER</a>
+      <h2>Prêt à devenir meilleur ?</h2>
+      <a href="index.html" class="cta-btn cta-btn--green"
+        >REJOINDRE PROJET MARS</a
+      >
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-brand">PROJET FEVRIER © 2025</div>
-            <div class="footer-links">
-                <a href="https://github.com/LonnySakalese/FEVRIER" target="_blank" rel="noopener" class="footer-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    GitHub
-                </a>
-            </div>
+      <div class="footer-content">
+        <div class="footer-brand">PROJET MARS © 2025</div>
+        <div class="footer-links">
+          <a
+            href="https://github.com/LonnySakalese/FEVRIER"
+            target="_blank"
+            rel="noopener"
+            class="footer-link"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+              />
+            </svg>
+            GitHub
+          </a>
         </div>
+      </div>
     </footer>
 
     <!-- CONFETTI CONTAINER -->
     <div class="confetti-container" id="confettiContainer"></div>
 
     <script>
-    (function() {
-        'use strict';
+      (function () {
+        "use strict";
 
         // ===== PARALLAX =====
-        const heroLogo = document.querySelector('.hero-logo');
-        window.addEventListener('scroll', function() {
+        const heroLogo = document.querySelector(".hero-logo");
+        window.addEventListener(
+          "scroll",
+          function () {
             if (heroLogo && window.scrollY < window.innerHeight) {
-                heroLogo.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px)';
+              heroLogo.style.transform =
+                "translateY(" + window.scrollY * 0.3 + "px)";
             }
-        }, { passive: true });
+          },
+          { passive: true },
+        );
 
         // ===== PARTICLES =====
-        const particlesEl = document.getElementById('particles');
+        const particlesEl = document.getElementById("particles");
         const particleCount = window.innerWidth < 600 ? 15 : 30;
         for (let i = 0; i < particleCount; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = (60 + Math.random() * 40) + '%';
-            p.style.animationDuration = (8 + Math.random() * 12) + 's';
-            p.style.animationDelay = (Math.random() * 10) + 's';
-            particlesEl.appendChild(p);
+          const p = document.createElement("div");
+          p.className = "particle";
+          p.style.left = Math.random() * 100 + "%";
+          p.style.top = 60 + Math.random() * 40 + "%";
+          p.style.animationDuration = 8 + Math.random() * 12 + "s";
+          p.style.animationDelay = Math.random() * 10 + "s";
+          particlesEl.appendChild(p);
         }
 
         // ===== FADE IN OBSERVER =====
-        const fadeObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting) e.target.classList.add('visible');
+        const fadeObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) e.target.classList.add("visible");
             });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('.fade-in').forEach(function(el) { fadeObs.observe(el); });
+          },
+          { threshold: 0.15 },
+        );
+        document.querySelectorAll(".fade-in").forEach(function (el) {
+          fadeObs.observe(el);
+        });
 
         // ===== ANIMATED COUNTERS =====
         let statsAnimated = false;
-        const statsObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting && !statsAnimated) {
-                    statsAnimated = true;
-                    animateCounters();
-                }
+        const statsObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting && !statsAnimated) {
+                statsAnimated = true;
+                animateCounters();
+              }
             });
-        }, { threshold: 0.3 });
-        const statsRow = document.getElementById('statsRow');
+          },
+          { threshold: 0.3 },
+        );
+        const statsRow = document.getElementById("statsRow");
         if (statsRow) statsObs.observe(statsRow);
 
         function animateCounters() {
-            document.querySelectorAll('.stat-number').forEach(function(el) {
-                if (el.dataset.infinity === 'true') return; // already shows ∞
-                const target = parseInt(el.dataset.target);
-                const suffix = el.dataset.suffix || '';
-                const duration = 1500;
-                const start = performance.now();
-                function tick(now) {
-                    const progress = Math.min((now - start) / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    el.textContent = Math.round(eased * target) + suffix;
-                    if (progress < 1) requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-            });
+          document.querySelectorAll(".stat-number").forEach(function (el) {
+            if (el.dataset.infinity === "true") return; // already shows ∞
+            const target = parseInt(el.dataset.target);
+            const suffix = el.dataset.suffix || "";
+            const duration = 1500;
+            const start = performance.now();
+            function tick(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.round(eased * target) + suffix;
+              if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+          });
         }
 
         // ===== COMMUNITY COUNTER =====
         let communityAnimated = false;
-        const communityEl = document.getElementById('communityCounter');
-        const communityObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting && !communityAnimated) {
-                    communityAnimated = true;
-                    animateCommunity();
-                }
+        const communityEl = document.getElementById("communityCounter");
+        const communityObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting && !communityAnimated) {
+                communityAnimated = true;
+                animateCommunity();
+              }
             });
-        }, { threshold: 0.3 });
+          },
+          { threshold: 0.3 },
+        );
         if (communityEl) communityObs.observe(communityEl);
 
         function animateCommunity() {
-            const target = 12847;
-            const duration = 2500;
-            const start = performance.now();
-            function tick(now) {
-                const progress = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const val = Math.round(eased * target);
-                communityEl.textContent = val.toLocaleString('fr-FR');
-                if (progress < 1) requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
+          const target = 12847;
+          const duration = 2500;
+          const start = performance.now();
+          function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const val = Math.round(eased * target);
+            communityEl.textContent = val.toLocaleString("fr-FR");
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
         }
 
         // ===== DEMO DATE =====
-        const dateEl = document.getElementById('demoDate');
+        const dateEl = document.getElementById("demoDate");
         const now = new Date();
-        const months = ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'];
-        dateEl.textContent = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+        const months = [
+          "JANVIER",
+          "FÉVRIER",
+          "MARS",
+          "AVRIL",
+          "MAI",
+          "JUIN",
+          "JUILLET",
+          "AOÛT",
+          "SEPTEMBRE",
+          "OCTOBRE",
+          "NOVEMBRE",
+          "DÉCEMBRE",
+        ];
+        dateEl.textContent =
+          now.getDate() +
+          " " +
+          months[now.getMonth()] +
+          " " +
+          now.getFullYear();
 
         // ===== DEMO INTERACTIVE =====
         const habits = [false, false, false, false];
-        const habitEls = document.querySelectorAll('.demo-habit');
-        const scoreEl = document.getElementById('demoScore');
-        const pctEl = document.getElementById('demoPercentage');
-        const rankEl = document.getElementById('demoRank');
-        const streakEl = document.getElementById('demoStreak');
-        const perfectEl = document.getElementById('demoPerfect');
-        const resetBtn = document.getElementById('demoReset');
+        const habitEls = document.querySelectorAll(".demo-habit");
+        const scoreEl = document.getElementById("demoScore");
+        const pctEl = document.getElementById("demoPercentage");
+        const rankEl = document.getElementById("demoRank");
+        const streakEl = document.getElementById("demoStreak");
+        const perfectEl = document.getElementById("demoPerfect");
+        const resetBtn = document.getElementById("demoReset");
 
         function updateDemo() {
-            const checked = habits.filter(Boolean).length;
-            const pct = Math.round(checked / 4 * 100);
+          const checked = habits.filter(Boolean).length;
+          const pct = Math.round((checked / 4) * 100);
 
-            scoreEl.textContent = checked + '/4';
-            pctEl.textContent = pct + '%';
+          scoreEl.textContent = checked + "/4";
+          pctEl.textContent = pct + "%";
 
-            // Rank
-            rankEl.className = 'demo-rank';
-            if (pct === 100) {
-                rankEl.textContent = 'MAÎTRE';
-                rankEl.classList.add('rank-maitre');
-            } else if (pct >= 75) {
-                rankEl.textContent = 'CONFIRMÉ';
-                rankEl.classList.add('rank-confirme');
-            } else if (pct >= 50) {
-                rankEl.textContent = 'APPRENTI';
-                rankEl.classList.add('rank-apprenti');
-            } else {
-                rankEl.textContent = 'DÉBUTANT';
-            }
+          // Rank
+          rankEl.className = "demo-rank";
+          if (pct === 100) {
+            rankEl.textContent = "MAÎTRE";
+            rankEl.classList.add("rank-maitre");
+          } else if (pct >= 75) {
+            rankEl.textContent = "CONFIRMÉ";
+            rankEl.classList.add("rank-confirme");
+          } else if (pct >= 50) {
+            rankEl.textContent = "APPRENTI";
+            rankEl.classList.add("rank-apprenti");
+          } else {
+            rankEl.textContent = "DÉBUTANT";
+          }
 
-            // Streak
-            if (checked === 4) {
-                streakEl.textContent = '🔥 Série: 1 jour';
-                streakEl.classList.add('active');
-                scoreEl.classList.add('perfect');
-            } else {
-                streakEl.textContent = '🔥 Série: 0 jours';
-                streakEl.classList.remove('active');
-                scoreEl.classList.remove('perfect');
-            }
+          // Streak
+          if (checked === 4) {
+            streakEl.textContent = "🔥 Série: 1 jour";
+            streakEl.classList.add("active");
+            scoreEl.classList.add("perfect");
+          } else {
+            streakEl.textContent = "🔥 Série: 0 jours";
+            streakEl.classList.remove("active");
+            scoreEl.classList.remove("perfect");
+          }
 
-            // Perfect day
-            if (checked === 4) {
-                perfectEl.classList.add('show');
-                triggerConfetti();
-                if (navigator.vibrate) navigator.vibrate([50, 30, 80]);
-            } else {
-                perfectEl.classList.remove('show');
-            }
+          // Perfect day
+          if (checked === 4) {
+            perfectEl.classList.add("show");
+            triggerConfetti();
+            if (navigator.vibrate) navigator.vibrate([50, 30, 80]);
+          } else {
+            perfectEl.classList.remove("show");
+          }
         }
 
-        habitEls.forEach(function(el) {
-            el.addEventListener('click', function() {
-                const idx = parseInt(el.dataset.index);
-                habits[idx] = !habits[idx];
-                el.classList.toggle('checked', habits[idx]);
+        habitEls.forEach(function (el) {
+          el.addEventListener("click", function () {
+            const idx = parseInt(el.dataset.index);
+            habits[idx] = !habits[idx];
+            el.classList.toggle("checked", habits[idx]);
 
-                // Ripple effect
-                if (habits[idx]) {
-                    const ripple = el.querySelector('.demo-ripple');
-                    ripple.classList.remove('animate');
-                    void ripple.offsetWidth;
-                    ripple.classList.add('animate');
-                }
+            // Ripple effect
+            if (habits[idx]) {
+              const ripple = el.querySelector(".demo-ripple");
+              ripple.classList.remove("animate");
+              void ripple.offsetWidth;
+              ripple.classList.add("animate");
+            }
 
-                updateDemo();
-            });
+            updateDemo();
+          });
         });
 
-        resetBtn.addEventListener('click', function() {
-            habits.fill(false);
-            habitEls.forEach(function(el) { el.classList.remove('checked'); });
-            updateDemo();
+        resetBtn.addEventListener("click", function () {
+          habits.fill(false);
+          habitEls.forEach(function (el) {
+            el.classList.remove("checked");
+          });
+          updateDemo();
         });
 
         // ===== AUTO DEMO ANIMATION =====
-        (function() {
-            var autoHabits = document.querySelectorAll('.auto-demo-habit');
-            var autoScore = document.getElementById('autoScore');
-            var autoPct = document.getElementById('autoPct');
-            var autoRingFill = document.getElementById('autoRingFill');
-            var autoRingText = document.getElementById('autoRingText');
-            var autoPerfect = document.getElementById('autoPerfect');
-            var miniConfetti = document.getElementById('miniConfettiContainer');
-            var totalHabits = autoHabits.length;
-            var circumference = 2 * Math.PI * 36; // r=36
-            var autoRunning = false;
-            var autoObserver;
+        (function () {
+          var autoHabits = document.querySelectorAll(".auto-demo-habit");
+          var autoScore = document.getElementById("autoScore");
+          var autoPct = document.getElementById("autoPct");
+          var autoRingFill = document.getElementById("autoRingFill");
+          var autoRingText = document.getElementById("autoRingText");
+          var autoPerfect = document.getElementById("autoPerfect");
+          var miniConfetti = document.getElementById("miniConfettiContainer");
+          var totalHabits = autoHabits.length;
+          var circumference = 2 * Math.PI * 36; // r=36
+          var autoRunning = false;
+          var autoObserver;
 
-            function resetAutoDemo() {
-                autoHabits.forEach(function(h) { h.classList.remove('auto-checked'); });
-                autoScore.textContent = '0/' + totalHabits;
-                autoScore.classList.remove('glow-green');
-                autoPct.textContent = 'Commence ta journée !';
-                autoPct.classList.remove('glow-green');
-                autoRingFill.style.strokeDashoffset = circumference;
-                autoRingText.textContent = '0%';
-                autoRingText.classList.remove('glow-green');
-                autoPerfect.classList.remove('show');
-                miniConfetti.innerHTML = '';
+          function resetAutoDemo() {
+            autoHabits.forEach(function (h) {
+              h.classList.remove("auto-checked");
+            });
+            autoScore.textContent = "0/" + totalHabits;
+            autoScore.classList.remove("glow-green");
+            autoPct.textContent = "Commence ta journée !";
+            autoPct.classList.remove("glow-green");
+            autoRingFill.style.strokeDashoffset = circumference;
+            autoRingText.textContent = "0%";
+            autoRingText.classList.remove("glow-green");
+            autoPerfect.classList.remove("show");
+            miniConfetti.innerHTML = "";
+          }
+
+          function updateAutoProgress(checked) {
+            var pct = Math.round((checked / totalHabits) * 100);
+            autoScore.textContent = checked + "/" + totalHabits;
+            autoRingText.textContent = pct + "%";
+            autoRingFill.style.strokeDashoffset =
+              circumference - (circumference * pct) / 100;
+
+            if (checked === totalHabits) {
+              autoScore.classList.add("glow-green");
+              autoPct.textContent = "🔥 Série: 1 jour";
+              autoPct.classList.add("glow-green");
+              autoRingText.classList.add("glow-green");
+            } else if (checked > 0) {
+              autoPct.textContent = "Continue, tu gères !";
+              autoPct.classList.remove("glow-green");
+              autoScore.classList.remove("glow-green");
+              autoRingText.classList.remove("glow-green");
             }
+          }
 
-            function updateAutoProgress(checked) {
-                var pct = Math.round(checked / totalHabits * 100);
-                autoScore.textContent = checked + '/' + totalHabits;
-                autoRingText.textContent = pct + '%';
-                autoRingFill.style.strokeDashoffset = circumference - (circumference * pct / 100);
-
-                if (checked === totalHabits) {
-                    autoScore.classList.add('glow-green');
-                    autoPct.textContent = '🔥 Série: 1 jour';
-                    autoPct.classList.add('glow-green');
-                    autoRingText.classList.add('glow-green');
-                } else if (checked > 0) {
-                    autoPct.textContent = 'Continue, tu gères !';
-                    autoPct.classList.remove('glow-green');
-                    autoScore.classList.remove('glow-green');
-                    autoRingText.classList.remove('glow-green');
-                }
+          function triggerMiniConfetti() {
+            var colors = [
+              "#19E639",
+              "#F5F5F0",
+              "#FFD700",
+              "#FF6B35",
+              "#19A3E6",
+            ];
+            for (var i = 0; i < 35; i++) {
+              var piece = document.createElement("div");
+              piece.className = "mini-confetti";
+              piece.style.left = Math.random() * 100 + "%";
+              piece.style.background =
+                colors[Math.floor(Math.random() * colors.length)];
+              piece.style.width = 3 + Math.random() * 5 + "px";
+              piece.style.height = 3 + Math.random() * 5 + "px";
+              piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "1px";
+              piece.style.animationDuration = 1.2 + Math.random() * 1.5 + "s";
+              piece.style.animationDelay = Math.random() * 0.4 + "s";
+              miniConfetti.appendChild(piece);
+              // Trigger animation
+              setTimeout(
+                function (p) {
+                  p.classList.add("animate");
+                }.bind(null, piece),
+                10,
+              );
             }
+            setTimeout(function () {
+              miniConfetti.innerHTML = "";
+            }, 3500);
+          }
 
-            function triggerMiniConfetti() {
-                var colors = ['#19E639', '#F5F5F0', '#FFD700', '#FF6B35', '#19A3E6'];
-                for (var i = 0; i < 35; i++) {
-                    var piece = document.createElement('div');
-                    piece.className = 'mini-confetti';
-                    piece.style.left = Math.random() * 100 + '%';
-                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    piece.style.width = (3 + Math.random() * 5) + 'px';
-                    piece.style.height = (3 + Math.random() * 5) + 'px';
-                    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '1px';
-                    piece.style.animationDuration = (1.2 + Math.random() * 1.5) + 's';
-                    piece.style.animationDelay = (Math.random() * 0.4) + 's';
-                    miniConfetti.appendChild(piece);
-                    // Trigger animation
-                    setTimeout(function(p) { p.classList.add('animate'); }.bind(null, piece), 10);
-                }
-                setTimeout(function() { miniConfetti.innerHTML = ''; }, 3500);
-            }
+          function runAutoDemo() {
+            if (!autoRunning) return;
+            resetAutoDemo();
 
-            function runAutoDemo() {
+            var delays = [800, 1800, 2800, 3800, 4800];
+            delays.forEach(function (delay, idx) {
+              setTimeout(function () {
                 if (!autoRunning) return;
-                resetAutoDemo();
+                autoHabits[idx].classList.add("auto-checked");
+                updateAutoProgress(idx + 1);
 
-                var delays = [800, 1800, 2800, 3800, 4800];
-                delays.forEach(function(delay, idx) {
-                    setTimeout(function() {
-                        if (!autoRunning) return;
-                        autoHabits[idx].classList.add('auto-checked');
-                        updateAutoProgress(idx + 1);
+                if (idx === totalHabits - 1) {
+                  setTimeout(function () {
+                    if (!autoRunning) return;
+                    autoPerfect.classList.add("show");
+                    triggerMiniConfetti();
+                  }, 400);
+                }
+              }, delay);
+            });
 
-                        if (idx === totalHabits - 1) {
-                            setTimeout(function() {
-                                if (!autoRunning) return;
-                                autoPerfect.classList.add('show');
-                                triggerMiniConfetti();
-                            }, 400);
-                        }
-                    }, delay);
-                });
+            // Loop: reset after full cycle and restart
+            setTimeout(function () {
+              if (autoRunning) runAutoDemo();
+            }, 8500);
+          }
 
-                // Loop: reset after full cycle and restart
-                setTimeout(function() {
-                    if (autoRunning) runAutoDemo();
-                }, 8500);
-            }
+          // Start auto-demo when it enters viewport
+          autoObserver = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting && !autoRunning) {
+                  autoRunning = true;
+                  runAutoDemo();
+                } else if (!e.isIntersecting) {
+                  autoRunning = false;
+                  resetAutoDemo();
+                }
+              });
+            },
+            { threshold: 0.2 },
+          );
 
-            // Start auto-demo when it enters viewport
-            autoObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(function(e) {
-                    if (e.isIntersecting && !autoRunning) {
-                        autoRunning = true;
-                        runAutoDemo();
-                    } else if (!e.isIntersecting) {
-                        autoRunning = false;
-                        resetAutoDemo();
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            var autoDemoSection = document.getElementById('autoDemoSection');
-            if (autoDemoSection) autoObserver.observe(autoDemoSection);
+          var autoDemoSection = document.getElementById("autoDemoSection");
+          if (autoDemoSection) autoObserver.observe(autoDemoSection);
         })();
 
         // ===== PARALLAX EFFECT ON PHONE =====
-        (function() {
-            var phoneFrame = document.getElementById('autoPhoneFrame');
-            var parallaxContainer = document.getElementById('parallaxContainer');
-            if (!phoneFrame || !parallaxContainer) return;
+        (function () {
+          var phoneFrame = document.getElementById("autoPhoneFrame");
+          var parallaxContainer = document.getElementById("parallaxContainer");
+          if (!phoneFrame || !parallaxContainer) return;
 
-            window.addEventListener('scroll', function() {
-                var rect = parallaxContainer.getBoundingClientRect();
-                var windowH = window.innerHeight;
-                if (rect.top < windowH && rect.bottom > 0) {
-                    var center = rect.top + rect.height / 2;
-                    var fromCenter = (center - windowH / 2) / (windowH / 2);
-                    // Subtle tilt based on scroll position
-                    var rotateX = fromCenter * 5;
-                    phoneFrame.style.transform = 'rotateX(' + rotateX + 'deg) translateY(' + (fromCenter * -15) + 'px)';
-                }
-            }, { passive: true });
+          window.addEventListener(
+            "scroll",
+            function () {
+              var rect = parallaxContainer.getBoundingClientRect();
+              var windowH = window.innerHeight;
+              if (rect.top < windowH && rect.bottom > 0) {
+                var center = rect.top + rect.height / 2;
+                var fromCenter = (center - windowH / 2) / (windowH / 2);
+                // Subtle tilt based on scroll position
+                var rotateX = fromCenter * 5;
+                phoneFrame.style.transform =
+                  "rotateX(" +
+                  rotateX +
+                  "deg) translateY(" +
+                  fromCenter * -15 +
+                  "px)";
+              }
+            },
+            { passive: true },
+          );
 
-            // Mouse parallax on desktop
-            if (window.innerWidth > 768) {
-                parallaxContainer.addEventListener('mousemove', function(e) {
-                    var rect = parallaxContainer.getBoundingClientRect();
-                    var x = (e.clientX - rect.left) / rect.width - 0.5;
-                    var y = (e.clientY - rect.top) / rect.height - 0.5;
-                    phoneFrame.style.transform = 'rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg)';
-                });
-                parallaxContainer.addEventListener('mouseleave', function() {
-                    phoneFrame.style.transform = 'rotateY(0) rotateX(0)';
-                });
-            }
+          // Mouse parallax on desktop
+          if (window.innerWidth > 768) {
+            parallaxContainer.addEventListener("mousemove", function (e) {
+              var rect = parallaxContainer.getBoundingClientRect();
+              var x = (e.clientX - rect.left) / rect.width - 0.5;
+              var y = (e.clientY - rect.top) / rect.height - 0.5;
+              phoneFrame.style.transform =
+                "rotateY(" + x * 8 + "deg) rotateX(" + -y * 8 + "deg)";
+            });
+            parallaxContainer.addEventListener("mouseleave", function () {
+              phoneFrame.style.transform = "rotateY(0) rotateX(0)";
+            });
+          }
         })();
 
         // ===== CONFETTI =====
         function triggerConfetti() {
-            const container = document.getElementById('confettiContainer');
-            const colors = ['#19E639', '#F5F5F0', '#FFD700', '#FF6B35', '#19A3E6', '#E6194B'];
-            for (let i = 0; i < 60; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                piece.style.left = Math.random() * 100 + '%';
-                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                piece.style.width = (4 + Math.random() * 6) + 'px';
-                piece.style.height = (4 + Math.random() * 6) + 'px';
-                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                piece.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-                piece.style.animationDelay = (Math.random() * 0.5) + 's';
-                container.appendChild(piece);
-            }
-            setTimeout(function() { container.innerHTML = ''; }, 4000);
+          const container = document.getElementById("confettiContainer");
+          const colors = [
+            "#19E639",
+            "#F5F5F0",
+            "#FFD700",
+            "#FF6B35",
+            "#19A3E6",
+            "#E6194B",
+          ];
+          for (let i = 0; i < 60; i++) {
+            const piece = document.createElement("div");
+            piece.className = "confetti-piece";
+            piece.style.left = Math.random() * 100 + "%";
+            piece.style.background =
+              colors[Math.floor(Math.random() * colors.length)];
+            piece.style.width = 4 + Math.random() * 6 + "px";
+            piece.style.height = 4 + Math.random() * 6 + "px";
+            piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            piece.style.animationDuration = 1.5 + Math.random() * 2 + "s";
+            piece.style.animationDelay = Math.random() * 0.5 + "s";
+            container.appendChild(piece);
+          }
+          setTimeout(function () {
+            container.innerHTML = "";
+          }, 4000);
         }
-    })();
+      })();
     </script>
-</body>
+  </body>
 </html>

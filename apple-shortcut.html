@@ -1,572 +1,647 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0A0A0A">
-    <title>Raccourci iOS - PROJET FEVRIER</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#0A0A0A" />
+    <title>Raccourci iOS - PROJET MARS</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+          sans-serif;
+        background: #0a0a0a;
+        color: #f5f5f0;
+        min-height: 100vh;
+        padding: 20px;
+        padding-top: env(safe-area-inset-top, 20px);
+        padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 40px);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, #f5f5f0, #e0e0d8);
+        color: #0a0a0a;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .back-link:active {
+        transform: scale(0.97);
+        opacity: 0.9;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 30px;
+      }
+
+      .section {
+        margin-bottom: 35px;
+      }
+
+      .section-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .step {
+        background: #151515;
+        border: 1px solid #222;
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 14px;
+        position: relative;
+      }
+
+      .step-number {
+        position: absolute;
+        top: -10px;
+        left: 16px;
+        background: #f5f5f0;
+        color: #0a0a0a;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.85rem;
+      }
+
+      .step-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-top: 4px;
+      }
+
+      .step-text strong {
+        color: #87ceeb;
+      }
+
+      /* CSS Phone illustration */
+      .phone-illustration {
+        margin: 16px auto 0;
+        width: 180px;
+        height: 110px;
+        background: #1a1a1a;
+        border-radius: 14px;
+        border: 2px solid #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .phone-illustration .safari-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 28px;
+        background: #222;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.55rem;
+        color: #666;
+        gap: 6px;
+      }
+
+      .phone-illustration .safari-bar .url {
+        background: #1a1a1a;
+        padding: 2px 12px;
+        border-radius: 6px;
+        font-size: 0.5rem;
+      }
+
+      .phone-illustration .share-icon {
+        font-size: 1.6rem;
+        margin-top: 14px;
+      }
+
+      .phone-illustration .menu-items {
+        margin-top: 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        width: 85%;
+      }
+
+      .phone-illustration .menu-item {
+        background: #252525;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 0.48rem;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .phone-illustration .menu-item.highlight {
+        background: #1a3a4a;
+        border: 1px solid #87ceeb;
+      }
+
+      /* Home screen illustration */
+      .home-illustration {
+        margin: 16px auto 0;
+        width: 180px;
+        height: 90px;
+        background: #1a1a1a;
+        border-radius: 14px;
+        border: 2px solid #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 10px;
+      }
+
+      .app-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+      }
+
+      .app-icon.warrior {
+        background: #0a0a0a;
+        border: 2px solid #f5f5f0;
+      }
+
+      .app-icon.placeholder {
+        background: #252525;
+        border: 1px solid #333;
+      }
+
+      .app-icon-label {
+        font-size: 0.4rem;
+        text-align: center;
+        margin-top: 3px;
+        color: #888;
+      }
+
+      /* Siri illustration */
+      .siri-illustration {
+        margin: 16px auto 0;
+        width: 200px;
+        height: 90px;
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        border-radius: 14px;
+        border: 2px solid #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .siri-wave {
+        width: 60px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+      }
+
+      .siri-wave span {
+        display: block;
+        width: 3px;
+        border-radius: 2px;
+        animation: siri-pulse 1.2s ease-in-out infinite;
+      }
+
+      .siri-wave span:nth-child(1) {
+        height: 8px;
+        background: #ff6b9d;
+        animation-delay: 0s;
+      }
+      .siri-wave span:nth-child(2) {
+        height: 14px;
+        background: #c44dff;
+        animation-delay: 0.15s;
+      }
+      .siri-wave span:nth-child(3) {
+        height: 18px;
+        background: #6b9dff;
+        animation-delay: 0.3s;
+      }
+      .siri-wave span:nth-child(4) {
+        height: 14px;
+        background: #4dffc4;
+        animation-delay: 0.45s;
+      }
+      .siri-wave span:nth-child(5) {
+        height: 8px;
+        background: #ffd94d;
+        animation-delay: 0.6s;
+      }
+
+      @keyframes siri-pulse {
+        0%,
+        100% {
+          transform: scaleY(0.5);
+        }
+        50% {
+          transform: scaleY(1.2);
+        }
+      }
+
+      .siri-text {
+        font-size: 0.6rem;
+        color: #aaa;
+        font-style: italic;
+      }
+
+      /* Shortcut app illustration */
+      .shortcut-illustration {
+        margin: 16px auto 0;
+        width: 200px;
+        background: #151515;
+        border-radius: 14px;
+        border: 2px solid #333;
+        padding: 12px;
+      }
+
+      .shortcut-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 10px;
+        font-size: 0.55rem;
+        color: #888;
+      }
+
+      .shortcut-block {
+        background: #252525;
+        border-radius: 8px;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        font-size: 0.55rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .shortcut-block.action {
+        border-left: 3px solid #87ceeb;
+      }
+
+      .tip-box {
+        background: #1a2a1a;
+        border: 1px solid #2a4a2a;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 20px;
+      }
+
+      .tip-box .tip-title {
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+      }
+
+      .tip-box .tip-text {
+        font-size: 0.85rem;
+        color: #aaa;
+        line-height: 1.5;
+      }
+
+      .shortcuts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .shortcut-card {
+        background: #151515;
+        border: 1px solid #222;
+        border-radius: 12px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .shortcut-card .sc-icon {
+        font-size: 1.5rem;
+      }
+
+      .shortcut-card .sc-info {
+        flex: 1;
+      }
+
+      .shortcut-card .sc-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .shortcut-card .sc-desc {
+        font-size: 0.75rem;
+        color: #888;
+        margin-top: 2px;
+      }
+
+      .shortcut-card .sc-voice {
+        font-size: 0.7rem;
+        color: #87ceeb;
+        margin-top: 4px;
+        font-style: italic;
+      }
+
+      .warning-box {
+        background: #2a2010;
+        border: 1px solid #4a3a10;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 24px;
+      }
+
+      .warning-box .warn-title {
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+      }
+
+      .warning-box .warn-text {
+        font-size: 0.8rem;
+        color: #aaa;
+        line-height: 1.5;
+      }
+
+      /* Responsive */
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      @media (max-width: 360px) {
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: #0A0A0A;
-            color: #F5F5F0;
-            min-height: 100vh;
-            padding: 20px;
-            padding-top: env(safe-area-inset-top, 20px);
-            padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 40px);
+          padding: 12px;
         }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 14px 24px;
-            background: linear-gradient(135deg, #F5F5F0, #E0E0D8);
-            color: #0A0A0A;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        .back-link:active {
-            transform: scale(0.97);
-            opacity: 0.9;
-        }
-
         h1 {
-            font-size: 1.6rem;
-            text-align: center;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+          font-size: 1.3rem;
         }
-
-        .subtitle {
-            text-align: center;
-            color: #888;
-            font-size: 0.85rem;
-            margin-bottom: 30px;
-        }
-
-        .section {
-            margin-bottom: 35px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
         .step {
-            background: #151515;
-            border: 1px solid #222;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 14px;
-            position: relative;
+          padding: 14px;
         }
-
-        .step-number {
-            position: absolute;
-            top: -10px;
-            left: 16px;
-            background: #F5F5F0;
-            color: #0A0A0A;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-        }
-
         .step-text {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-top: 4px;
+          font-size: 0.85rem;
         }
+      }
 
-        .step-text strong {
-            color: #87CEEB;
+      @media (min-width: 768px) {
+        body {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 40px 30px;
         }
-
-        /* CSS Phone illustration */
-        .phone-illustration {
-            margin: 16px auto 0;
-            width: 180px;
-            height: 110px;
-            background: #1a1a1a;
-            border-radius: 14px;
-            border: 2px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
+        h1 {
+          font-size: 1.8rem;
         }
-
-        .phone-illustration .safari-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 28px;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.55rem;
-            color: #666;
-            gap: 6px;
-        }
-
-        .phone-illustration .safari-bar .url {
-            background: #1a1a1a;
-            padding: 2px 12px;
-            border-radius: 6px;
-            font-size: 0.5rem;
-        }
-
-        .phone-illustration .share-icon {
-            font-size: 1.6rem;
-            margin-top: 14px;
-        }
-
-        .phone-illustration .menu-items {
-            margin-top: 26px;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            width: 85%;
-        }
-
-        .phone-illustration .menu-item {
-            background: #252525;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.48rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .phone-illustration .menu-item.highlight {
-            background: #1a3a4a;
-            border: 1px solid #87CEEB;
-        }
-
-        /* Home screen illustration */
-        .home-illustration {
-            margin: 16px auto 0;
-            width: 180px;
-            height: 90px;
-            background: #1a1a1a;
-            border-radius: 14px;
-            border: 2px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            padding: 10px;
-        }
-
-        .app-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .app-icon.warrior {
-            background: #0A0A0A;
-            border: 2px solid #F5F5F0;
-        }
-
-        .app-icon.placeholder {
-            background: #252525;
-            border: 1px solid #333;
-        }
-
-        .app-icon-label {
-            font-size: 0.4rem;
-            text-align: center;
-            margin-top: 3px;
-            color: #888;
-        }
-
-        /* Siri illustration */
-        .siri-illustration {
-            margin: 16px auto 0;
-            width: 200px;
-            height: 90px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 14px;
-            border: 2px solid #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .siri-wave {
-            width: 60px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-        }
-
-        .siri-wave span {
-            display: block;
-            width: 3px;
-            border-radius: 2px;
-            animation: siri-pulse 1.2s ease-in-out infinite;
-        }
-
-        .siri-wave span:nth-child(1) { height: 8px; background: #ff6b9d; animation-delay: 0s; }
-        .siri-wave span:nth-child(2) { height: 14px; background: #c44dff; animation-delay: 0.15s; }
-        .siri-wave span:nth-child(3) { height: 18px; background: #6b9dff; animation-delay: 0.3s; }
-        .siri-wave span:nth-child(4) { height: 14px; background: #4dffc4; animation-delay: 0.45s; }
-        .siri-wave span:nth-child(5) { height: 8px; background: #ffd94d; animation-delay: 0.6s; }
-
-        @keyframes siri-pulse {
-            0%, 100% { transform: scaleY(0.5); }
-            50% { transform: scaleY(1.2); }
-        }
-
-        .siri-text {
-            font-size: 0.6rem;
-            color: #aaa;
-            font-style: italic;
-        }
-
-        /* Shortcut app illustration */
-        .shortcut-illustration {
-            margin: 16px auto 0;
-            width: 200px;
-            background: #151515;
-            border-radius: 14px;
-            border: 2px solid #333;
-            padding: 12px;
-        }
-
-        .shortcut-header {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 10px;
-            font-size: 0.55rem;
-            color: #888;
-        }
-
-        .shortcut-block {
-            background: #252525;
-            border-radius: 8px;
-            padding: 8px 10px;
-            margin-bottom: 6px;
-            font-size: 0.55rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .shortcut-block.action {
-            border-left: 3px solid #87CEEB;
-        }
-
-        .tip-box {
-            background: #1a2a1a;
-            border: 1px solid #2a4a2a;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 20px;
-        }
-
-        .tip-box .tip-title {
-            font-weight: 700;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-        }
-
-        .tip-box .tip-text {
-            font-size: 0.85rem;
-            color: #aaa;
-            line-height: 1.5;
-        }
-
-        .shortcuts-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .shortcut-card {
-            background: #151515;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .shortcut-card .sc-icon {
-            font-size: 1.5rem;
-        }
-
-        .shortcut-card .sc-info {
-            flex: 1;
-        }
-
-        .shortcut-card .sc-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .shortcut-card .sc-desc {
-            font-size: 0.75rem;
-            color: #888;
-            margin-top: 2px;
-        }
-
-        .shortcut-card .sc-voice {
-            font-size: 0.7rem;
-            color: #87CEEB;
-            margin-top: 4px;
-            font-style: italic;
-        }
-
-        .warning-box {
-            background: #2a2010;
-            border: 1px solid #4a3a10;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 24px;
-        }
-
-        .warning-box .warn-title {
-            font-weight: 700;
-            margin-bottom: 6px;
-            font-size: 0.9rem;
-        }
-
-        .warning-box .warn-text {
-            font-size: 0.8rem;
-            color: #aaa;
-            line-height: 1.5;
-        }
-
-        /* Responsive */
-        html, body {
-            overflow-x: hidden;
-            max-width: 100vw;
-        }
-
-        @media (max-width: 360px) {
-            body { padding: 12px; }
-            h1 { font-size: 1.3rem; }
-            .step { padding: 14px; }
-            .step-text { font-size: 0.85rem; }
-        }
-
-        @media (min-width: 768px) {
-            body {
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 40px 30px;
-            }
-            h1 { font-size: 1.8rem; }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <a
+      href="#"
+      class="back-link"
+      onclick="
+        event.preventDefault();
+        if (window.opener || window.history.length > 1) {
+          window.close();
+          if (!window.closed) history.back();
+        } else {
+          window.location.href = 'index.html';
+        }
+      "
+      >← Retour à l'app</a
+    >
 
-<a href="#" class="back-link" onclick="event.preventDefault(); if(window.opener || window.history.length > 1) { window.close(); if(!window.closed) history.back(); } else { window.location.href='index.html'; }">← Retour à l'app</a>
+    <h1>📱 RACCOURCI iOS</h1>
+    <p class="subtitle">Accède à PROJET MARS en un tap ou avec Siri</p>
 
-<h1>📱 RACCOURCI iOS</h1>
-<p class="subtitle">Accède à PROJET FEVRIER en un tap ou avec Siri</p>
+    <!-- ===== SECTION 1: Ajouter à l'écran d'accueil ===== -->
+    <div class="section">
+      <div class="section-title">🏠 Ajouter à l'écran d'accueil</div>
 
-<!-- ===== SECTION 1: Ajouter à l'écran d'accueil ===== -->
-<div class="section">
-    <div class="section-title">🏠 Ajouter à l'écran d'accueil</div>
-
-    <div class="step">
+      <div class="step">
         <div class="step-number">1</div>
         <div class="step-text">
-            Ouvre <strong>PROJET FEVRIER</strong> dans <strong>Safari</strong> sur ton iPhone
+          Ouvre <strong>PROJET MARS</strong> dans <strong>Safari</strong> sur
+          ton iPhone
         </div>
         <div class="phone-illustration">
-            <div class="safari-bar">
-                🔒 <span class="url">projet-fevrier.web.app</span>
-            </div>
-            <div class="share-icon">📤</div>
+          <div class="safari-bar">
+            🔒 <span class="url">projet-fevrier.web.app</span>
+          </div>
+          <div class="share-icon">📤</div>
         </div>
-    </div>
+      </div>
 
-    <div class="step">
+      <div class="step">
         <div class="step-number">2</div>
         <div class="step-text">
-            Appuie sur le bouton <strong>Partager</strong> (📤) en bas de Safari
+          Appuie sur le bouton <strong>Partager</strong> (📤) en bas de Safari
         </div>
         <div class="phone-illustration">
-            <div class="safari-bar">
-                🔒 <span class="url">projet-fevrier.web.app</span>
-            </div>
-            <div class="menu-items">
-                <div class="menu-item">📋 Copier</div>
-                <div class="menu-item highlight">➕ Sur l'écran d'accueil</div>
-                <div class="menu-item">🔖 Ajouter aux favoris</div>
-            </div>
+          <div class="safari-bar">
+            🔒 <span class="url">projet-fevrier.web.app</span>
+          </div>
+          <div class="menu-items">
+            <div class="menu-item">📋 Copier</div>
+            <div class="menu-item highlight">➕ Sur l'écran d'accueil</div>
+            <div class="menu-item">🔖 Ajouter aux favoris</div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="step">
+      <div class="step">
         <div class="step-number">3</div>
         <div class="step-text">
-            Sélectionne <strong>"Sur l'écran d'accueil"</strong>, puis appuie sur <strong>Ajouter</strong>
+          Sélectionne <strong>"Sur l'écran d'accueil"</strong>, puis appuie sur
+          <strong>Ajouter</strong>
         </div>
         <div class="home-illustration">
-            <div style="text-align: center;">
-                <div class="app-icon placeholder">📷</div>
-                <div class="app-icon-label">Photos</div>
-            </div>
-            <div style="text-align: center;">
-                <div class="app-icon warrior">⚔️</div>
-                <div class="app-icon-label">Warrior</div>
-            </div>
-            <div style="text-align: center;">
-                <div class="app-icon placeholder">🎵</div>
-                <div class="app-icon-label">Musique</div>
-            </div>
+          <div style="text-align: center">
+            <div class="app-icon placeholder">📷</div>
+            <div class="app-icon-label">Photos</div>
+          </div>
+          <div style="text-align: center">
+            <div class="app-icon warrior">⚔️</div>
+            <div class="app-icon-label">Warrior</div>
+          </div>
+          <div style="text-align: center">
+            <div class="app-icon placeholder">🎵</div>
+            <div class="app-icon-label">Musique</div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="tip-box">
+      <div class="tip-box">
         <div class="tip-title">✅ Résultat</div>
         <div class="tip-text">
-            L'app s'ouvre en plein écran, sans barre Safari. Comme une vraie app native !
+          L'app s'ouvre en plein écran, sans barre Safari. Comme une vraie app
+          native !
         </div>
+      </div>
     </div>
-</div>
 
-<!-- ===== SECTION 2: Créer un Raccourci Siri ===== -->
-<div class="section">
-    <div class="section-title">🗣️ Créer un Raccourci Siri</div>
-    <p style="color: #888; font-size: 0.85rem; margin-bottom: 16px;">
+    <!-- ===== SECTION 2: Créer un Raccourci Siri ===== -->
+    <div class="section">
+      <div class="section-title">🗣️ Créer un Raccourci Siri</div>
+      <p style="color: #888; font-size: 0.85rem; margin-bottom: 16px">
         Dis <em>"Hey Siri, mes habitudes"</em> pour ouvrir l'app directement !
-    </p>
+      </p>
 
-    <div class="step">
+      <div class="step">
         <div class="step-number">1</div>
         <div class="step-text">
-            Ouvre l'app <strong>Raccourcis</strong> sur ton iPhone (préinstallée par Apple)
+          Ouvre l'app <strong>Raccourcis</strong> sur ton iPhone (préinstallée
+          par Apple)
         </div>
-    </div>
+      </div>
 
-    <div class="step">
+      <div class="step">
         <div class="step-number">2</div>
         <div class="step-text">
-            Appuie sur <strong>+</strong> en haut à droite pour créer un nouveau raccourci
+          Appuie sur <strong>+</strong> en haut à droite pour créer un nouveau
+          raccourci
         </div>
-    </div>
+      </div>
 
-    <div class="step">
+      <div class="step">
         <div class="step-number">3</div>
         <div class="step-text">
-            Ajoute l'action <strong>"Ouvrir URL"</strong> et entre l'adresse de l'app :
+          Ajoute l'action <strong>"Ouvrir URL"</strong> et entre l'adresse de
+          l'app :
         </div>
         <div class="shortcut-illustration">
-            <div class="shortcut-header">🔧 Nouveau Raccourci</div>
-            <div class="shortcut-block action">🌐 Ouvrir l'URL</div>
-            <div class="shortcut-block" style="color: #87CEEB; word-break: break-all;">
-                https://ton-app.web.app/#today
-            </div>
+          <div class="shortcut-header">🔧 Nouveau Raccourci</div>
+          <div class="shortcut-block action">🌐 Ouvrir l'URL</div>
+          <div
+            class="shortcut-block"
+            style="color: #87ceeb; word-break: break-all"
+          >
+            https://ton-app.web.app/#today
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="step">
+      <div class="step">
         <div class="step-number">4</div>
         <div class="step-text">
-            Renomme le raccourci en <strong>"Mes habitudes"</strong> (c'est la phrase que Siri reconnaîtra)
+          Renomme le raccourci en <strong>"Mes habitudes"</strong> (c'est la
+          phrase que Siri reconnaîtra)
         </div>
         <div class="siri-illustration">
-            <div class="siri-wave">
-                <span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <div class="siri-text">"Hey Siri, mes habitudes"</div>
+          <div class="siri-wave">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="siri-text">"Hey Siri, mes habitudes"</div>
         </div>
-    </div>
+      </div>
 
-    <div class="tip-box">
+      <div class="tip-box">
         <div class="tip-title">💡 Raccourcis suggérés</div>
         <div class="tip-text">
-            Crée plusieurs raccourcis avec différentes URLs pour accéder directement à chaque section :
+          Crée plusieurs raccourcis avec différentes URLs pour accéder
+          directement à chaque section :
         </div>
         <div class="shortcuts-list">
-            <div class="shortcut-card">
-                <div class="sc-icon">⚔️</div>
-                <div class="sc-info">
-                    <div class="sc-name">Mes habitudes</div>
-                    <div class="sc-desc">URL : .../#today</div>
-                    <div class="sc-voice">"Hey Siri, mes habitudes"</div>
-                </div>
+          <div class="shortcut-card">
+            <div class="sc-icon">⚔️</div>
+            <div class="sc-info">
+              <div class="sc-name">Mes habitudes</div>
+              <div class="sc-desc">URL : .../#today</div>
+              <div class="sc-voice">"Hey Siri, mes habitudes"</div>
             </div>
-            <div class="shortcut-card">
-                <div class="sc-icon">📊</div>
-                <div class="sc-info">
-                    <div class="sc-name">Mes stats</div>
-                    <div class="sc-desc">URL : .../#stats</div>
-                    <div class="sc-voice">"Hey Siri, mes stats"</div>
-                </div>
+          </div>
+          <div class="shortcut-card">
+            <div class="sc-icon">📊</div>
+            <div class="sc-info">
+              <div class="sc-name">Mes stats</div>
+              <div class="sc-desc">URL : .../#stats</div>
+              <div class="sc-voice">"Hey Siri, mes stats"</div>
             </div>
-            <div class="shortcut-card">
-                <div class="sc-icon">✅</div>
-                <div class="sc-info">
-                    <div class="sc-name">Valider ma journée</div>
-                    <div class="sc-desc">URL : .../#validate</div>
-                    <div class="sc-voice">"Hey Siri, valider ma journée"</div>
-                </div>
+          </div>
+          <div class="shortcut-card">
+            <div class="sc-icon">✅</div>
+            <div class="sc-info">
+              <div class="sc-name">Valider ma journée</div>
+              <div class="sc-desc">URL : .../#validate</div>
+              <div class="sc-voice">"Hey Siri, valider ma journée"</div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-<!-- ===== Notes iOS ===== -->
-<div class="warning-box">
-    <div class="warn-title">⚠️ Bon à savoir (iOS)</div>
-    <div class="warn-text">
-        • Les <strong>raccourcis du manifest</strong> apparaissent en appui long sur l'icône de l'app (iOS 16.4+)<br>
-        • L'app doit être ajoutée via <strong>Safari</strong> (pas Chrome/Firefox)<br>
-        • Les notifications push ne sont disponibles qu'à partir d'<strong>iOS 16.4</strong><br>
-        • Si l'app ne se met pas à jour, ouvre-la 2× et ferme-la pour forcer le refresh du Service Worker
+    <!-- ===== Notes iOS ===== -->
+    <div class="warning-box">
+      <div class="warn-title">⚠️ Bon à savoir (iOS)</div>
+      <div class="warn-text">
+        • Les <strong>raccourcis du manifest</strong> apparaissent en appui long
+        sur l'icône de l'app (iOS 16.4+)<br />
+        • L'app doit être ajoutée via <strong>Safari</strong> (pas
+        Chrome/Firefox)<br />
+        • Les notifications push ne sont disponibles qu'à partir d'<strong
+          >iOS 16.4</strong
+        ><br />
+        • Si l'app ne se met pas à jour, ouvre-la 2× et ferme-la pour forcer le
+        refresh du Service Worker
+      </div>
     </div>
-</div>
 
-<div style="height: 40px;"></div>
-
-</body>
+    <div style="height: 40px"></div>
+  </body>
 </html>

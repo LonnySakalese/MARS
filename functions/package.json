@@ -1,6 +1,6 @@
 {
   "name": "fevrier-functions",
-  "description": "Cloud Functions for PROJET FEVRIER",
+  "description": "Cloud Functions for PROJET MARS",
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "deploy": "firebase deploy --only functions"

@@ -1,155 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0A0A0A">
-    <title>Politique de Confidentialité - PROJET FEVRIER</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <title>Politique de Confidentialité - PROJET MARS</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: #0A0A0A;
-            color: #C5C5C0;
-            min-height: 100vh;
-            padding: 20px;
-            padding-top: env(safe-area-inset-top, 20px);
-            line-height: 1.7;
-        }
-        .container { max-width: 640px; margin: 0 auto; }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 10px;
-            color: #F5F5F0;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            transition: background 0.2s;
-        }
-        .back-link:active { background: rgba(255,255,255,0.1); }
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #F5F5F0;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-        .subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 30px;
-        }
-        h2 {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #F5F5F0;
-            margin: 24px 0 10px;
-            letter-spacing: 1px;
-        }
-        p, li { font-size: 0.85rem; margin-bottom: 10px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 6px; }
-        .highlight {
-            background: rgba(46, 204, 113, 0.1);
-            border-left: 3px solid #2ECC71;
-            padding: 12px 16px;
-            border-radius: 0 8px 8px 0;
-            margin: 16px 0;
-        }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.3);
-            text-align: center;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+          sans-serif;
+        background: #0a0a0a;
+        color: #c5c5c0;
+        min-height: 100vh;
+        padding: 20px;
+        padding-top: env(safe-area-inset-top, 20px);
+        line-height: 1.7;
+      }
+      .container {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        color: #f5f5f0;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        transition: background 0.2s;
+      }
+      .back-link:active {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #f5f5f0;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #f5f5f0;
+        margin: 24px 0 10px;
+        letter-spacing: 1px;
+      }
+      p,
+      li {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      .highlight {
+        background: rgba(46, 204, 113, 0.1);
+        border-left: 3px solid #2ecc71;
+        padding: 12px 16px;
+        border-radius: 0 8px 8px 0;
+        margin: 16px 0;
+      }
+      .footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.3);
+        text-align: center;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <a href="#" class="back-link" onclick="event.preventDefault(); if(window.history.length > 1) history.back(); else window.location.href='index.html';">← Retour</a>
-        
-        <h1>POLITIQUE DE CONFIDENTIALITÉ</h1>
-        <p class="subtitle">Dernière mise à jour : 23 février 2026</p>
+      <a
+        href="#"
+        class="back-link"
+        onclick="
+          event.preventDefault();
+          if (window.history.length > 1) history.back();
+          else window.location.href = 'index.html';
+        "
+        >← Retour</a
+      >
 
-        <div class="highlight">
-            <strong>En résumé :</strong> Nous collectons le minimum de données nécessaires au fonctionnement de l'Application. Vos données d'habitudes vous appartiennent. Nous ne vendons rien à personne.
-        </div>
+      <h1>POLITIQUE DE CONFIDENTIALITÉ</h1>
+      <p class="subtitle">Dernière mise à jour : 23 février 2026</p>
 
-        <h2>1. Responsable du traitement</h2>
-        <p>PROJET FEVRIER est édité par un développeur indépendant basé à Lyon, France.</p>
+      <div class="highlight">
+        <strong>En résumé :</strong> Nous collectons le minimum de données
+        nécessaires au fonctionnement de l'Application. Vos données d'habitudes
+        vous appartiennent. Nous ne vendons rien à personne.
+      </div>
 
-        <h2>2. Données collectées</h2>
-        <p><strong>Données de compte :</strong></p>
-        <ul>
-            <li>Adresse email (pour l'authentification)</li>
-            <li>Pseudo et avatar (choisis par l'utilisateur)</li>
-        </ul>
-        <p><strong>Données d'utilisation :</strong></p>
-        <ul>
-            <li>Habitudes créées et leur suivi quotidien</li>
-            <li>Statistiques de progression (scores, streaks, XP)</li>
-            <li>Messages dans les chats de groupe</li>
-            <li>Participation aux challenges</li>
-        </ul>
-        <p><strong>Données techniques :</strong></p>
-        <ul>
-            <li>Données de connexion Firebase (horodatage)</li>
-        </ul>
+      <h2>1. Responsable du traitement</h2>
+      <p>
+        PROJET MARS est édité par un développeur indépendant basé à Lyon,
+        France.
+      </p>
 
-        <h2>3. Finalité du traitement</h2>
-        <p>Les données sont utilisées exclusivement pour :</p>
-        <ul>
-            <li>Permettre le fonctionnement de l'Application</li>
-            <li>Afficher vos statistiques et votre progression</li>
-            <li>Permettre les interactions sociales (groupes, chat, leaderboard)</li>
-        </ul>
+      <h2>2. Données collectées</h2>
+      <p><strong>Données de compte :</strong></p>
+      <ul>
+        <li>Adresse email (pour l'authentification)</li>
+        <li>Pseudo et avatar (choisis par l'utilisateur)</li>
+      </ul>
+      <p><strong>Données d'utilisation :</strong></p>
+      <ul>
+        <li>Habitudes créées et leur suivi quotidien</li>
+        <li>Statistiques de progression (scores, streaks, XP)</li>
+        <li>Messages dans les chats de groupe</li>
+        <li>Participation aux challenges</li>
+      </ul>
+      <p><strong>Données techniques :</strong></p>
+      <ul>
+        <li>Données de connexion Firebase (horodatage)</li>
+      </ul>
 
-        <h2>4. Stockage des données</h2>
-        <p><strong>Données locales :</strong> vos habitudes et statistiques sont stockées dans le localStorage de votre navigateur.</p>
-        <p><strong>Données cloud :</strong> les données de compte, groupes et messages sont stockées sur Firebase (Google Cloud Platform), dont les serveurs sont situés dans l'Union Européenne.</p>
+      <h2>3. Finalité du traitement</h2>
+      <p>Les données sont utilisées exclusivement pour :</p>
+      <ul>
+        <li>Permettre le fonctionnement de l'Application</li>
+        <li>Afficher vos statistiques et votre progression</li>
+        <li>
+          Permettre les interactions sociales (groupes, chat, leaderboard)
+        </li>
+      </ul>
 
-        <h2>5. Partage des données</h2>
-        <p>Vos données ne sont <strong>jamais vendues ni partagées</strong> avec des tiers à des fins commerciales.</p>
-        <p>Seules les données suivantes sont visibles par d'autres utilisateurs dans les groupes :</p>
-        <ul>
-            <li>Pseudo et avatar</li>
-            <li>Score du jour et statistiques dans le leaderboard</li>
-            <li>Messages envoyés dans les chats de groupe</li>
-        </ul>
+      <h2>4. Stockage des données</h2>
+      <p>
+        <strong>Données locales :</strong> vos habitudes et statistiques sont
+        stockées dans le localStorage de votre navigateur.
+      </p>
+      <p>
+        <strong>Données cloud :</strong> les données de compte, groupes et
+        messages sont stockées sur Firebase (Google Cloud Platform), dont les
+        serveurs sont situés dans l'Union Européenne.
+      </p>
 
-        <h2>6. Durée de conservation</h2>
-        <p>Vos données sont conservées tant que votre compte est actif. La suppression du compte entraîne la suppression de vos données personnelles.</p>
+      <h2>5. Partage des données</h2>
+      <p>
+        Vos données ne sont <strong>jamais vendues ni partagées</strong> avec
+        des tiers à des fins commerciales.
+      </p>
+      <p>
+        Seules les données suivantes sont visibles par d'autres utilisateurs
+        dans les groupes :
+      </p>
+      <ul>
+        <li>Pseudo et avatar</li>
+        <li>Score du jour et statistiques dans le leaderboard</li>
+        <li>Messages envoyés dans les chats de groupe</li>
+      </ul>
 
-        <h2>7. Vos droits (RGPD)</h2>
-        <p>Conformément au Règlement Général sur la Protection des Données, vous disposez des droits suivants :</p>
-        <ul>
-            <li><strong>Accès :</strong> consulter vos données via l'Application</li>
-            <li><strong>Rectification :</strong> modifier vos informations (pseudo, bio)</li>
-            <li><strong>Suppression :</strong> supprimer votre compte et toutes vos données via les paramètres</li>
-            <li><strong>Portabilité :</strong> exporter vos données en CSV via les paramètres</li>
-            <li><strong>Opposition :</strong> vous pouvez cesser d'utiliser l'Application à tout moment</li>
-        </ul>
+      <h2>6. Durée de conservation</h2>
+      <p>
+        Vos données sont conservées tant que votre compte est actif. La
+        suppression du compte entraîne la suppression de vos données
+        personnelles.
+      </p>
 
-        <h2>8. Cookies</h2>
-        <p>L'Application n'utilise pas de cookies tiers. Seul le localStorage du navigateur est utilisé pour stocker vos préférences et données locales.</p>
+      <h2>7. Vos droits (RGPD)</h2>
+      <p>
+        Conformément au Règlement Général sur la Protection des Données, vous
+        disposez des droits suivants :
+      </p>
+      <ul>
+        <li>
+          <strong>Accès :</strong> consulter vos données via l'Application
+        </li>
+        <li>
+          <strong>Rectification :</strong> modifier vos informations (pseudo,
+          bio)
+        </li>
+        <li>
+          <strong>Suppression :</strong> supprimer votre compte et toutes vos
+          données via les paramètres
+        </li>
+        <li>
+          <strong>Portabilité :</strong> exporter vos données en CSV via les
+          paramètres
+        </li>
+        <li>
+          <strong>Opposition :</strong> vous pouvez cesser d'utiliser
+          l'Application à tout moment
+        </li>
+      </ul>
 
-        <h2>9. Sécurité</h2>
-        <p>L'authentification est gérée par Firebase Authentication (Google). Les communications sont chiffrées via HTTPS. Les règles de sécurité Firestore contrôlent l'accès aux données.</p>
+      <h2>8. Cookies</h2>
+      <p>
+        L'Application n'utilise pas de cookies tiers. Seul le localStorage du
+        navigateur est utilisé pour stocker vos préférences et données locales.
+      </p>
 
-        <h2>10. Modifications</h2>
-        <p>Cette politique peut être mise à jour. La date de dernière modification est indiquée en haut du document.</p>
+      <h2>9. Sécurité</h2>
+      <p>
+        L'authentification est gérée par Firebase Authentication (Google). Les
+        communications sont chiffrées via HTTPS. Les règles de sécurité
+        Firestore contrôlent l'accès aux données.
+      </p>
 
-        <h2>11. Contact</h2>
-        <p>Pour exercer vos droits ou poser une question, contactez-nous via l'Application.</p>
+      <h2>10. Modifications</h2>
+      <p>
+        Cette politique peut être mise à jour. La date de dernière modification
+        est indiquée en haut du document.
+      </p>
 
-        <div class="footer">PROJET FEVRIER © 2026 — Tous droits réservés</div>
+      <h2>11. Contact</h2>
+      <p>
+        Pour exercer vos droits ou poser une question, contactez-nous via
+        l'Application.
+      </p>
+
+      <div class="footer">PROJET MARS © 2026 — Tous droits réservés</div>
     </div>
-</body>
+  </body>
 </html>
