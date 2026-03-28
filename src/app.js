@@ -62,7 +62,7 @@ import { needsGuidedTour, startGuidedTour, resetGuidedTour } from './ui/guided-t
 
 // --- Pages ---
 import {
-    renderHabits, updateKPIs, toggleHabit, changeDate, updateUI,
+    renderHabits, updateKPIs, toggleHabit, changeDate, goToDate, changeWeek, updateUI,
     showValidateDayModal, closeValidateDayModal, confirmValidateDay, updateValidateButton
 } from './pages/today.js';
 import { updateStats, toggleBadgesVisibility } from './pages/stats.js';
@@ -685,6 +685,8 @@ Object.assign(window, {
 
     // Date navigation
     changeDate,
+    goToDate,
+    changeWeek,
 
     // Day validation
     showValidateDayModal, closeValidateDayModal, confirmValidateDay,

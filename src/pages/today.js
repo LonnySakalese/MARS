@@ -15,7 +15,6 @@ import {
   getPerfectDays,
   getHabitStreak,
   getHabitMonthProgress,
-  formatDate,
   isToday,
   canEditDate,
   isDayValidated,
@@ -72,14 +71,24 @@ export function changeDate(delta) {
     setCurrentDate(newDate);
   }
 
-  // Show/hide "back to today" button
-  const todayBtn = document.getElementById("dateNavToday");
-  if (todayBtn) {
-    const cur = getCurrentDate();
-    const isToday = cur.toDateString() === new Date().toDateString();
-    todayBtn.style.display = isToday ? "none" : "flex";
-  }
+  updateUI();
+}
 
+// Navigate to a specific date (called from week timeline)
+export function goToDate(dateString) {
+  // Parser la date ISO en heure locale (pas UTC)
+  // new Date("2026-03-28") parse en UTC, ce qui décale d'un jour selon le fuseau
+  const [year, month, day] = dateString.split('-').map(Number);
+  const targetDate = new Date(year, month - 1, day);
+  targetDate.setHours(12, 0, 0, 0); // Midi pour éviter les problèmes de DST
+
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+
+  // Don't allow navigating to future dates
+  if (targetDate > today) return;
+
+  setCurrentDate(targetDate);
   updateUI();
 }
 
@@ -336,7 +345,7 @@ function spawnScoreParticles(el) {
   }
 }
 
-// Renders the tactical week timeline (Mon-Sun)
+// Renders the tactical week timeline (Mon-Sun) - clickable navigation with week arrows
 function renderWeekDots() {
   const container = document.getElementById("weekTimeline");
   if (!container) return;
@@ -345,14 +354,29 @@ function renderWeekDots() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Get Monday of current week
+  // Get Monday of current week (based on currentDate being viewed)
   const day = currentDate.getDay();
   const monday = new Date(currentDate);
   monday.setDate(monday.getDate() - ((day + 6) % 7));
   monday.setHours(0, 0, 0, 0);
 
-  const labels = ["LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM"];
-  let html = "";
+  // Check if we're viewing the current week
+  const todayMonday = new Date(today);
+  const todayDay = today.getDay();
+  todayMonday.setDate(todayMonday.getDate() - ((todayDay + 6) % 7));
+  todayMonday.setHours(0, 0, 0, 0);
+  const isCurrentWeek = monday.getTime() === todayMonday.getTime();
+
+  // Get month/year label for the week
+  const sunday = new Date(monday);
+  sunday.setDate(sunday.getDate() + 6);
+  const monthNames = ["JAN", "FÉV", "MAR", "AVR", "MAI", "JUN", "JUL", "AOÛ", "SEP", "OCT", "NOV", "DÉC"];
+  const weekLabel = monday.getMonth() === sunday.getMonth()
+    ? `${monday.getDate()}-${sunday.getDate()} ${monthNames[monday.getMonth()]}`
+    : `${monday.getDate()} ${monthNames[monday.getMonth()]} - ${sunday.getDate()} ${monthNames[sunday.getMonth()]}`;
+
+  const labels = ["L", "M", "M", "J", "V", "S", "D"];
+  let daysHtml = "";
 
   for (let i = 0; i < 7; i++) {
     const d = new Date(monday);
@@ -364,9 +388,12 @@ function renderWeekDots() {
     const isCurrent = d.toDateString() === currentDate.toDateString();
     const isFuture = d > today;
 
+    // ISO date string for navigation
+    const dateISO = getDateKey(d);
+
     let nodeClasses = ["day-node"];
     if (isTodayDate) nodeClasses.push("is-today");
-    if (isCurrent && !isTodayDate) nodeClasses.push("is-selected");
+    if (isCurrent) nodeClasses.push("is-selected");
 
     if (!isFuture) {
       const score = getDayScore(d);
@@ -384,8 +411,11 @@ function renderWeekDots() {
       nodeClasses.push("is-future");
     }
 
-    html += `
-      <div class="${nodeClasses.join(" ")}">
+    // Only clickable if not in the future
+    const clickAttr = isFuture ? "" : `onclick="goToDate('${dateISO}')"`;
+
+    daysHtml += `
+      <div class="${nodeClasses.join(" ")}" ${clickAttr}>
         <div class="day-hex">
           <div class="day-hex-inner">
             <span class="day-num">${dayNum}</span>
@@ -396,7 +426,53 @@ function renderWeekDots() {
     `;
   }
 
-  container.innerHTML = html;
+  // Build full timeline with navigation
+  container.innerHTML = `
+    <button class="week-nav-btn week-nav-prev" onclick="changeWeek(-1)" aria-label="Semaine précédente">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <div class="week-days-container">
+      <div class="week-label">${weekLabel}</div>
+      <div class="week-days">
+        ${daysHtml}
+      </div>
+    </div>
+    <button class="week-nav-btn week-nav-next ${isCurrentWeek ? 'disabled' : ''}" onclick="changeWeek(1)" aria-label="Semaine suivante" ${isCurrentWeek ? 'disabled' : ''}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+    ${!isCurrentWeek ? `
+      <button class="week-today-btn" onclick="goToDate('${today.toISOString().split("T")[0]}')" aria-label="Aujourd'hui">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </button>
+    ` : ''}
+  `;
+}
+
+// Navigate to previous/next week
+export function changeWeek(delta) {
+  const currentDate = getCurrentDate();
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+
+  const newDate = new Date(currentDate);
+  newDate.setDate(newDate.getDate() + (delta * 7));
+
+  // Don't allow navigating to future weeks
+  if (newDate > today) {
+    // Go to today instead
+    setCurrentDate(new Date());
+  } else {
+    setCurrentDate(newDate);
+  }
+
+  updateUI();
 }
 
 // Met à jour les KPIs (score, streak, etc.) sur la page "Aujourd'hui"
@@ -415,7 +491,6 @@ export function updateKPIs() {
     const currentStreakEl = document.getElementById("currentStreak");
     const perfectDaysEl = document.getElementById("perfectDays");
     const completedCountEl = document.getElementById("completedCount");
-    const currentDateEl = document.getElementById("currentDate");
 
     // Animate score count-up + dopamine effects
     if (dailyScoreEl) {
@@ -458,9 +533,6 @@ export function updateKPIs() {
 
     if (currentStreakEl) currentStreakEl.textContent = getStreak();
     if (perfectDaysEl) perfectDaysEl.textContent = getPerfectDays();
-    if (currentDateEl)
-      currentDateEl.textContent =
-        formatDate(currentDate) + (locked ? " (verrouillé)" : "");
 
     const data = getData();
     const currentStreak = getStreak();

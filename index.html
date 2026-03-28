@@ -306,51 +306,7 @@
       <div class="pull-indicator" id="pullIndicator">
         <span class="pull-icon">↻</span> Mise à jour...
       </div>
-      <!-- Navigation pour changer de date -->
-      <div class="date-nav">
-        <button
-          class="date-nav-btn"
-          onclick="changeDate(-1)"
-          aria-label="Jour précédent"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-        <div class="current-date" id="currentDate"></div>
-        <button
-          class="date-nav-btn date-nav-today"
-          onclick="changeDate(0)"
-          aria-label="Aujourd'hui"
-          id="dateNavToday"
-          style="display: none"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Week tactical timeline -->
+      <!-- Week tactical timeline (clickable navigation) -->
       <div class="week-timeline" id="weekTimeline"></div>
 
       <!-- Score du jour — full width -->
