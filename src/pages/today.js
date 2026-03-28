@@ -92,20 +92,20 @@ export function renderHabits() {
 
   if (habits.length === 0) {
     container.innerHTML = `
-            <div style="text-align: center; padding: 50px 20px;">
-                <div style="width: 64px; height: 64px; margin: 0 auto 20px; background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(46,204,113,0.05)); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
-                <button class="action-btn action-btn-primary" onclick="openManageHabitsModal()" style="max-width: 260px; margin: 0 auto;">    
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2ECC71" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                </button>
-                </div>
-                <div style="font-size: 1rem; color: var(--accent); margin-bottom: 8px; font-weight: 800; letter-spacing: 1px;">
-                    COMMENCE ICI
-                </div>
-                <div style="font-size: 0.82rem; color: var(--accent-dim); margin-bottom: 24px; line-height: 1.5;">
-                    Crée ta première habitude pour démarrer ton parcours
-                </div>
-            </div>
-        `;
+      <div class="empty-state">
+        <div class="empty-state-icon">🎯</div>
+        <div class="empty-state-title">MISSION EN ATTENTE</div>
+        <div class="empty-state-text">
+          Définis ta première habitude pour commencer ton ascension
+        </div>
+        <button class="empty-state-btn" onclick="openManageHabitsModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          CRÉER UNE HABITUDE
+        </button>
+      </div>
+    `;
     return;
   }
 
@@ -132,33 +132,33 @@ export function renderHabits() {
     ];
     const dayName = dayNames[currentDate.getDay()];
     container.innerHTML = `
-            <div style="text-align: center; padding: 40px 20px; color: var(--accent-dim);">
-                <div style="margin-bottom: 15px; opacity: 0.4;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2"/><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/></svg></div>
-                <div style="font-size: 1.1rem; color: var(--accent); margin-bottom: 10px; font-weight: bold;">
-                    JOUR DE REPOS
-                </div>
-                <div style="font-size: 0.85rem; margin-bottom: 20px; line-height: 1.5;">
-                    Aucune habitude planifiée pour ${dayName}.
-                </div>
-            </div>
-        `;
+      <div class="rest-state">
+        <div class="rest-state-icon">🌙</div>
+        <div class="rest-state-title">JOUR DE REPOS</div>
+        <div class="rest-state-text">
+          Aucune mission planifiée pour ${dayName}.<br>
+          Récupère ton énergie, warrior.
+        </div>
+      </div>
+    `;
     return;
   }
 
   if (filteredHabits.length === 0 && scheduledHabits.length > 0) {
     container.innerHTML = `
-            <div style="text-align: center; padding: 30px 20px; color: var(--accent-dim);">
-                <div style="margin-bottom: 10px; opacity: 0.4;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-                <div style="font-size: 0.9rem;">Aucune habitude dans cette catégorie</div>
-            </div>
-        `;
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-title">AUCUNE MISSION</div>
+        <div class="empty-state-text">Aucune habitude dans cette catégorie</div>
+      </div>
+    `;
     return;
   }
 
   const isPastDay = !isToday(currentDate);
 
   container.innerHTML = filteredHabits
-    .map((habit) => {
+    .map((habit, index) => {
       const checked = dayData[habit.id] || false;
       const streak = getHabitStreak(habit.id);
       const monthData = getHabitMonthProgress(habit.id);
@@ -170,40 +170,61 @@ export function renderHabits() {
       const isFailed = isPastDay && !checked;
       const streakText = locked
         ? isFailed
-          ? "Non fait"
-          : "Fait"
-        : `Série: ${streak} jours`;
+          ? "Échoué"
+          : "Accompli"
+        : streak > 0
+          ? `${streak}j`
+          : "Nouveau";
 
-      let itemClasses = "habit-item";
-
-      if (locked) {
-        itemClasses += " locked";
-      }
-      if (checked) {
-        itemClasses += " completed";
-      } else if (isFailed) {
-        itemClasses += " failed";
-      }
+      let cardClasses = ["mission-card"];
+      if (locked) cardClasses.push("is-locked");
+      if (checked) cardClasses.push("is-completed");
+      else if (isFailed) cardClasses.push("is-failed");
 
       const descriptionHtml = description
-        ? `<div class="habit-description">${description}</div>`
+        ? `<div class="mission-desc">${description}</div>`
         : "";
 
+      // Calculate ring progress (circumference = 2 * PI * radius = 2 * 3.14159 * 15 ≈ 94.25)
+      const circumference = 94.25;
+      const offset = circumference - (monthData / 100) * circumference;
+
+      // Staggered animation delay
+      const animDelay = index * 0.05;
+
       return `
-            <div class="${itemClasses}" ${onclickAttr} data-habit-id="${escapedId}">
-                <div class="habit-fill-bar"></div>
-                <div class="habit-content">
-                    <div class="habit-info">
-                        <div class="habit-name">${habit.icon} ${displayName}</div>
-                        ${descriptionHtml}
-                        <div class="habit-streak">${streakText}</div>
-                    </div>
-                    <div class="habit-progress">
-                        <div class="percent">${monthData}%</div>
-                    </div>
-                </div>
+        <div class="${cardClasses.join(" ")}" ${onclickAttr} data-habit-id="${escapedId}" style="animation-delay: ${animDelay}s">
+          <div class="mission-status-bar">
+            <div class="mission-charge" style="height: ${checked ? 100 : 0}%"></div>
+          </div>
+          <div class="mission-content">
+            <div class="mission-icon">${habit.icon}</div>
+            <div class="mission-info">
+              <div class="mission-name">${displayName}</div>
+              ${descriptionHtml}
+              <div class="mission-meta">
+                <span class="mission-streak">
+                  ${streak > 0 ? '<span class="mission-streak-fire">🔥</span>' : ''}
+                  ${streakText}
+                </span>
+              </div>
             </div>
-        `;
+            <div class="mission-stats">
+              <div class="mission-progress-ring">
+                <svg width="38" height="38" viewBox="0 0 38 38">
+                  <circle class="ring-bg" cx="19" cy="19" r="15"/>
+                  <circle class="ring-fill" cx="19" cy="19" r="15"
+                    stroke-dasharray="${circumference}"
+                    stroke-dashoffset="${offset}"/>
+                </svg>
+              </div>
+              <div class="mission-percent">${monthData}%</div>
+            </div>
+          </div>
+          ${checked ? '<div class="mission-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' : ''}
+          ${isFailed ? '<div class="mission-fail-mark">✕</div>' : ''}
+        </div>
+      `;
     })
     .join("");
 }
@@ -214,28 +235,29 @@ export function toggleHabit(habitId) {
   const dayData = getDayData(currentDate);
   const newStatus = !dayData[habitId];
 
-  // Animate the fill bar BEFORE updating data
+  // Animate the charge bar BEFORE updating data
   const escapedId = habitId.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
-  const itemEl = document.querySelector(
-    `.habit-item[data-habit-id="${CSS.escape(habitId)}"]`,
+  const cardEl = document.querySelector(
+    `.mission-card[data-habit-id="${CSS.escape(habitId)}"]`,
   );
 
-  if (itemEl) {
-    const bar = itemEl.querySelector(".habit-fill-bar");
-    if (bar) {
+  if (cardEl) {
+    const chargeBar = cardEl.querySelector(".mission-charge");
+    if (chargeBar) {
       if (newStatus) {
-        // Fill up like a glass of water (bottom → top)
-        bar.style.transition = "none";
-        bar.style.height = "0%";
-        bar.style.opacity = "1";
-        void bar.offsetWidth;
-        bar.style.transition = "height 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
-        bar.style.height = "100%";
+        // Charge up animation
+        chargeBar.style.transition = "none";
+        chargeBar.style.height = "0%";
+        void chargeBar.offsetWidth;
+        chargeBar.style.transition = "height 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+        chargeBar.style.height = "100%";
+        // Add completed class for visual feedback
+        cardEl.classList.add("is-completed");
       } else {
-        // Drain down (top → bottom)
-        bar.style.transition = "height 0.4s ease-in, opacity 0.4s ease-in";
-        bar.style.height = "0%";
-        bar.style.opacity = "0";
+        // Discharge animation
+        chargeBar.style.transition = "height 0.4s ease-in";
+        chargeBar.style.height = "0%";
+        cardEl.classList.remove("is-completed");
       }
     }
   }
@@ -314,9 +336,9 @@ function spawnScoreParticles(el) {
   }
 }
 
-// Renders the week dots overview (Mon-Sun)
+// Renders the tactical week timeline (Mon-Sun)
 function renderWeekDots() {
-  const container = document.getElementById("weekDots");
+  const container = document.getElementById("weekTimeline");
   if (!container) return;
 
   const currentDate = getCurrentDate();
@@ -329,7 +351,7 @@ function renderWeekDots() {
   monday.setDate(monday.getDate() - ((day + 6) % 7));
   monday.setHours(0, 0, 0, 0);
 
-  const labels = ["L", "M", "M", "J", "V", "S", "D"];
+  const labels = ["LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM"];
   let html = "";
 
   for (let i = 0; i < 7; i++) {
@@ -337,30 +359,41 @@ function renderWeekDots() {
     d.setDate(d.getDate() + i);
     d.setHours(0, 0, 0, 0);
 
-    const isToday = d.getTime() === today.getTime();
+    const dayNum = d.getDate();
+    const isTodayDate = d.getTime() === today.getTime();
     const isCurrent = d.toDateString() === currentDate.toDateString();
     const isFuture = d > today;
 
-    let dotClass = "week-dot";
-    if (isCurrent) dotClass += " week-dot-current";
+    let nodeClasses = ["day-node"];
+    if (isTodayDate) nodeClasses.push("is-today");
+    if (isCurrent && !isTodayDate) nodeClasses.push("is-selected");
 
     if (!isFuture) {
       const score = getDayScore(d);
       const scheduled = habits.filter((h) => isHabitScheduledForDate(h, d));
       if (scheduled.length === 0) {
-        dotClass += " week-dot-rest";
+        nodeClasses.push("is-rest");
       } else if (score >= 80) {
-        dotClass += " week-dot-good";
+        nodeClasses.push("is-good");
       } else if (score > 0) {
-        dotClass += " week-dot-partial";
-      } else if (!isToday) {
-        dotClass += " week-dot-missed";
+        nodeClasses.push("is-partial");
+      } else if (!isTodayDate) {
+        nodeClasses.push("is-missed");
       }
     } else {
-      dotClass += " week-dot-future";
+      nodeClasses.push("is-future");
     }
 
-    html += `<div class="${dotClass}"><span class="week-dot-label">${labels[i]}</span><span class="week-dot-indicator"></span></div>`;
+    html += `
+      <div class="${nodeClasses.join(" ")}">
+        <div class="day-hex">
+          <div class="day-hex-inner">
+            <span class="day-num">${dayNum}</span>
+          </div>
+        </div>
+        <span class="day-label">${labels[i]}</span>
+      </div>
+    `;
   }
 
   container.innerHTML = html;

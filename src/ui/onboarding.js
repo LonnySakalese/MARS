@@ -298,12 +298,12 @@ function renderStep() {
 function renderWelcome(container) {
   container.innerHTML = `
         <div class="onb-step onb-step-welcome">
-            <div class="onb-big-icon">🔥</div>
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Fire.png" alt="🔥" class="onb-big-icon" style="width: 4rem; height: 4rem; object-fit: contain;">
             <h1 class="onb-title">Prêt à transformer ta vie ?</h1>
             <p class="onb-text">
                 Chaque jour est une opportunité de devenir meilleur.<br>
             </p>
-            <button class="onb-cta-btn" id="onbNextBtn">Commencer 🚀</button>
+            <button class="onb-cta-btn" id="onbNextBtn">Commencer</button>
         </div>
     `;
   container

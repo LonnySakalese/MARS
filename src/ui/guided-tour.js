@@ -5,32 +5,33 @@
 const TOUR_STEPS = [
   {
     selector: ".date-nav",
-    title: "📅 Navigation",
-    text: "Voici ta date du jour. Tu peux naviguer avec les flèches ◀ ▶",
+    title: "Navigation",
+    text: "Voici ta date du jour. Tu peux naviguer avec les flèches",
     position: "bottom",
   },
   {
     selector: "#xpBarContainer",
-    title: "⚡ Barre d'XP",
+    title: "Barre d'XP",
     text: "Gagne de l'XP en validant tes habitudes dans les 24h !",
     position: "bottom",
   },
   {
-    selector: ".kpi-container",
-    title: "📊 Indicateurs",
+    selector: ".score-banner",
+    title: "Indicateurs",
     text: "Tes indicateurs clés : score du jour, série en cours, jours parfaits",
     position: "bottom",
   },
   {
     selector: ".habit-item",
-    title: "🎯 Tes habitudes",
-    text: "Tape pour cocher une habitude ✅ La barre se remplit en vert quand c'est fait.",
+    fallbackSelector: "#habitsList",
+    title: "Tes habitudes",
+    text: "Tape pour cocher une habitude. La barre se remplit en vert quand c'est fait.",
     position: "bottom",
   },
   {
     selector: '.nav-item[aria-label="Statistiques"]',
     fallbackSelector: ".nav-item:nth-child(2)",
-    title: "📊 Stats",
+    title: "Stats",
     text: "Consulte tes statistiques détaillées ici",
     position: "top",
     page: "today",
@@ -38,7 +39,7 @@ const TOUR_STEPS = [
   {
     selector: '.nav-item[aria-label="Groupes"]',
     fallbackSelector: ".nav-item:nth-child(4)",
-    title: "👥 Groupes",
+    title: "Groupes",
     text: "Rejoins ou crée des groupes pour te motiver en équipe !",
     position: "top",
     page: "today",
@@ -46,7 +47,7 @@ const TOUR_STEPS = [
   {
     selector: '.nav-item[aria-label="Profil"]',
     fallbackSelector: ".nav-item:nth-child(5)",
-    title: "👤 Profil",
+    title: "Profil",
     text: "Personnalise ton profil, consulte tes badges et tes progrès !",
     position: "top",
     page: "today",
@@ -54,7 +55,7 @@ const TOUR_STEPS = [
   {
     selector: ".nav-add-btn",
     title: "Crée ta première habitude !",
-    text: "Appuie sur ce bouton pour ajouter une habitude et commencer ton parcours 💪",
+    text: "Appuie sur ce bouton pour ajouter une habitude et commencer ton parcours",
     position: "top",
     page: "today",
     isFinal: true,
@@ -299,7 +300,9 @@ function renderFinalStep(step, totalSteps) {
 
   tooltipEl.innerHTML = `
         <div style="text-align:center;">
-            <div style="font-size:3rem; margin-bottom:10px;">🔥</div>
+            <div style="margin-bottom:10px;">
+                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Fire.png" alt="🔥" style="width: 3rem; height: 3rem; object-fit: contain;">
+            </div>
             <div style="font-weight:900; font-size:1.2rem; color:var(--accent,#F5F5F0); margin-bottom:8px;">
                 ${step.title}
             </div>
@@ -313,7 +316,7 @@ function renderFinalStep(step, totalSteps) {
                 <span style="font-size:0.65rem; color:var(--accent-dim,#A3A39E);">${totalSteps}/${totalSteps}</span>
             </div>
             <button id="gtFinishBtn" style="width:100%; padding:14px; background:var(--accent-green,#19E639); color:var(--black,#0A0A0A); border:none; border-radius:12px; font-size:0.95rem; font-weight:800; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">
-                C'est parti ! 🚀
+                C'est parti !
             </button>
         </div>
     `;

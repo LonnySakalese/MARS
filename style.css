@@ -5680,7 +5680,12 @@ button:active, .modal-btn:active, .auth-btn:active, .settings-btn:active, .form-
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.onb-container::-webkit-scrollbar {
+    display: none;
 }
 
 /* Dots navigation */
