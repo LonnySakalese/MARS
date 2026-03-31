@@ -194,12 +194,15 @@
 
 /* ============================================================
    MODE CHAT — version discrète (statique, sans pulse)
-   Exception : .avatar-wrap--maitre garde l'anneau tournant
+   Exception : .avatar-wrap--chat.avatar-wrap--maitre garde l'anneau tournant
+   NOTE: A size modifier (--large or --small) is always required on .avatar-wrap
    ============================================================ */
 
-.avatar-wrap--chat .aura-ring {
-    animation: none !important;
-    box-shadow: none !important;
+/* Blanket reset: use high specificity to avoid needing !important */
+.avatar-wrap--chat.avatar-wrap--large .aura-ring,
+.avatar-wrap--chat.avatar-wrap--small .aura-ring {
+    animation: none;
+    box-shadow: none;
 }
 
 .avatar-wrap--chat .aura-acier   .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #7B8FA155; }
@@ -217,7 +220,7 @@
 
 /* Exception Maître en chat : anneau pointillé doré qui tourne lentement */
 .avatar-wrap--chat.avatar-wrap--maitre .aura-sacree .aura-ring:nth-child(3) {
-    animation: aura-spin 6s linear infinite !important;
+    animation: aura-spin 6s linear infinite;
 }
 
 /* ============================================================
@@ -289,4 +292,14 @@
     color: var(--steel);
     text-align: center;
     max-width: 60px;
+}
+
+/* ============================================================
+   ACCESSIBILITÉ — Respect du paramètre "réduire les animations"
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .aura-ring {
+        animation: none !important;
+    }
 }
