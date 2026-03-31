@@ -4,7 +4,7 @@
 
 import { getData, saveData } from '../services/storage.js';
 import { appState } from '../services/state.js';
-import { auth, db, isFirebaseConfigured } from '../config/firebase.js';
+import { db, isFirebaseConfigured } from '../config/firebase.js';
 import { loadBadges } from '../core/badges.js';
 import { rankSettings, getRank } from '../core/ranks.js';
 import { getAvgScore } from '../core/scores.js';
