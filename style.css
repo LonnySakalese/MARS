@@ -1889,6 +1889,51 @@ canvas {
     display: block;
 }
 
+/* Google Auth Button */
+.auth-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: var(--steel);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.auth-separator::before,
+.auth-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--steel);
+    margin: 0 10px;
+}
+.google-auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-bottom: 15px;
+}
+.google-auth-btn:hover {
+    background: #f8f9fa;
+}
+.google-auth-btn:active {
+    transform: scale(0.98);
+}
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
 .logout-btn {
     position: absolute;
     top: 20px;

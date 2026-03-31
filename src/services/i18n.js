@@ -51,7 +51,7 @@ const translations = {
     "settings.account": "Compte",
     "settings.logout": "Déconnexion",
     "settings.logoutDesc": "Se déconnecter de l'application",
-    "settings.logoutBtn": "Sortir",
+    "settings.logoutBtn": "Se déconnecter",
     "settings.deleteAccount": "Supprimer le compte",
     "settings.deleteDesc": "Action irréversible",
     "settings.deleteBtn": "Supprimer",
@@ -66,8 +66,6 @@ const translations = {
 
     // Profile
     "profile.pseudo": "Pseudo",
-    "profile.bio": "Bio",
-    "profile.noBio": "Aucune bio",
     "profile.myStats": "MES STATS",
     "profile.avgScore": "Score moyen",
     "profile.bestStreak": "Meilleur streak",
@@ -155,8 +153,6 @@ const translations = {
     "settings.languageDesc": "Change language",
 
     "profile.pseudo": "Username",
-    "profile.bio": "Bio",
-    "profile.noBio": "No bio",
     "profile.myStats": "MY STATS",
     "profile.avgScore": "Average score",
     "profile.bestStreak": "Best streak",
@@ -182,92 +178,6 @@ const translations = {
 
     "motivation.mental": "MINDSET",
     "motivation.ranksTitle": "RANKS TO REACH",
-  },
-  es: {
-    "nav.habits": "Hábitos",
-    "nav.stats": "Stats",
-    "nav.info": "Info",
-    "nav.profile": "Perfil",
-    "nav.groups": "Grupos",
-
-    "today.missions": "MISIONES DEL DÍA",
-    "today.score": "Puntuación",
-    "today.today": "Hoy",
-    "today.streak": "Racha",
-    "today.days": "Días",
-    "today.perfect": "Perfecto",
-    "today.perfectDays": "Días 100%",
-    "today.validateDay": "Validar el día",
-    "today.shareDay": "Compartir",
-
-    "stats.currentRank": "Tu Rango Actual",
-    "stats.thisMonth": "⏳ ESTE MES",
-    "stats.viewCalendar": "VER CALENDARIO DEL MES",
-    "stats.thisWeek": "ESTA SEMANA",
-    "stats.progression": "PROGRESIÓN",
-    "stats.last7days": "Puntuación últimos 7 días",
-    "stats.byHabit": "Rendimiento por hábito",
-    "stats.monthScore": "Puntuación del mes",
-    "stats.bestStreak": "Mejor racha",
-    "stats.totalWins": "Victorias totales",
-    "stats.avgScore": "Promedio general",
-
-    "settings.habits": "Hábitos",
-    "settings.manageHabits": "Gestión de hábitos",
-    "settings.manageHabitsDesc": "Añadir, editar o eliminar",
-    "settings.modify": "Editar",
-    "settings.appearance": "Apariencia",
-    "settings.theme": "Tema de la app",
-    "settings.themeDesc": "Claro u oscuro",
-    "settings.notifications": "Notificaciones",
-    "settings.reminderTime": "Hora de recordatorio",
-    "settings.dailyReminder": "Recordatorio diario",
-    "settings.enableNotifs": "Activar notificaciones",
-    "settings.receiveReminders": "Recibir recordatorios",
-    "settings.account": "Cuenta",
-    "settings.logout": "Cerrar sesión",
-    "settings.logoutDesc": "Desconectarse de la app",
-    "settings.logoutBtn": "Salir",
-    "settings.deleteAccount": "Eliminar cuenta",
-    "settings.deleteDesc": "Acción irreversible",
-    "settings.deleteBtn": "Eliminar",
-    "settings.data": "Datos",
-    "settings.export": "Exportar datos",
-    "settings.exportDesc": "Descargar en CSV",
-    "settings.reset": "Reiniciar",
-    "settings.resetDesc": "Borrar todos los datos",
-    "settings.resetBtn": "Borrar",
-    "settings.language": "Idioma",
-    "settings.languageDesc": "Cambiar idioma",
-
-    "profile.pseudo": "Apodo",
-    "profile.bio": "Bio",
-    "profile.noBio": "Sin bio",
-    "profile.myStats": "MIS STATS",
-    "profile.avgScore": "Puntuación media",
-    "profile.bestStreak": "Mejor racha",
-    "profile.perfectDays": "Días perfectos",
-    "profile.rank": "Rango",
-    "profile.myGroups": "MIS GRUPOS",
-    "profile.memberSince": "Miembro desde",
-
-    "auth.login": "INICIAR SESIÓN",
-    "auth.signup": "REGISTRARSE",
-    "auth.email": "Correo electrónico",
-    "auth.password": "Contraseña (mín 8 caracteres)",
-    "auth.confirmPassword": "Confirmar contraseña",
-    "auth.loginBtn": "Entrar",
-    "auth.signupBtn": "Registrarse",
-    "auth.forgotPassword": "¿Contraseña olvidada?",
-
-    "general.cancel": "Cancelar",
-    "general.save": "Guardar",
-    "general.close": "Cerrar",
-    "general.confirm": "Confirmar",
-    "general.loading": "Cargando...",
-
-    "motivation.mental": "MENTALIDAD",
-    "motivation.ranksTitle": "RANGOS A ALCANZAR",
   },
 };
 
@@ -296,7 +206,6 @@ export function getAvailableLangs() {
   return [
     { code: "fr", label: "🇫🇷 Français" },
     { code: "en", label: "🇬🇧 English" },
-    { code: "es", label: "🇪🇸 Español" },
   ];
 }
 
@@ -319,7 +228,7 @@ export function applyTranslations() {
 }
 
 export function cycleLang() {
-  const langs = ["fr", "en", "es"];
+  const langs = ["fr", "en"];
   const idx = langs.indexOf(currentLang);
   const next = langs[(idx + 1) % langs.length];
   setLang(next);

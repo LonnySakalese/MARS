@@ -102,7 +102,35 @@ export function renderHabits() {
   if (habits.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <div class="empty-state-icon">🎯</div>
+        <div class="empty-state-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <style>
+              @keyframes radar-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              @keyframes pulse-ring {
+                0% { transform: scale(0.8); opacity: 0; }
+                50% { opacity: 1; }
+                100% { transform: scale(1.2); opacity: 0; }
+              }
+              .spin {
+                transform-origin: 12px 12px;
+                animation: radar-spin 4s linear infinite;
+              }
+              .pulse {
+                transform-origin: 12px 12px;
+                animation: pulse-ring 2s ease-out infinite;
+              }
+            </style>
+            <circle cx="12" cy="12" r="10" stroke-width="1" opacity="0.5"/>
+            <circle cx="12" cy="12" r="6" class="pulse"/>
+            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            <g class="spin">
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+            </g>
+          </svg>
+        </div>
         <div class="empty-state-title">MISSION EN ATTENTE</div>
         <div class="empty-state-text">
           Définis ta première habitude pour commencer ton ascension

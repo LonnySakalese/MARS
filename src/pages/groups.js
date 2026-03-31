@@ -957,67 +957,7 @@ export function copyGroupCode(code) {
 }
 
 // ============================================================
-// PROFILE GROUPS SECTION
-// ============================================================
-
-export async function renderProfileGroups() {
-  const container = document.getElementById("profileGroups");
-  if (!container) return;
-
-  if (!isFirebaseConfigured || !appState.currentUser) {
-    container.innerHTML = `
-            <div style="text-align: center; padding: 20px; color: var(--accent-dim);">
-                <div style="margin-bottom: 10px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                <div>Connecte-toi pour voir tes groupes</div>
-            </div>`;
-    return;
-  }
-
-  try {
-    const userDoc = await db
-      .collection("users")
-      .doc(appState.currentUser.uid)
-      .get();
-    const userData = userDoc.data() || {};
-    const groupIds = userData.groups || [];
-
-    if (groupIds.length === 0) {
-      container.innerHTML = `
-                <div style="text-align: center; padding: 20px; color: var(--accent-dim);">
-                    <div style="margin-bottom: 10px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                    <div>Aucun groupe pour le moment</div>
-                    <div style="font-size: 0.8rem; margin-top: 5px; cursor: pointer; color: var(--accent);"
-                         onclick="showPage('groups', event)">Rejoindre ou créer un groupe →</div>
-                </div>`;
-      return;
-    }
-
-    let html = "";
-    for (const gId of groupIds) {
-      try {
-        const gDoc = await db.collection("groups").doc(gId).get();
-        if (!gDoc.exists) continue;
-        const g = gDoc.data();
-        html += `
-                    <div class="profile-group-card" onclick="openGroupDetail('${gId}')">
-                        <div class="profile-group-card-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
-                        <div class="profile-group-card-info">
-                            <div class="profile-group-card-name">${escapeHtml(g.name)}</div>
-                            <div class="profile-group-card-members">${g.memberCount || 0} membres</div>
-                        </div>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,0.3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
-                    </div>`;
-      } catch (e) {
-        /* skip */
-      }
-    }
-    container.innerHTML = html;
-  } catch (err) {
-    console.error("Erreur renderProfileGroups:", err);
-  }
-}
+// PROFILE GROUPS SECTION REMOVED
 
 // ============================================================
 // UTILS

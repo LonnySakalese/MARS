@@ -40,7 +40,7 @@ src/
 ├── services/           # Services transversaux
 │   ├── state.js        # État global (appState, habits)
 │   ├── storage.js      # Abstraction localStorage (getData, saveData)
-│   ├── i18n.js         # Internationalisation (FR/EN/ES)
+│   ├── i18n.js         # Internationalisation (FR/EN)
 │   ├── notifications.js # Push notifications (FCM)
 │   └── pseudo-validator.js
 ├── pages/              # Vues principales

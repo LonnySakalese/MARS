@@ -72,7 +72,6 @@ import { initNotifications, renderNotifSettings, checkDailyReminder } from './se
 import {
     renderProfile, openAvatarPicker, closeAvatarPicker, selectAvatar,
     openEditPseudoModal, closeEditPseudoModal, saveProfilePseudo,
-    openEditBioModal, closeEditBioModal, saveProfileBio,
     checkNeedsPseudo, showSetupPseudoModal, saveSetupPseudo,
     loadProfileFromFirestore
 } from './pages/profile.js';
@@ -80,7 +79,7 @@ import {
     renderGroups, openCreateGroupModal, closeCreateGroupModal, createGroup,
     openJoinGroupModal, closeJoinGroupModal, joinGroup, joinGroupByCode, toggleQRScanner,
     openGroupDetail, closeGroupDetail, leaveGroup, deleteGroup, copyGroupCode,
-    renderProfileGroups, switchGroupTab
+    switchGroupTab
 } from './pages/groups.js';
 import { renderLeaderboard } from './ui/leaderboard.js';
 
@@ -150,6 +149,10 @@ async function handleSignup() {
         errorEl.textContent = getAuthErrorMessage(error.code);
         errorEl.classList.add('show');
     }
+}
+
+async function handleGoogleLogin() {
+    alert("La connexion avec Google sera configurée plus tard.");
 }
 
 async function handleLogin() {
@@ -236,6 +239,29 @@ async function handleForgotPassword() {
         try {
             await auth.sendPasswordResetEmail(email);
             showPopup('Email de réinitialisation envoyé ! Vérifie ta boîte mail (et les spams).', 'success');
+        } catch (error) {
+            console.error('❌ Erreur réinitialisation:', error);
+            showPopup(getAuthErrorMessage(error.code), 'error');
+        }
+    }
+}
+
+async function handleForgotPasswordForCurrentUser() {
+    if (!isFirebaseConfigured || !appState.currentUser) return;
+
+    const email = appState.currentUser.email;
+
+    const confirmed = await ConfirmModal.show({
+        title: 'RÉINITIALISATION',
+        message: `Envoyer un email de réinitialisation à ton adresse : <strong>${email}</strong> ?`,
+        confirmText: 'Envoyer',
+        cancelText: 'Annuler'
+    });
+
+    if (confirmed) {
+        try {
+            await auth.sendPasswordResetEmail(email);
+            showPopup('Email de réinitialisation envoyé ! Vérifie ta boîte mail.', 'success');
         } catch (error) {
             console.error('❌ Erreur réinitialisation:', error);
             showPopup(getAuthErrorMessage(error.code), 'error');
@@ -594,7 +620,6 @@ function showPage(page, event) {
         // Lazy-load streak display
         import('./ui/streak-display.js').then(m => m.renderStreakDisplay('streakDisplay')).catch(e => console.warn('Streak display load error:', e));
         renderProfile();
-        renderProfileGroups();
         renderThemeSelector();
         checkAdminButton();
     } else if (page === 'groups') {
@@ -664,7 +689,8 @@ function showRankedTeaser() {
 Object.assign(window, {
     showRankedTeaser,
     // Auth
-    showAuthTab, handleSignup, handleLogin, handleLogout, handleForgotPassword,
+    showAuthTab, handleSignup, handleLogin, handleGoogleLogin, handleLogout, handleForgotPassword,
+    handleForgotPasswordForCurrentUser,
     handleDeleteAccount, closeDeleteAccountModal, confirmDeleteAccount,
     closeLogoutModal, confirmLogout,
 
@@ -711,7 +737,6 @@ Object.assign(window, {
     // Profile
     openAvatarPicker, closeAvatarPicker, selectAvatar,
     openEditPseudoModal, closeEditPseudoModal, saveProfilePseudo,
-    openEditBioModal, closeEditBioModal, saveProfileBio,
     saveSetupPseudo,
 
     // Data
@@ -765,7 +790,7 @@ Object.assign(window, {
 window.cycleLang = function() {
     const lang = cycleLangFromModule();
     const btn = document.getElementById('langToggleBtn');
-    const flags = { fr: '🇫🇷 FR', en: '🇬🇧 EN', es: '🇪🇸 ES' };
+    const flags = { fr: '🇫🇷 FR', en: '🇬🇧 EN' };
     if (btn) btn.textContent = flags[lang] || lang;
 };
 
@@ -799,7 +824,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
     const langBtn = document.getElementById('langToggleBtn');
     if (langBtn) {
-        const flags = { fr: '🇫🇷 FR', en: '🇬🇧 EN', es: '🇪🇸 ES' };
+        const flags = { fr: '🇫🇷 FR', en: '🇬🇧 EN' };
         langBtn.textContent = flags[getCurrentLang()] || getCurrentLang();
     }
 
@@ -857,8 +882,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 checkLocalStorageMigration(user);
 
-                document.getElementById('logoutItem').style.display = 'block';
-                document.getElementById('deleteItem').style.display = 'block';
+                document.getElementById('logoutItem').style.display = 'flex';
+                document.getElementById('deleteItem').style.display = 'flex';
                 showAppPage('today');
                 await initializeApp();
                 // Update groups nav badge

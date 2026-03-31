@@ -23,7 +23,7 @@ const AVATAR_EMOJIS = [
 
 export function getProfile() {
     const data = getData();
-    return data.profile || { pseudo: '', bio: '', avatar: '🦁' };
+    return data.profile || { pseudo: '', avatar: '🦁' };
 }
 
 export function saveProfile(profile) {
@@ -46,7 +46,6 @@ async function syncProfileToFirestore(profile) {
             profile: profile,
             pseudo: profile.pseudo || null,
             avatar: profile.avatar || null,
-            bio: profile.bio || null,
         }, { merge: true });
         console.log('✅ Profil synchronisé avec Firestore');
     } catch (error) {
@@ -89,20 +88,6 @@ export function renderProfile() {
     // Pseudo
     const pseudoEl = document.getElementById('profilePseudo');
     if (pseudoEl) pseudoEl.textContent = profile.pseudo || '-';
-
-    // Bio
-    const bioEl = document.getElementById('profileBio');
-    if (bioEl) {
-        if (profile.bio) {
-            bioEl.textContent = profile.bio;
-            bioEl.style.fontStyle = 'normal';
-            bioEl.style.color = 'var(--accent)';
-        } else {
-            bioEl.textContent = 'Aucune bio';
-            bioEl.style.fontStyle = 'italic';
-            bioEl.style.color = 'var(--accent-dim)';
-        }
-    }
 
     // Stats
     const avgScore = getAvgScore();
@@ -241,33 +226,6 @@ export function saveProfilePseudo() {
 
     if (navigator.vibrate) navigator.vibrate([30, 30]);
     showPopup(`Pseudo mis à jour : ${pseudo}`, 'success');
-}
-
-// --- EDIT BIO ---
-
-export function openEditBioModal() {
-    const profile = getProfile();
-    document.getElementById('editBioInput').value = profile.bio || '';
-    document.getElementById('editBioModal').classList.add('active');
-}
-
-export function closeEditBioModal() {
-    document.getElementById('editBioModal').classList.remove('active');
-}
-
-export function saveProfileBio() {
-    const input = document.getElementById('editBioInput');
-    const bio = input.value.trim();
-
-    const profile = getProfile();
-    profile.bio = bio;
-    saveProfile(profile);
-
-    closeEditBioModal();
-    renderProfile();
-
-    if (navigator.vibrate) navigator.vibrate([30, 30]);
-    showPopup('Bio mise à jour !', 'success');
 }
 
 // --- SETUP PSEUDO (après inscription) ---
