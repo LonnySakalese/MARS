@@ -6,8 +6,7 @@ import { auth, db, isFirebaseConfigured } from '../config/firebase.js';
 import { appState } from '../services/state.js';
 import { showPopup } from '../ui/toast.js';
 import { playChatSound } from '../ui/sounds.js';
-import { renderAvatar, AURAS } from '../ui/avatar.js';
-import { rankSettings, getRank } from '../core/ranks.js';
+import { renderAvatar } from '../ui/avatar.js';
 
 let currentChatGroupId = null;
 let chatUnsubscribe = null;
@@ -56,12 +55,6 @@ function hashStringToColor(str) {
     }
     const h = Math.abs(hash % 360);
     return `hsl(${h}, 70%, 65%)`;
-}
-
-function isMaitreRank(avgScore) {
-    if (!rankSettings || rankSettings.length === 0) return false;
-    const rank = getRank(avgScore || 0);
-    return rankSettings.findIndex(r => r.name === rank.name) === rankSettings.length - 1;
 }
 
 // ============================================================
