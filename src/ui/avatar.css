@@ -1,0 +1,305 @@
+/* ============================================================
+   AVATAR AURA SYSTEM
+   ============================================================ */
+
+/* --- Conteneur avatar --- */
+.avatar-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-emoji {
+    position: relative;
+    z-index: 2;
+    line-height: 1;
+}
+
+/* --- Anneaux de base --- */
+.aura-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    pointer-events: none;
+}
+
+/* ============================================================
+   AURAS DE RANG — profil (pleine intensité, animées)
+   ============================================================ */
+
+/* ACIER (Débutant) — halo simple, lent */
+@keyframes aura-acier-pulse {
+    0%, 100% { box-shadow: 0 0 6px 2px #7B8FA155; }
+    50%       { box-shadow: 0 0 12px 4px #7B8FA199; }
+}
+.aura-acier .aura-ring:nth-child(1) {
+    border-color: #7B8FA1;
+    animation: aura-acier-pulse 3.5s ease-in-out infinite;
+}
+
+/* AZUR (Apprenti) — double anneau qui respire */
+@keyframes aura-azur-inner {
+    0%, 100% { box-shadow: 0 0 10px 3px #4B9CD3; }
+    50%       { box-shadow: 0 0 18px 6px #4B9CD3; }
+}
+@keyframes aura-azur-outer {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 0.7; }
+}
+.aura-azur .aura-ring:nth-child(1) {
+    border-color: #4B9CD3;
+    animation: aura-azur-inner 2.8s ease-in-out infinite;
+}
+.aura-azur .aura-ring:nth-child(2) {
+    border-color: #4B9CD355;
+    animation: aura-azur-outer 2.8s ease-in-out infinite 0.4s;
+}
+
+/* BRAISE (Confirmé) — solide + pointillé tournant */
+@keyframes aura-braise-glow {
+    0%, 100% { box-shadow: 0 0 12px 4px #E74C3C; }
+    50%       { box-shadow: 0 0 20px 8px #E74C3C; }
+}
+@keyframes aura-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.aura-braise .aura-ring:nth-child(1) {
+    border-color: #E74C3C;
+    animation: aura-braise-glow 2.5s ease-in-out infinite;
+}
+.aura-braise .aura-ring:nth-child(2) {
+    border-style: dashed;
+    border-color: #E74C3C88;
+    animation: aura-spin 4s linear infinite;
+}
+
+/* DORÉE (Expert) — triple ring en cascade pulsant */
+@keyframes aura-doree-core {
+    0%, 100% { box-shadow: 0 0 14px 5px #FFD700, 0 0 28px 10px #FFD70044; }
+    50%       { box-shadow: 0 0 24px 10px #FFD700, 0 0 48px 18px #FFD70088; }
+}
+@keyframes aura-doree-mid {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.8; }
+}
+@keyframes aura-doree-outer {
+    0%, 100% { opacity: 0.2; }
+    50%       { opacity: 0.5; }
+}
+.aura-doree .aura-ring:nth-child(1) {
+    border-color: #FFD700;
+    animation: aura-doree-core 2.2s ease-in-out infinite;
+}
+.aura-doree .aura-ring:nth-child(2) {
+    border-color: #FFD70066;
+    animation: aura-doree-mid 2.2s ease-in-out infinite 0.3s;
+}
+.aura-doree .aura-ring:nth-child(3) {
+    border-color: #FFD70033;
+    animation: aura-doree-outer 2.2s ease-in-out infinite 0.6s;
+}
+
+/* SACRÉE (Maître) — multi-ring + glow max + anneau doré tournant */
+@keyframes aura-sacree-core {
+    0%, 100% { box-shadow: 0 0 20px 8px #FFFAF0, 0 0 40px 16px #FFFAF066, 0 0 60px 24px #FFFAF022; }
+    50%       { box-shadow: 0 0 30px 14px #FFFAF0, 0 0 60px 24px #FFD70099, 0 0 80px 32px #FFFAF044; }
+}
+@keyframes aura-sacree-mid {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.9; }
+}
+.aura-sacree .aura-ring:nth-child(1) {
+    border-color: #FFFAF0;
+    border-width: 3px;
+    animation: aura-sacree-core 1.8s ease-in-out infinite;
+}
+.aura-sacree .aura-ring:nth-child(2) {
+    border-color: #FFFAF066;
+    animation: aura-sacree-mid 1.8s ease-in-out infinite 0.3s;
+}
+.aura-sacree .aura-ring:nth-child(3) {
+    border-style: dashed;
+    border-color: #FFD70088;
+    animation: aura-spin 3s linear infinite;
+}
+
+/* ============================================================
+   AURAS SPÉCIALES (badges)
+   ============================================================ */
+
+@keyframes aura-special-pulse-flammes {
+    0%, 100% { box-shadow: 0 0 12px 4px #FF6B35, 0 0 24px 8px #FF6B3533; }
+    50%       { box-shadow: 0 0 22px 9px #FF6B35, 0 0 44px 14px #FF6B3566; }
+}
+.aura-flammes .aura-ring:nth-child(1) {
+    border-color: #FF6B35;
+    animation: aura-special-pulse-flammes 2s ease-in-out infinite;
+}
+
+@keyframes aura-special-pulse-blizzard {
+    0%, 100% { box-shadow: 0 0 12px 4px #00D4FF, 0 0 24px 8px #00D4FF33; }
+    50%       { box-shadow: 0 0 22px 9px #00D4FF, 0 0 44px 14px #00D4FF66; }
+}
+.aura-blizzard .aura-ring:nth-child(1) {
+    border-color: #00D4FF;
+    animation: aura-special-pulse-blizzard 2.3s ease-in-out infinite;
+}
+
+@keyframes aura-special-pulse-foudre {
+    0%, 100% { box-shadow: 0 0 12px 4px #FFFF00, 0 0 24px 8px #FFFF0033; }
+    50%       { box-shadow: 0 0 22px 9px #FFFF00, 0 0 44px 14px #FFFF0066; }
+}
+.aura-foudre .aura-ring:nth-child(1) {
+    border-color: #FFFF00;
+    animation: aura-special-pulse-foudre 1.8s ease-in-out infinite;
+}
+
+@keyframes aura-special-pulse-ombre {
+    0%, 100% { box-shadow: 0 0 12px 4px #8B5CF6, 0 0 24px 8px #8B5CF633; }
+    50%       { box-shadow: 0 0 22px 9px #8B5CF6, 0 0 44px 14px #8B5CF666; }
+}
+.aura-ombre .aura-ring:nth-child(1) {
+    border-color: #8B5CF6;
+    animation: aura-special-pulse-ombre 2.6s ease-in-out infinite;
+}
+
+@keyframes aura-special-pulse-verdure {
+    0%, 100% { box-shadow: 0 0 12px 4px #39FF14, 0 0 24px 8px #39FF1433; }
+    50%       { box-shadow: 0 0 22px 9px #39FF14, 0 0 44px 14px #39FF1466; }
+}
+.aura-verdure .aura-ring:nth-child(1) {
+    border-color: #39FF14;
+    animation: aura-special-pulse-verdure 2.4s ease-in-out infinite;
+}
+
+@keyframes aura-special-pulse-celeste {
+    0%, 100% { box-shadow: 0 0 14px 5px #B9F2FF, 0 0 28px 10px #B9F2FF44; }
+    50%       { box-shadow: 0 0 26px 11px #B9F2FF, 0 0 52px 18px #B9F2FF77; }
+}
+.aura-celeste .aura-ring:nth-child(1) {
+    border-color: #B9F2FF;
+    animation: aura-special-pulse-celeste 2.1s ease-in-out infinite;
+}
+
+@keyframes aura-special-pulse-prestige {
+    0%, 100% { box-shadow: 0 0 16px 6px #FF00FF, 0 0 32px 12px #FFD70055; }
+    50%       { box-shadow: 0 0 28px 12px #00D4FF, 0 0 56px 20px #FF00FF44; }
+}
+.aura-prestige .aura-ring:nth-child(1) {
+    border-color: #FF00FF;
+    animation: aura-special-pulse-prestige 1.6s ease-in-out infinite;
+}
+
+/* ============================================================
+   MODE CHAT — version discrète (statique, sans pulse)
+   Exception : .avatar-wrap--chat.avatar-wrap--maitre garde l'anneau tournant
+   NOTE: A size modifier (--large or --small) is always required on .avatar-wrap
+   ============================================================ */
+
+/* Blanket reset: use high specificity to avoid needing !important */
+.avatar-wrap--chat.avatar-wrap--large .aura-ring,
+.avatar-wrap--chat.avatar-wrap--small .aura-ring {
+    animation: none;
+    box-shadow: none;
+}
+
+.avatar-wrap--chat .aura-acier   .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #7B8FA155; }
+.avatar-wrap--chat .aura-azur    .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #4B9CD355; }
+.avatar-wrap--chat .aura-braise  .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #E74C3C55; }
+.avatar-wrap--chat .aura-doree   .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #FFD70055; }
+.avatar-wrap--chat .aura-sacree  .aura-ring:nth-child(1) { box-shadow: 0 0 6px 2px #FFFAF055; }
+.avatar-wrap--chat .aura-flammes .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #FF6B3555; }
+.avatar-wrap--chat .aura-blizzard .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #00D4FF55; }
+.avatar-wrap--chat .aura-foudre  .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #FFFF0055; }
+.avatar-wrap--chat .aura-ombre   .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #8B5CF655; }
+.avatar-wrap--chat .aura-verdure .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #39FF1455; }
+.avatar-wrap--chat .aura-celeste .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #B9F2FF55; }
+.avatar-wrap--chat .aura-prestige .aura-ring:nth-child(1) { box-shadow: 0 0 5px 1px #FF00FF55; }
+
+/* Exception Maître en chat : anneau pointillé doré qui tourne lentement */
+.avatar-wrap--chat.avatar-wrap--maitre .aura-sacree .aura-ring:nth-child(3) {
+    animation: aura-spin 6s linear infinite;
+}
+
+/* ============================================================
+   TAILLES
+   ============================================================ */
+
+/* Large (profil) */
+.avatar-wrap--large { width: 96px; height: 96px; }
+.avatar-wrap--large .avatar-emoji { font-size: 48px; }
+.avatar-wrap--large .aura-ring:nth-child(1) { width: 80px; height: 80px; }
+.avatar-wrap--large .aura-ring:nth-child(2) { width: 92px; height: 92px; }
+.avatar-wrap--large .aura-ring:nth-child(3) { width: 104px; height: 104px; }
+
+/* Small (chat) */
+.avatar-wrap--small { width: 44px; height: 44px; }
+.avatar-wrap--small .avatar-emoji { font-size: 20px; }
+.avatar-wrap--small .aura-ring:nth-child(1) { width: 36px; height: 36px; }
+.avatar-wrap--small .aura-ring:nth-child(2) { width: 43px; height: 43px; }
+.avatar-wrap--small .aura-ring:nth-child(3) { width: 50px; height: 50px; }
+
+/* ============================================================
+   PICKER D'AURA (page profil)
+   ============================================================ */
+
+.aura-picker-section-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--steel);
+    text-transform: uppercase;
+    margin: 14px 0 8px;
+}
+
+.aura-picker-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.aura-picker-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.aura-picker-item--locked {
+    opacity: 0.35;
+    filter: grayscale(100%);
+    cursor: default;
+    pointer-events: none;
+}
+
+.aura-picker-name {
+    font-size: 0.6rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.aura-picker-item--active .avatar-wrap {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+    border-radius: 50%;
+}
+
+.aura-picker-lock {
+    font-size: 0.6rem;
+    color: var(--steel);
+    text-align: center;
+    max-width: 60px;
+}
+
+/* ============================================================
+   ACCESSIBILITÉ — Respect du paramètre "réduire les animations"
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .aura-ring {
+        animation: none !important;
+    }
+}

@@ -6,6 +6,7 @@ import { auth, db, isFirebaseConfigured } from '../config/firebase.js';
 import { appState } from '../services/state.js';
 import { showPopup } from '../ui/toast.js';
 import { playChatSound } from '../ui/sounds.js';
+import { renderAvatar } from '../ui/avatar.js';
 
 let currentChatGroupId = null;
 let chatUnsubscribe = null;
@@ -436,8 +437,15 @@ async function renderMessages(docs) {
 
         // Sender pseudo at bottom (not me, last in group)
         if (!isMe && isLastInGroup) {
+            const chatAvatarHtml = renderAvatar({
+                emoji: msg.senderAvatar || '👤',
+                auraId: msg.senderAura || null,
+                size: 'small',
+                isMaitre: false,
+                id: `chat-avatar-${msgId}`,
+            });
             html += `<div class="chat-bubble-sender-bottom">
-                <span class="chat-bubble-avatar">${escapeHtml(msg.senderAvatar || '👤')}</span>
+                ${chatAvatarHtml}
                 <span class="chat-bubble-name" style="color: ${senderColor}">${escapeHtml(msg._displayPseudo)}</span>
             </div>`;
         }
@@ -500,6 +508,7 @@ export async function sendChatMessage(groupId) {
             senderId: appState.currentUser.uid,
             senderPseudo: userData.pseudo || userData.profile?.pseudo || 'Anonyme',
             senderAvatar: userData.avatar || userData.profile?.avatar || '👤',
+            senderAura: userData.profile?.activeAura || null,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
@@ -935,6 +944,7 @@ async function autoSendAudio(groupId, base64, duration) {
             senderId: appState.currentUser.uid,
             senderPseudo: userData.pseudo || userData.profile?.pseudo || 'Anonyme',
             senderAvatar: userData.avatar || userData.profile?.avatar || '👤',
+            senderAura: userData.profile?.activeAura || null,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
@@ -1062,6 +1072,7 @@ export async function sendPendingAudio() {
             senderId: appState.currentUser.uid,
             senderPseudo: userData.pseudo || userData.profile?.pseudo || 'Anonyme',
             senderAvatar: userData.avatar || userData.profile?.avatar || '👤',
+            senderAura: userData.profile?.activeAura || null,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 

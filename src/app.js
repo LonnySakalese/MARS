@@ -75,6 +75,7 @@ import {
     checkNeedsPseudo, showSetupPseudoModal, saveSetupPseudo,
     loadProfileFromFirestore
 } from './pages/profile.js';
+import { openAuraPicker, closeAuraPicker, setActiveAura } from './ui/avatar.js';
 import {
     renderGroups, openCreateGroupModal, closeCreateGroupModal, createGroup,
     openJoinGroupModal, closeJoinGroupModal, joinGroup, joinGroupByCode, toggleQRScanner,
@@ -736,6 +737,7 @@ Object.assign(window, {
 
     // Profile
     openAvatarPicker, closeAvatarPicker, selectAvatar,
+    openAuraPicker, closeAuraPicker, setActiveAura,
     openEditPseudoModal, closeEditPseudoModal, saveProfilePseudo,
     saveSetupPseudo,
 

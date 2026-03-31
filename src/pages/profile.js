@@ -10,6 +10,7 @@ import { getRank } from '../core/ranks.js';
 import { showPopup } from '../ui/toast.js';
 import { validatePseudo } from '../services/pseudo-validator.js';
 import { loadBadges, BADGES } from '../core/badges.js';
+import { renderAvatar } from '../ui/avatar.js';
 
 // Liste d'emojis pour l'avatar
 const AVATAR_EMOJIS = [
@@ -82,8 +83,10 @@ export function renderProfile() {
     const profile = getProfile();
 
     // Avatar
-    const avatarEl = document.getElementById('profileAvatar');
-    if (avatarEl) avatarEl.textContent = profile.avatar || '🦁';
+    const avatarWrapEl = document.getElementById('profileAvatarWrap');
+    if (avatarWrapEl) {
+        avatarWrapEl.outerHTML = renderAvatar({ size: 'large', id: 'profileAvatarWrap' });
+    }
 
     // Pseudo
     const pseudoEl = document.getElementById('profilePseudo');

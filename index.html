@@ -62,6 +62,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
   <link rel="stylesheet" href="src/ui/tactical-ux.css" />
+  <link rel="stylesheet" href="src/ui/avatar.css">
 </head>
 
 <body>
@@ -1130,9 +1131,15 @@
     <div class="profile-container">
       <!-- Avatar -->
       <div class="profile-avatar-section">
-        <div class="profile-avatar" id="profileAvatar">🦁</div>
+        <div id="profileAvatarWrap" class="avatar-wrap avatar-wrap--large">
+            <div></div>
+            <span class="avatar-emoji">🦁</span>
+        </div>
         <button class="profile-change-avatar-btn" onclick="openAvatarPicker()">
           Changer l'avatar
+        </button>
+        <button class="profile-change-avatar-btn" onclick="openAuraPicker()" style="margin-top:6px;">
+          ✦ Changer l'aura
         </button>
       </div>
 
@@ -1270,6 +1277,19 @@
           </svg>
           <span style="color: #e74c3c">Admin Panel</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Aura Picker -->
+  <div class="modal-overlay" id="auraPickerModal">
+    <div class="modal">
+      <h3>✦ CHOISIR UNE AURA</h3>
+      <div id="auraPicker">
+        <!-- Rempli par avatar.js -->
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-btn cancel" onclick="closeAuraPicker()">Fermer</button>
       </div>
     </div>
   </div>
