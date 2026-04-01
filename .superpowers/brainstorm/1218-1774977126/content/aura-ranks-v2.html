@@ -1,0 +1,107 @@
+<h2>Auras de rang — différenciées</h2>
+<p class="subtitle">Chaque rang a un style visuel distinct, pas juste une couleur différente</p>
+
+<style>
+/* DÉBUTANT — glow simple, lent, discret */
+@keyframes r1-pulse { 0%,100%{box-shadow:0 0 6px 2px #7B8FA166} 50%{box-shadow:0 0 12px 4px #7B8FA1AA} }
+
+/* APPRENTI — double anneau, respiration */
+@keyframes r2-inner { 0%,100%{box-shadow:0 0 10px 3px #4B9CD3,0 0 0px 0px #4B9CD300} 50%{box-shadow:0 0 16px 5px #4B9CD3,0 0 24px 10px #4B9CD322} }
+
+/* CONFIRMÉ — rotation d'un cercle en pointillés */
+@keyframes r3-spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes r3-glow { 0%,100%{box-shadow:0 0 12px 4px #E74C3C} 50%{box-shadow:0 0 20px 8px #E74C3C} }
+
+/* EXPERT — pulse intense + double ring rapide */
+@keyframes r4-pulse { 0%,100%{box-shadow:0 0 14px 5px #FFD700,0 0 28px 10px #FFD70044} 50%{box-shadow:0 0 24px 10px #FFD700,0 0 48px 18px #FFD70088} }
+@keyframes r4-outer { 0%,100%{opacity:0.3; transform:scale(1)} 50%{opacity:0.8; transform:scale(1.08)} }
+
+/* MAÎTRE — multi-ring + glow intense + très rapide */
+@keyframes r5-core  { 0%,100%{box-shadow:0 0 20px 8px #FFFAF0,0 0 40px 16px #FFFAF066,0 0 60px 24px #FFFAF022} 50%{box-shadow:0 0 30px 14px #FFFAF0,0 0 60px 24px #FFD70099,0 0 80px 32px #FFFAF044} }
+@keyframes r5-ring1 { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.06)} }
+@keyframes r5-ring2 { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.12)} }
+
+.rank-showcase { display:flex; gap:32px; flex-wrap:wrap; justify-content:center; margin: 20px 0; }
+.rank-item { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.rank-label { font-size:0.7rem; font-weight:bold; letter-spacing:0.08em; text-align:center; }
+.rank-desc { font-size:0.6rem; color:#888; text-align:center; max-width:90px; }
+.avatar-wrap { position:relative; width:80px; height:80px; display:flex; align-items:center; justify-content:center; }
+.avatar-emoji { font-size:36px; position:relative; z-index:2; }
+</style>
+
+<div class="rank-showcase">
+
+  <!-- DÉBUTANT: glow simple et discret -->
+  <div class="rank-item">
+    <div class="avatar-wrap">
+      <div style="position:absolute;width:72px;height:72px;border-radius:50%;border:2px solid #7B8FA1;animation:r1-pulse 3.5s ease-in-out infinite;"></div>
+      <span class="avatar-emoji">🦁</span>
+    </div>
+    <div class="rank-label" style="color:#7B8FA1;">DÉBUTANT</div>
+    <div class="rank-desc">Halo simple, discret. "Je commence."</div>
+  </div>
+
+  <!-- APPRENTI: double anneau qui respire -->
+  <div class="rank-item">
+    <div class="avatar-wrap">
+      <div style="position:absolute;width:72px;height:72px;border-radius:50%;border:2px solid #4B9CD3;animation:r2-inner 2.8s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid #4B9CD355;animation:r2-inner 2.8s ease-in-out infinite 0.4s;"></div>
+      <span class="avatar-emoji">🐺</span>
+    </div>
+    <div class="rank-label" style="color:#4B9CD3;">APPRENTI</div>
+    <div class="rank-desc">Double anneau, respiration lente.</div>
+  </div>
+
+  <!-- CONFIRMÉ: anneau en pointillés qui tourne + glow -->
+  <div class="rank-item">
+    <div class="avatar-wrap">
+      <div style="position:absolute;width:72px;height:72px;border-radius:50%;border:2px solid #E74C3C;animation:r3-glow 2s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:82px;height:82px;border-radius:50%;border:2px dashed #E74C3C88;animation:r3-spin 4s linear infinite;"></div>
+      <span class="avatar-emoji">🦅</span>
+    </div>
+    <div class="rank-label" style="color:#E74C3C;">CONFIRMÉ</div>
+    <div class="rank-desc">Anneau pointillé qui tourne + glow.</div>
+  </div>
+
+  <!-- EXPERT: triple ring + pulse fort -->
+  <div class="rank-item">
+    <div class="avatar-wrap">
+      <div style="position:absolute;width:72px;height:72px;border-radius:50%;border:2.5px solid #FFD700;animation:r4-pulse 2s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:82px;height:82px;border-radius:50%;border:1.5px solid #FFD70066;animation:r4-outer 2s ease-in-out infinite 0.3s;"></div>
+      <div style="position:absolute;width:92px;height:92px;border-radius:50%;border:1px solid #FFD70033;animation:r4-outer 2s ease-in-out infinite 0.6s;"></div>
+      <span class="avatar-emoji">🐉</span>
+    </div>
+    <div class="rank-label" style="color:#FFD700;">EXPERT</div>
+    <div class="rank-desc">Triple ring en cascade, intense.</div>
+  </div>
+
+  <!-- MAÎTRE: multi-ring + glow max + rotation dashed -->
+  <div class="rank-item">
+    <div class="avatar-wrap" style="width:96px;height:96px;">
+      <div style="position:absolute;width:72px;height:72px;border-radius:50%;border:3px solid #FFFAF0;animation:r5-core 1.8s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:84px;height:84px;border-radius:50%;border:1.5px solid #FFFAF066;animation:r5-ring1 1.8s ease-in-out infinite 0.3s;"></div>
+      <div style="position:absolute;width:96px;height:96px;border-radius:50%;border:1px dashed #FFD70088;animation:r3-spin 3s linear infinite;"></div>
+      <span class="avatar-emoji" style="font-size:36px;">👑</span>
+    </div>
+    <div class="rank-label" style="color:#FFFAF0;">MAÎTRE</div>
+    <div class="rank-desc">Multi-ring + rotation dorée + glow max.</div>
+  </div>
+
+</div>
+
+<div class="mockup" style="margin-top:8px;">
+  <div class="mockup-header">Progression visuelle — du plus discret au plus impressionnant</div>
+  <div class="mockup-body" style="display:flex; align-items:center; gap:8px; justify-content:center; flex-wrap:wrap;">
+    <span style="font-size:0.7rem; color:#7B8FA1;">① Halo</span>
+    <span style="color:#444;">→</span>
+    <span style="font-size:0.7rem; color:#4B9CD3;">② Double ring</span>
+    <span style="color:#444;">→</span>
+    <span style="font-size:0.7rem; color:#E74C3C;">③ Ring tournant</span>
+    <span style="color:#444;">→</span>
+    <span style="font-size:0.7rem; color:#FFD700;">④ Triple cascade</span>
+    <span style="color:#444;">→</span>
+    <span style="font-size:0.7rem; color:#FFFAF0;">⑤ Full prestige</span>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Est-ce que la progression te semble bien différenciée maintenant ? Tu veux ajuster un rang en particulier ?</p>

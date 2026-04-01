@@ -24,7 +24,7 @@ const translations = {
 
     // Stats
     "stats.currentRank": "Ton Rang Actuel",
-    "stats.thisMonth": "⏳ CE MOIS-CI",
+    "stats.thisMonth": "CE MOIS-CI",
     "stats.viewCalendar": "VOIR LE CALENDRIER DU MOIS",
     "stats.thisWeek": "CETTE SEMAINE",
     "stats.progression": "PROGRESSION",
@@ -113,7 +113,7 @@ const translations = {
     "today.shareDay": "Share",
 
     "stats.currentRank": "Your Current Rank",
-    "stats.thisMonth": "⏳ THIS MONTH",
+    "stats.thisMonth": "THIS MONTH",
     "stats.viewCalendar": "VIEW MONTHLY CALENDAR",
     "stats.thisWeek": "THIS WEEK",
     "stats.progression": "PROGRESSION",

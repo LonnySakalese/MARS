@@ -78,7 +78,7 @@ export function changeDate(delta) {
 export function goToDate(dateString) {
   // Parser la date ISO en heure locale (pas UTC)
   // new Date("2026-03-28") parse en UTC, ce qui décale d'un jour selon le fuseau
-  const [year, month, day] = dateString.split('-').map(Number);
+  const [year, month, day] = dateString.split("-").map(Number);
   const targetDate = new Date(year, month - 1, day);
   targetDate.setHours(12, 0, 0, 0); // Midi pour éviter les problèmes de DST
 
@@ -131,7 +131,7 @@ export function renderHabits() {
             </g>
           </svg>
         </div>
-        <div class="empty-state-title">MISSION EN ATTENTE</div>
+        <div class="empty-state-title">HABITUDES EN ATTENTE</div>
         <div class="empty-state-text">
           Définis ta première habitude pour commencer ton ascension
         </div>
@@ -241,7 +241,7 @@ export function renderHabits() {
               ${descriptionHtml}
               <div class="mission-meta">
                 <span class="mission-streak">
-                  ${streak > 0 ? '<span class="mission-streak-fire">🔥</span>' : ''}
+                  ${streak > 0 ? '<span class="mission-streak-fire">🔥</span>' : ""}
                   ${streakText}
                 </span>
               </div>
@@ -258,8 +258,8 @@ export function renderHabits() {
               <div class="mission-percent">${monthData}%</div>
             </div>
           </div>
-          ${checked ? '<div class="mission-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' : ''}
-          ${isFailed ? '<div class="mission-fail-mark">✕</div>' : ''}
+          ${checked ? '<div class="mission-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' : ""}
+          ${isFailed ? '<div class="mission-fail-mark">✕</div>' : ""}
         </div>
       `;
     })
@@ -286,7 +286,8 @@ export function toggleHabit(habitId) {
         chargeBar.style.transition = "none";
         chargeBar.style.height = "0%";
         void chargeBar.offsetWidth;
-        chargeBar.style.transition = "height 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+        chargeBar.style.transition =
+          "height 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
         chargeBar.style.height = "100%";
         // Add completed class for visual feedback
         cardEl.classList.add("is-completed");
@@ -312,12 +313,6 @@ export function toggleHabit(habitId) {
   }
 
   if (newStatus) {
-    const completed = habits.filter(
-      (h) => getDayData(currentDate)[h.id],
-    ).length;
-    if (completed === habits.length) {
-      triggerConfetti();
-    }
     const currentScore = getDayScore(currentDate);
     if (checkClearFatigue(currentScore)) {
       if (window.updateXPDisplay) window.updateXPDisplay();
@@ -398,10 +393,24 @@ function renderWeekDots() {
   // Get month/year label for the week
   const sunday = new Date(monday);
   sunday.setDate(sunday.getDate() + 6);
-  const monthNames = ["JAN", "FÉV", "MAR", "AVR", "MAI", "JUN", "JUL", "AOÛ", "SEP", "OCT", "NOV", "DÉC"];
-  const weekLabel = monday.getMonth() === sunday.getMonth()
-    ? `${monday.getDate()}-${sunday.getDate()} ${monthNames[monday.getMonth()]}`
-    : `${monday.getDate()} ${monthNames[monday.getMonth()]} - ${sunday.getDate()} ${monthNames[sunday.getMonth()]}`;
+  const monthNames = [
+    "JAN",
+    "FÉV",
+    "MAR",
+    "AVR",
+    "MAI",
+    "JUN",
+    "JUL",
+    "AOÛ",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DÉC",
+  ];
+  const weekLabel =
+    monday.getMonth() === sunday.getMonth()
+      ? `${monday.getDate()}-${sunday.getDate()} ${monthNames[monday.getMonth()]}`
+      : `${monday.getDate()} ${monthNames[monday.getMonth()]} - ${sunday.getDate()} ${monthNames[sunday.getMonth()]}`;
 
   const labels = ["L", "M", "M", "J", "V", "S", "D"];
   let daysHtml = "";
@@ -467,19 +476,23 @@ function renderWeekDots() {
         ${daysHtml}
       </div>
     </div>
-    <button class="week-nav-btn week-nav-next ${isCurrentWeek ? 'disabled' : ''}" onclick="changeWeek(1)" aria-label="Semaine suivante" ${isCurrentWeek ? 'disabled' : ''}>
+    <button class="week-nav-btn week-nav-next ${isCurrentWeek ? "disabled" : ""}" onclick="changeWeek(1)" aria-label="Semaine suivante" ${isCurrentWeek ? "disabled" : ""}>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <polyline points="9 18 15 12 9 6"/>
       </svg>
     </button>
-    ${!isCurrentWeek ? `
+    ${
+      !isCurrentWeek
+        ? `
       <button class="week-today-btn" onclick="goToDate('${today.toISOString().split("T")[0]}')" aria-label="Aujourd'hui">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <circle cx="12" cy="12" r="10"/>
           <polyline points="12 6 12 12 16 14"/>
         </svg>
       </button>
-    ` : ''}
+    `
+        : ""
+    }
   `;
 }
 
@@ -490,7 +503,7 @@ export function changeWeek(delta) {
   today.setHours(23, 59, 59, 999);
 
   const newDate = new Date(currentDate);
-  newDate.setDate(newDate.getDate() + (delta * 7));
+  newDate.setDate(newDate.getDate() + delta * 7);
 
   // Don't allow navigating to future weeks
   if (newDate > today) {
@@ -657,9 +670,7 @@ export function confirmValidateDay() {
   if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]);
   showPopup("Journée validée !", "success");
 
-  const dayDataToday = getDayData(new Date());
-  const completedCount = habits.filter((h) => dayDataToday[h.id]).length;
-  if (completedCount === habits.length && habits.length > 0) {
+  if (score === 100) {
     triggerConfetti();
   }
 

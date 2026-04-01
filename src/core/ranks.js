@@ -209,7 +209,7 @@ export function renderRanks(isEditing = false) {
                                   .join("")}
                             </div>
                             <div class="palette-card-name">${palette.name}</div>
-                            ${palette.id === "samourai" ? '<span class="palette-recommended">★</span>' : ""}
+                            ${palette.id === "samourai" ? `<span class="palette-recommended"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>` : ""}
                         </div>
                     `,
                       )
@@ -284,12 +284,12 @@ export function toggleRankEditMode() {
   if (isRankEditMode) {
     rankSettingsBackup = JSON.parse(JSON.stringify(rankSettings));
     selectedPaletteIdBackup = selectedPaletteId;
-    editBtn.textContent = "⊘";
+    editBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>`;
     editBtn.title = "Mode édition actif";
     editButtons.style.display = "flex";
     renderRanks(true);
   } else {
-    editBtn.textContent = "✎";
+    editBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
     editBtn.title = "Modifier les rangs";
     editButtons.style.display = "none";
     renderRanks(false);
@@ -308,7 +308,7 @@ export function cancelRankEdit() {
   const editBtn = document.getElementById("editRanksBtn");
   const editButtons = document.getElementById("rankEditButtons");
 
-  editBtn.textContent = "✎";
+  editBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
   editButtons.style.display = "none";
   renderRanks(false);
 
@@ -350,7 +350,7 @@ export function saveRankSettings() {
   const editBtn = document.getElementById("editRanksBtn");
   const editButtons = document.getElementById("rankEditButtons");
 
-  editBtn.textContent = "✎";
+  editBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
   editButtons.style.display = "none";
   renderRanks(false);
 
@@ -387,7 +387,6 @@ export function openRanksModal() {
                     <div class="ranks-modal-name" style="color: ${rank.color};">${rank.name}</div>
                     <div class="ranks-modal-range">${range.min}% — ${range.max}%</div>
                 </div>
-                ${isCurrent ? '<span class="ranks-modal-you">← TOI</span>' : ""}
             </div>
         `;
     })

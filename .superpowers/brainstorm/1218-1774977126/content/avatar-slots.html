@@ -1,0 +1,109 @@
+<h2>Quels éléments personnalisables dans l'avatar ?</h2>
+<p class="subtitle">Chaque option définit ce que l'utilisateur peut customiser. Tu peux en sélectionner plusieurs.</p>
+
+<div class="options" data-multiselect>
+
+  <div class="option" data-choice="icon" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content" style="display:flex; align-items:center; gap:16px;">
+      <div style="display:flex; gap:6px;">
+        <span style="font-size:26px; background:#2a2a2a; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center;">🐺</span>
+        <span style="font-size:26px; background:#2a2a2a; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center;">🦁</span>
+        <span style="font-size:26px; background:#2a2a2a; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center;">🐉</span>
+      </div>
+      <div>
+        <h3>Icône centrale</h3>
+        <p>Animal, symbole ou icône — sélectionnable parmi une bibliothèque débloquable</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="bg" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content" style="display:flex; align-items:center; gap:16px;">
+      <div style="display:flex; gap:6px;">
+        <span style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#1a1a2e,#16213e); display:block;"></span>
+        <span style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#2d1b33,#4a0e4e); display:block;"></span>
+        <span style="width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#0d2137,#1a4a6e); display:block;"></span>
+      </div>
+      <div>
+        <h3>Couleur / Fond</h3>
+        <p>Couleur unie ou dégradé derrière l'icône — déblocable par palettes</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="border" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content" style="display:flex; align-items:center; gap:16px;">
+      <div style="display:flex; gap:6px;">
+        <span style="width:44px; height:44px; border-radius:50%; border:4px solid #FFD700; background:#2a2a2a; display:block;"></span>
+        <span style="width:44px; height:44px; border-radius:50%; border:4px solid #B9F2FF; background:#2a2a2a; display:block;"></span>
+        <span style="width:44px; height:44px; border-radius:50%; border:4px solid #E74C3C; background:#2a2a2a; display:block;"></span>
+      </div>
+      <div>
+        <h3>Bordure (= Rang automatique)</h3>
+        <p>La couleur de la bordure reflète ton rang actuel — automatique, non choisie</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="aura" onclick="toggleSelect(this)">
+    <div class="letter">4</div>
+    <div class="content" style="display:flex; align-items:center; gap:16px;">
+      <svg width="130" height="50" viewBox="0 0 130 50">
+        <!-- Avatar avec aura feu -->
+        <circle cx="25" cy="25" r="20" fill="#1a1a1a" />
+        <circle cx="25" cy="25" r="20" fill="none" stroke="#FF6B35" stroke-width="3" />
+        <circle cx="25" cy="25" r="24" fill="none" stroke="#FF6B35" stroke-width="1" opacity="0.4"/>
+        <circle cx="25" cy="25" r="28" fill="none" stroke="#FF6B35" stroke-width="1" opacity="0.15"/>
+        <text x="25" y="31" text-anchor="middle" font-size="18">🔥</text>
+        <!-- Avatar avec aura glace -->
+        <circle cx="75" cy="25" r="20" fill="#1a1a1a" />
+        <circle cx="75" cy="25" r="20" fill="none" stroke="#00D4FF" stroke-width="3" />
+        <circle cx="75" cy="25" r="24" fill="none" stroke="#00D4FF" stroke-width="1" opacity="0.4"/>
+        <circle cx="75" cy="25" r="28" fill="none" stroke="#00D4FF" stroke-width="1" opacity="0.15"/>
+        <text x="75" y="31" text-anchor="middle" font-size="18">❄️</text>
+        <!-- Avatar avec aura électrique -->
+        <circle cx="125" cy="25" r="20" fill="#1a1a1a" />
+        <circle cx="125" cy="25" r="20" fill="none" stroke="#FFFF00" stroke-width="3" />
+        <circle cx="125" cy="25" r="24" fill="none" stroke="#FFFF00" stroke-width="1" opacity="0.4"/>
+        <circle cx="125" cy="25" r="28" fill="none" stroke="#FFFF00" stroke-width="1" opacity="0.15"/>
+        <text x="125" y="31" text-anchor="middle" font-size="18">⚡</text>
+      </svg>
+      <div>
+        <h3>Aura / Effet de halo</h3>
+        <p>Effet lumineux autour de l'avatar — récompenses rares, pour les gros streaks ou badges légendaires</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="frame" onclick="toggleSelect(this)">
+    <div class="letter">5</div>
+    <div class="content" style="display:flex; align-items:center; gap:16px;">
+      <svg width="130" height="50" viewBox="0 0 130 50">
+        <!-- Cadre étoiles -->
+        <circle cx="25" cy="25" r="19" fill="#1a1a2e" />
+        <text x="25" y="31" text-anchor="middle" font-size="16">🐉</text>
+        <text x="5" y="12" font-size="8">⭐</text><text x="40" y="12" font-size="8">⭐</text>
+        <text x="5" y="42" font-size="8">⭐</text><text x="40" y="42" font-size="8">⭐</text>
+        <!-- Cadre flammes -->
+        <circle cx="75" cy="25" r="19" fill="#1a1a2e" />
+        <text x="75" y="31" text-anchor="middle" font-size="16">🦅</text>
+        <text x="55" y="14" font-size="9">🔥</text><text x="88" y="14" font-size="9">🔥</text>
+        <text x="55" y="40" font-size="9">🔥</text><text x="88" y="40" font-size="9">🔥</text>
+        <!-- Cadre couronnes -->
+        <circle cx="125" cy="25" r="19" fill="#1a1a2e" />
+        <text x="125" y="31" text-anchor="middle" font-size="16">👑</text>
+        <text x="114" y="10" font-size="9">✨</text><text x="130" y="10" font-size="9">✨</text>
+      </svg>
+      <div>
+        <h3>Cadre décoratif</h3>
+        <p>Ornement autour de l'avatar — étoiles, flammes, couronnes. Style gacha/battle pass.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Sélectionne tous les éléments que tu veux inclure, puis réponds dans le terminal.</p>

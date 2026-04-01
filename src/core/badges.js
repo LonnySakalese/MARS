@@ -106,7 +106,7 @@ export const BADGE_FAMILIES = [
     desc: "Jours au rang Maître",
     icon: BADGE_ICONS.trophy,
     condition: "rankMasterDays",
-    tiers: [1, 7, 30, 90, 365],
+    tiers: [7, 14, 30, 90, 365],
   },
   {
     id: "collector",
@@ -267,11 +267,33 @@ export function toggleBadgesVisibility() {
   const grid = document.getElementById("badgesGridWrapper");
   const btn = document.getElementById("toggleBadgesBtn");
   if (!grid || !btn) return;
+  
   const isHidden = grid.style.display === "none";
-  grid.style.display = isHidden ? "block" : "none";
-  btn.querySelector("span").textContent = isHidden
-    ? "Masquer les badges"
-    : "Voir les badges";
+  
+  if (isHidden) {
+    grid.style.display = "block";
+    btn.querySelector("span").textContent = "Masquer les badges";
+    
+    // Animation super mega stylée
+    const cards = grid.querySelectorAll(".badge-family-card");
+    cards.forEach((card, index) => {
+      // Reset state
+      card.classList.remove("badge-animate");
+      card.style.opacity = "0";
+      
+      // Force reflow
+      void card.offsetWidth;
+      
+      // Add animation with staggered delay
+      card.classList.add("badge-animate");
+      card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    if (navigator.vibrate) navigator.vibrate(20);
+  } else {
+    grid.style.display = "none";
+    btn.querySelector("span").textContent = "Voir les badges";
+  }
 }
 
 // ============================================================
@@ -420,19 +442,20 @@ export function renderBadges() {
     const progress = Math.round((totalUnlocked / totalPossible) * 100);
 
     let html = `
-            <div class="badges-header">
-                <div class="badges-title">
-                    ${svg('<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>', 2)}
-                    RÉALISATIONS
-                </div>
-                <div class="badges-progress">
+            <div class="section-title">
+                ${svg('<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>', 2.5)}
+                RÉALISATIONS
+            </div>
+            <div style="padding: 0 15px; margin-bottom: 15px;">
+                <div class="badges-progress" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.8rem; color: var(--accent-dim);">
+                    <span>Progression des succès</span>
                     <span>${totalUnlocked} / ${totalPossible}</span>
-                    <div class="progress-bar-small">
-                        <div class="progress-fill-small" style="width: ${progress}%"></div>
-                    </div>
+                </div>
+                <div class="progress-bar-small" style="height: 6px; background: var(--steel); border-radius: 10px; overflow: hidden;">
+                    <div class="progress-fill-small" style="width: ${progress}%; height: 100%; background: var(--accent-dim); box-shadow: 0 0 10px var(--accent-dim);"></div>
                 </div>
             </div>
-            <button id="toggleBadgesBtn" class="action-btn action-btn-secondary" onclick="toggleBadgesVisibility()" style="width: 100%; margin-bottom: 10px;">
+            <button id="toggleBadgesBtn" class="action-btn action-btn-secondary" onclick="toggleBadgesVisibility()" style="width: calc(100% - 30px); margin: 0 15px 15px 15px;">
                 ${svg('<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>', 2)}
                 <span>Voir les badges</span>
             </button>

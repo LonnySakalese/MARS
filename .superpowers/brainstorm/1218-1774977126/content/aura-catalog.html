@@ -1,0 +1,109 @@
+<h2>Catalogue des auras</h2>
+<p class="subtitle">5 auras de rang (automatiques) + 7 auras spéciales (badges). Chaque aura pulse en continu.</p>
+
+<style>
+@keyframes pulse-steel   { 0%,100%{box-shadow:0 0 10px 3px #7B8FA1,0 0 20px 6px #7B8FA133} 50%{box-shadow:0 0 18px 7px #7B8FA1,0 0 36px 12px #7B8FA155} }
+@keyframes pulse-blue    { 0%,100%{box-shadow:0 0 10px 3px #4B9CD3,0 0 20px 6px #4B9CD333} 50%{box-shadow:0 0 18px 7px #4B9CD3,0 0 36px 12px #4B9CD355} }
+@keyframes pulse-red     { 0%,100%{box-shadow:0 0 10px 3px #E74C3C,0 0 20px 6px #E74C3C33} 50%{box-shadow:0 0 18px 7px #E74C3C,0 0 36px 12px #E74C3C55} }
+@keyframes pulse-gold    { 0%,100%{box-shadow:0 0 12px 4px #FFD700,0 0 24px 8px #FFD70033} 50%{box-shadow:0 0 22px 9px #FFD700,0 0 44px 14px #FFD70066} }
+@keyframes pulse-ivory   { 0%,100%{box-shadow:0 0 14px 5px #FFFAF0,0 0 28px 10px #FFFAF044} 50%{box-shadow:0 0 26px 11px #FFFAF0,0 0 52px 18px #FFFAF077} }
+@keyframes pulse-fire    { 0%,100%{box-shadow:0 0 12px 4px #FF6B35,0 0 24px 8px #FF6B3533} 50%{box-shadow:0 0 22px 9px #FF6B35,0 0 44px 14px #FF6B3566} }
+@keyframes pulse-ice     { 0%,100%{box-shadow:0 0 12px 4px #00D4FF,0 0 24px 8px #00D4FF33} 50%{box-shadow:0 0 22px 9px #00D4FF,0 0 44px 14px #00D4FF66} }
+@keyframes pulse-thunder { 0%,100%{box-shadow:0 0 12px 4px #FFFF00,0 0 24px 8px #FFFF0033} 50%{box-shadow:0 0 22px 9px #FFFF00,0 0 44px 14px #FFFF0066} }
+@keyframes pulse-shadow  { 0%,100%{box-shadow:0 0 12px 4px #8B5CF6,0 0 24px 8px #8B5CF633} 50%{box-shadow:0 0 22px 9px #8B5CF6,0 0 44px 14px #8B5CF666} }
+@keyframes pulse-nature  { 0%,100%{box-shadow:0 0 12px 4px #39FF14,0 0 24px 8px #39FF1433} 50%{box-shadow:0 0 22px 9px #39FF14,0 0 44px 14px #39FF1466} }
+@keyframes pulse-legend  { 0%,100%{box-shadow:0 0 16px 6px #B9F2FF,0 0 32px 12px #B9F2FF44} 50%{box-shadow:0 0 28px 12px #B9F2FF,0 0 56px 20px #B9F2FF77} }
+@keyframes pulse-prestige{ 0%,100%{box-shadow:0 0 16px 6px #FF00FF,0 0 28px 10px #FFD70055} 50%{box-shadow:0 0 26px 11px #00D4FF,0 0 50px 18px #FF00FF44} }
+
+.aura-item { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.aura-ring { width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px; border: 2px solid; }
+.aura-label { font-size:0.65rem; text-align:center; font-weight:bold; letter-spacing:0.05em; }
+.aura-unlock { font-size:0.6rem; color:#666; text-align:center; max-width:80px; }
+.section-title { font-size:0.7rem; letter-spacing:0.1em; color:#555; margin: 16px 0 10px; text-transform:uppercase; }
+.aura-grid { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.badge-tag { font-size:0.6rem; padding:2px 7px; border-radius:20px; margin-top:2px; display:inline-block; }
+</style>
+
+<div class="section-title">🏅 Auras de rang — débloquées automatiquement</div>
+<div class="aura-grid">
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#7B8FA1; animation:pulse-steel 3s ease-in-out infinite;">🦁</div>
+    <div class="aura-label" style="color:#7B8FA1;">Acier</div>
+    <div class="aura-unlock">Rang Débutant</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#4B9CD3; animation:pulse-blue 2.8s ease-in-out infinite;">🐺</div>
+    <div class="aura-label" style="color:#4B9CD3;">Azur</div>
+    <div class="aura-unlock">Rang Apprenti</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#E74C3C; animation:pulse-red 2.5s ease-in-out infinite;">🦅</div>
+    <div class="aura-label" style="color:#E74C3C;">Braise</div>
+    <div class="aura-unlock">Rang Confirmé</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#FFD700; animation:pulse-gold 2.2s ease-in-out infinite;">🐉</div>
+    <div class="aura-label" style="color:#FFD700;">Dorée</div>
+    <div class="aura-unlock">Rang Expert</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#FFFAF0; animation:pulse-ivory 2s ease-in-out infinite;">👑</div>
+    <div class="aura-label" style="color:#FFFAF0;">Sacrée</div>
+    <div class="aura-unlock">Rang Maître</div>
+  </div>
+
+</div>
+
+<div class="section-title">✨ Auras spéciales — débloquées par badges</div>
+<div class="aura-grid">
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#FF6B35; animation:pulse-fire 2s ease-in-out infinite;">🔥</div>
+    <div class="aura-label" style="color:#FF6B35;">Flammes</div>
+    <div class="aura-unlock">Victoires Or+</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#00D4FF; animation:pulse-ice 2.3s ease-in-out infinite;">❄️</div>
+    <div class="aura-label" style="color:#00D4FF;">Blizzard</div>
+    <div class="aura-unlock">Régularité Or+</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#FFFF00; animation:pulse-thunder 1.8s ease-in-out infinite;">⚡</div>
+    <div class="aura-label" style="color:#FFFF00;">Foudre</div>
+    <div class="aura-unlock">Perfection Or+</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#8B5CF6; animation:pulse-shadow 2.6s ease-in-out infinite;">🌙</div>
+    <div class="aura-label" style="color:#8B5CF6;">Ombre</div>
+    <div class="aura-unlock">Noctambule Or+</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#39FF14; animation:pulse-nature 2.4s ease-in-out infinite;">🌿</div>
+    <div class="aura-label" style="color:#39FF14;">Verdure</div>
+    <div class="aura-unlock">Architecte Or+</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#B9F2FF; animation:pulse-legend 2.1s ease-in-out infinite;">💎</div>
+    <div class="aura-label" style="color:#B9F2FF;">Céleste</div>
+    <div class="aura-unlock">Collectionneur Diamant</div>
+  </div>
+
+  <div class="aura-item">
+    <div class="aura-ring" style="border-color:#FF00FF; animation:pulse-prestige 1.6s ease-in-out infinite;">🌟</div>
+    <div class="aura-label" style="color:#FF00FF;">Prestige</div>
+    <div class="aura-unlock">Prestige Diamant</div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:20px;">L'aura active = celle choisie dans le picker (parmi les débloquées). Regarde bien les animations — est-ce que le catalogue te convient ?</p>

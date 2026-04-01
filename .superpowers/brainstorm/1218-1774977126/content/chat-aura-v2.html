@@ -1,0 +1,161 @@
+<h2>Aura dans le chat — version discrète</h2>
+<p class="subtitle">Profil = aura pleine intensité. Chat = version réduite. Quelle discrétion préfères-tu ?</p>
+
+<style>
+@keyframes r5-core { 0%,100%{box-shadow:0 0 20px 8px #FFFAF0,0 0 40px 16px #FFFAF066} 50%{box-shadow:0 0 30px 14px #FFFAF0,0 0 60px 24px #FFD70099} }
+@keyframes r3-spin  { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes r4-pulse { 0%,100%{box-shadow:0 0 14px 5px #FFD700,0 0 28px 10px #FFD70044} 50%{box-shadow:0 0 24px 10px #FFD700,0 0 48px 18px #FFD70088} }
+@keyframes pulse-fire { 0%,100%{box-shadow:0 0 12px 4px #FF6B35,0 0 24px 8px #FF6B3533} 50%{box-shadow:0 0 22px 9px #FF6B35,0 0 44px 14px #FF6B3566} }
+
+.chat-block { background:#161616; border-radius:12px; padding:14px; font-family:sans-serif; }
+.chat-label { font-size:0.6rem; color:#555; letter-spacing:0.1em; margin-bottom:12px; }
+.chat-msg { display:flex; gap:10px; align-items:flex-start; margin-bottom:12px; }
+.chat-avatar { position:relative; width:36px; height:36px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.chat-emoji { font-size:18px; position:relative; z-index:2; }
+.chat-bubble { background:#222; border-radius:10px; padding:7px 11px; flex:1; }
+.chat-author { font-size:0.65rem; font-weight:bold; margin-bottom:2px; }
+.chat-text { font-size:0.72rem; color:#bbb; }
+.option-label { font-size:0.75rem; color:#888; margin: 18px 0 8px; padding-bottom:6px; border-bottom:1px solid #2a2a2a; }
+</style>
+
+<div class="cards">
+
+  <!-- Option A: Bordure colorée statique uniquement -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111; padding:16px;">
+      <div class="chat-block">
+        <div class="chat-label">💬 OPTION A — Bordure statique</div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFD700;"></div>
+            <span class="chat-emoji">🐉</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFD700;">DragonSlayer</div>
+            <div class="chat-text">Streak de 47 jours 💪</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFFAF0;"></div>
+            <span class="chat-emoji">👑</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFFAF0;">NightKing</div>
+            <div class="chat-text">Vous pouvez le faire !</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FF6B35;"></div>
+            <span class="chat-emoji">🦅</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FF6B35;">Phoenix</div>
+            <div class="chat-text">GG à tous 🔥</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Bordure colorée, pas d'animation</h3>
+      <p>La couleur identifie le rang/aura mais sans effet lumineux. Très lisible, aucune distraction. La couleur du texte du pseudo correspond à l'aura.</p>
+      <span style="background:#39FF1422;color:#39FF14;padding:3px 8px;border-radius:20px;font-size:0.7rem;">✅ Le plus propre</span>
+    </div>
+  </div>
+
+  <!-- Option B: Glow ultra-léger, statique -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111; padding:16px;">
+      <div class="chat-block">
+        <div class="chat-label">💬 OPTION B — Glow léger statique</div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFD700;box-shadow:0 0 6px 2px #FFD70055;"></div>
+            <span class="chat-emoji">🐉</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFD700;">DragonSlayer</div>
+            <div class="chat-text">Streak de 47 jours 💪</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFFAF0;box-shadow:0 0 6px 2px #FFFAF055;"></div>
+            <span class="chat-emoji">👑</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFFAF0;">NightKing</div>
+            <div class="chat-text">Vous pouvez le faire !</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FF6B35;box-shadow:0 0 6px 2px #FF6B3555;"></div>
+            <span class="chat-emoji">🦅</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FF6B35;">Phoenix</div>
+            <div class="chat-text">GG à tous 🔥</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Glow léger, pas d'animation</h3>
+      <p>Un léger halo coloré autour de la bordure, statique. Donne un peu de vie sans animer. On voit que c'est une aura, sans agresser l'œil.</p>
+      <span style="background:#FFD70022;color:#FFD700;padding:3px 8px;border-radius:20px;font-size:0.7rem;">⚖️ Bon compromis</span>
+    </div>
+  </div>
+
+  <!-- Option C: Animation ultra-lente uniquement sur les rangs hauts -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111; padding:16px;">
+      <div class="chat-block">
+        <div class="chat-label">💬 OPTION C — Statique bas rangs, animé hauts rangs</div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <!-- Expert: bordure simple -->
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFD700;box-shadow:0 0 5px 1px #FFD70044;"></div>
+            <span class="chat-emoji">🐉</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFD700;">DragonSlayer <span style="font-size:0.55rem;color:#666;">EXPERT</span></div>
+            <div class="chat-text">Streak de 47 jours 💪</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <!-- Maître: anneau dashed qui tourne lentement -->
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFFAF0;box-shadow:0 0 6px 2px #FFFAF066;"></div>
+            <div style="position:absolute;width:43px;height:43px;border-radius:50%;border:1px dashed #FFD70066;animation:r3-spin 6s linear infinite;"></div>
+            <span class="chat-emoji">👑</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFFAF0;">NightKing <span style="font-size:0.55rem;color:#666;">MAÎTRE</span></div>
+            <div class="chat-text">Vous pouvez le faire !</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <!-- Confirmé: juste bordure -->
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FF6B35;box-shadow:0 0 5px 1px #FF6B3544;"></div>
+            <span class="chat-emoji">🦅</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FF6B35;">Phoenix <span style="font-size:0.55rem;color:#666;">CONFIRMÉ</span></div>
+            <div class="chat-text">GG à tous 🔥</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Statique pour tous, sauf Maître</h3>
+      <p>Tous les rangs ont une bordure + glow léger statique. Seul le Maître a un discret anneau pointillé qui tourne lentement. Récompense visible sans surcharger.</p>
+      <span style="background:#4B9CD322;color:#4B9CD3;padding:3px 8px;border-radius:20px;font-size:0.7rem;">🏆 Gamification subtile</span>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Sur le profil l'aura reste en pleine intensité. Dans le chat, quelle version préfères-tu ?</p>

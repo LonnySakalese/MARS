@@ -1,0 +1,124 @@
+<h2>Quel style d'aura tu préfères ?</h2>
+<p class="subtitle">Comment l'effet lumineux s'affiche autour de l'avatar</p>
+
+<div class="cards">
+
+  <!-- Option A: Halo simple -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; min-height:180px;">
+      <div style="display:flex; gap:24px; align-items:center;">
+        <!-- Débutant -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:64px; height:64px; border-radius:50%; box-shadow: 0 0 10px 3px #7B8FA1; border: 2px solid #7B8FA1;"></div>
+            <span style="font-size:32px; z-index:1;">🦁</span>
+          </div>
+          <div style="font-size:0.6rem; color:#7B8FA1; margin-top:6px;">DÉBUTANT</div>
+        </div>
+        <!-- Expert -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:64px; height:64px; border-radius:50%; box-shadow: 0 0 16px 6px #FFD700; border: 2px solid #FFD700;"></div>
+            <span style="font-size:32px; z-index:1;">🐉</span>
+          </div>
+          <div style="font-size:0.6rem; color:#FFD700; margin-top:6px;">EXPERT</div>
+        </div>
+        <!-- Maître -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:64px; height:64px; border-radius:50%; box-shadow: 0 0 24px 10px #FFFAF0, 0 0 40px 15px #FFD70055; border: 2px solid #FFFAF0;"></div>
+            <span style="font-size:32px; z-index:1;">👑</span>
+          </div>
+          <div style="font-size:0.6rem; color:#FFFAF0; margin-top:6px;">MAÎTRE</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Halo simple (glow CSS)</h3>
+      <p>Un cercle lumineux avec <code>box-shadow</code>. Couleur = couleur du rang. Intensité augmente avec le rang. Simple, propre, très lisible.</p>
+      <span style="background:#39FF1422; color:#39FF14; padding:3px 8px; border-radius:20px; font-size:0.7rem;">✅ Le plus simple à faire</span>
+    </div>
+  </div>
+
+  <!-- Option B: Anneaux concentriques -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; min-height:180px;">
+      <div style="display:flex; gap:24px; align-items:center;">
+        <!-- Confirmé -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:72px; height:72px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:72px; height:72px; border-radius:50%; border: 1.5px solid #9A9A9555; "></div>
+            <div style="position:absolute; width:60px; height:60px; border-radius:50%; border: 2px solid #9A9A95AA;"></div>
+            <div style="position:absolute; width:50px; height:50px; border-radius:50%; border: 2px solid #9A9A95; box-shadow: 0 0 8px #9A9A95;"></div>
+            <span style="font-size:28px; z-index:1;">🦊</span>
+          </div>
+          <div style="font-size:0.6rem; color:#9A9A95; margin-top:6px;">CONFIRMÉ</div>
+        </div>
+        <!-- Maître -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:80px; height:80px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; width:80px; height:80px; border-radius:50%; border: 1px solid #FFFAF033;"></div>
+            <div style="position:absolute; width:68px; height:68px; border-radius:50%; border: 1.5px solid #FFFAF066;"></div>
+            <div style="position:absolute; width:56px; height:56px; border-radius:50%; border: 2px solid #FFFAF0AA;"></div>
+            <div style="position:absolute; width:46px; height:46px; border-radius:50%; border: 2.5px solid #FFFAF0; box-shadow: 0 0 12px #FFD700;"></div>
+            <span style="font-size:28px; z-index:1;">👑</span>
+          </div>
+          <div style="font-size:0.6rem; color:#FFFAF0; margin-top:6px;">MAÎTRE</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Anneaux concentriques</h3>
+      <p>Plusieurs cercles de plus en plus transparents. Le nombre d'anneaux augmente avec le rang. Effet professionnel, style "niveau" visible au premier coup d'œil.</p>
+      <span style="background:#FFD70022; color:#FFD700; padding:3px 8px; border-radius:20px; font-size:0.7rem;">🎯 Très lisible visuellement</span>
+    </div>
+  </div>
+
+  <!-- Option C: Particules / aura animée -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; min-height:180px;">
+      <div style="display:flex; gap:24px; align-items:center;">
+        <!-- Aura feu animée -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <style>
+              @keyframes pulse-fire { 0%,100%{box-shadow:0 0 12px 4px #FF6B35,0 0 24px 8px #FF6B3555} 50%{box-shadow:0 0 20px 8px #FF6B35,0 0 40px 16px #FF6B3588} }
+              @keyframes pulse-ice { 0%,100%{box-shadow:0 0 12px 4px #00D4FF,0 0 24px 8px #00D4FF55} 50%{box-shadow:0 0 20px 8px #00D4FF,0 0 40px 16px #00D4FF88} }
+              @keyframes pulse-legend { 0%,100%{box-shadow:0 0 16px 6px #B9F2FF,0 0 32px 12px #B9F2FF44} 50%{box-shadow:0 0 28px 12px #B9F2FF,0 0 56px 20px #B9F2FF66} }
+              .aura-fire{animation:pulse-fire 2s ease-in-out infinite; border-radius:50%}
+              .aura-ice{animation:pulse-ice 2.5s ease-in-out infinite; border-radius:50%}
+              .aura-legend{animation:pulse-legend 1.8s ease-in-out infinite; border-radius:50%}
+            </style>
+            <div class="aura-fire" style="position:absolute; width:64px; height:64px; border: 2px solid #FF6B35;"></div>
+            <span style="font-size:32px; z-index:1;">🔥</span>
+          </div>
+          <div style="font-size:0.6rem; color:#FF6B35; margin-top:6px;">AURA FEU</div>
+        </div>
+        <!-- Aura glace -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <div class="aura-ice" style="position:absolute; width:64px; height:64px; border: 2px solid #00D4FF;"></div>
+            <span style="font-size:32px; z-index:1;">❄️</span>
+          </div>
+          <div style="font-size:0.6rem; color:#00D4FF; margin-top:6px;">AURA GLACE</div>
+        </div>
+        <!-- Aura légendaire -->
+        <div style="text-align:center;">
+          <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+            <div class="aura-legend" style="position:absolute; width:64px; height:64px; border: 2px solid #B9F2FF;"></div>
+            <span style="font-size:32px; z-index:1;">💎</span>
+          </div>
+          <div style="font-size:0.6rem; color:#B9F2FF; margin-top:6px;">LÉGENDAIRE</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Aura animée (pulse CSS)</h3>
+      <p>Le halo pulse doucement en continu. Les auras spéciales (débloquées par badges) ont des couleurs et noms thématiques : Feu, Glace, Foudre, Ombre, Lumière…</p>
+      <span style="background:#E74C3C22; color:#E74C3C; padding:3px 8px; border-radius:20px; font-size:0.7rem;">✨ Le plus impressionnant</span>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Clique sur ton préféré dans le navigateur.</p>

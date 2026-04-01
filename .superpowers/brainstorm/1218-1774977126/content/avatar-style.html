@@ -1,0 +1,113 @@
+<h2>Quel style d'avatar veux-tu ?</h2>
+<p class="subtitle">Choisis le style qui correspond le mieux à l'ambiance de MARS</p>
+
+<div class="cards">
+
+  <!-- Option A: Couches SVG style Reddit -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1a1a; display:flex; align-items:center; justify-content:center; padding:20px; min-height:200px;">
+      <svg width="120" height="140" viewBox="0 0 120 140">
+        <!-- Corps -->
+        <rect x="35" y="75" width="50" height="55" rx="8" fill="#4B9CD3" />
+        <!-- Tête -->
+        <circle cx="60" cy="55" r="30" fill="#FDBCB4" />
+        <!-- Cheveux -->
+        <path d="M30 45 Q60 10 90 45 Q85 30 60 28 Q35 30 30 45" fill="#2C1810" />
+        <!-- Yeux -->
+        <circle cx="50" cy="52" r="4" fill="#1a1a1a" />
+        <circle cx="70" cy="52" r="4" fill="#1a1a1a" />
+        <circle cx="51" cy="51" r="1.5" fill="white" />
+        <circle cx="71" cy="51" r="1.5" fill="white" />
+        <!-- Bouche -->
+        <path d="M52 62 Q60 68 68 62" stroke="#c87050" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Badge rang (Maître) -->
+        <rect x="72" y="35" width="22" height="12" rx="6" fill="#FFD700" />
+        <text x="83" y="44" text-anchor="middle" font-size="7" fill="#000" font-weight="bold">MAÎTRE</text>
+        <!-- Accessoire: casque -->
+        <path d="M30 40 Q60 5 90 40 Q90 25 60 22 Q30 25 30 40" fill="#E74C3C" opacity="0.85"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>A — Avatar SVG en couches</h3>
+      <p>Personnage 2D composé de pièces superposées : corps, visage, cheveux, tenue, accessoires. Style Reddit / RPG. Chaque pièce est déblocable via les badges et rangs.</p>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span style="background:#FFD70022; color:#FFD700; padding:3px 8px; border-radius:20px; font-size:0.7rem;">🎮 Le plus gamifié</span>
+        <span style="background:#4B9CD322; color:#4B9CD3; padding:3px 8px; border-radius:20px; font-size:0.7rem;">🔧 Le plus complexe à coder</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B: Identicon / Formes géométriques -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1a1a; display:flex; align-items:center; justify-content:center; padding:20px; min-height:200px;">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <!-- Fond couleur de fond choisie -->
+        <circle cx="60" cy="60" r="55" fill="#5C4B8A" />
+        <!-- Symbole central : animal/icône stylisée selon l'animal choisi -->
+        <!-- Tête de loup stylisée -->
+        <polygon points="60,15 80,40 75,65 60,55 45,65 40,40" fill="#C0C0C0" />
+        <polygon points="45,18 55,35 40,40" fill="#C0C0C0" />
+        <polygon points="75,18 65,35 80,40" fill="#C0C0C0" />
+        <!-- Yeux -->
+        <circle cx="52" cy="45" r="5" fill="#1a1a1a" />
+        <circle cx="68" cy="45" r="5" fill="#1a1a1a" />
+        <circle cx="53" cy="44" r="2" fill="#4DFFFF" />
+        <circle cx="69" cy="44" r="2" fill="#4DFFFF" />
+        <!-- Museau -->
+        <ellipse cx="60" cy="55" rx="8" ry="5" fill="#FDBCB4" />
+        <!-- Couleur de bordure = rang -->
+        <circle cx="60" cy="60" r="55" fill="none" stroke="#FFD700" stroke-width="5" />
+        <!-- Badge niveau -->
+        <circle cx="95" cy="25" r="14" fill="#FFD700" />
+        <text x="95" y="29" text-anchor="middle" font-size="10" fill="#000" font-weight="bold">42</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>B — Icône + Couleurs personnalisables</h3>
+      <p>On garde le concept d'animaux/symboles mais avec customisation de couleur de fond, bordure (= ton rang), et icône centrale. Similaire aux avatars Discord. Simple et efficace.</p>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span style="background:#39FF1422; color:#39FF14; padding:3px 8px; border-radius:20px; font-size:0.7rem;">⚡ Rapide à implémenter</span>
+        <span style="background:#FF6B3522; color:#FF6B35; padding:3px 8px; border-radius:20px; font-size:0.7rem;">🎨 Moins de profondeur</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option C: Assemblage de parties (style mini-RPG) -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#1a1a1a; display:flex; align-items:center; justify-content:center; padding:20px; min-height:200px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; max-width:200px;">
+        <!-- Tête -->
+        <div style="background:#2a2a2a; border:2px solid #FFD700; border-radius:8px; padding:8px; text-align:center;">
+          <div style="font-size:0.6rem; color:#999; margin-bottom:4px;">VISAGE</div>
+          <div style="font-size:28px;">🐺</div>
+        </div>
+        <!-- Tenue -->
+        <div style="background:#2a2a2a; border:2px solid #4B9CD3; border-radius:8px; padding:8px; text-align:center;">
+          <div style="font-size:0.6rem; color:#999; margin-bottom:4px;">TENUE</div>
+          <div style="font-size:28px;">⚔️</div>
+        </div>
+        <!-- Fond -->
+        <div style="background:#2a2a2a; border:2px solid #39FF14; border-radius:8px; padding:8px; text-align:center;">
+          <div style="font-size:0.6rem; color:#999; margin-bottom:4px;">FOND</div>
+          <div style="font-size:28px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius:4px;">🌌</div>
+        </div>
+        <!-- Accessoire -->
+        <div style="background:#2a2a2a; border:2px solid #E74C3C; border-radius:8px; padding:8px; text-align:center;">
+          <div style="font-size:0.6rem; color:#999; margin-bottom:4px;">EFFET</div>
+          <div style="font-size:28px;">🔥</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Assemblage de slots d'emojis</h3>
+      <p>4 slots à composer : Visage, Tenue, Fond, Effet. Chaque slot a une liste d'emojis déblocables. L'avatar final est une carte composite. Évolution naturelle du système actuel.</p>
+      <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+        <span style="background:#39FF1422; color:#39FF14; padding:3px 8px; border-radius:20px; font-size:0.7rem;">✅ Évolution douce</span>
+        <span style="background:#FFD70022; color:#FFD700; padding:3px 8px; border-radius:20px; font-size:0.7rem;">🎯 Gamification naturelle</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Clique sur un style pour le sélectionner, puis réponds dans le terminal.</p>

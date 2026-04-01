@@ -1,0 +1,183 @@
+<h2>UI du sélecteur d'aura</h2>
+<p class="subtitle">Comment l'utilisateur choisit et voit ses auras débloquées</p>
+
+<style>
+@keyframes pulse-steel  { 0%,100%{box-shadow:0 0 6px 2px #7B8FA166} 50%{box-shadow:0 0 12px 4px #7B8FA1AA} }
+@keyframes pulse-gold   { 0%,100%{box-shadow:0 0 14px 5px #FFD700,0 0 28px 10px #FFD70044} 50%{box-shadow:0 0 24px 10px #FFD700,0 0 48px 18px #FFD70088} }
+@keyframes pulse-fire   { 0%,100%{box-shadow:0 0 12px 4px #FF6B35,0 0 24px 8px #FF6B3533} 50%{box-shadow:0 0 22px 9px #FF6B35,0 0 44px 14px #FF6B3566} }
+@keyframes pulse-ice    { 0%,100%{box-shadow:0 0 12px 4px #00D4FF,0 0 24px 8px #00D4FF33} 50%{box-shadow:0 0 22px 9px #00D4FF,0 0 44px 14px #00D4FF66} }
+@keyframes r3-spin      { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes r3-glow      { 0%,100%{box-shadow:0 0 12px 4px #E74C3C} 50%{box-shadow:0 0 20px 8px #E74C3C} }
+@keyframes r5-core      { 0%,100%{box-shadow:0 0 20px 8px #FFFAF0,0 0 40px 16px #FFFAF066} 50%{box-shadow:0 0 30px 14px #FFFAF0,0 0 60px 24px #FFD70099} }
+@keyframes r4-pulse     { 0%,100%{box-shadow:0 0 14px 5px #FFD700,0 0 28px 10px #FFD70044} 50%{box-shadow:0 0 24px 10px #FFD700,0 0 48px 18px #FFD70088} }
+@keyframes lock-pulse   { 0%,100%{opacity:0.4} 50%{opacity:0.6} }
+
+.mock-profile {
+  background:#161616; border-radius:16px; padding:20px;
+  max-width:360px; margin:0 auto; font-family:sans-serif;
+}
+.mock-profile-top { display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:20px; }
+.avatar-main { position:relative; width:88px; height:88px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.avatar-main-emoji { font-size:44px; position:relative; z-index:2; }
+.avatar-edit-btn {
+  position:absolute; bottom:-6px; right:-6px;
+  background:#FFD700; color:#000; border-radius:50%; width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; z-index:3; font-weight:bold;
+}
+.mock-pseudo { color:#fff; font-size:1rem; font-weight:bold; letter-spacing:0.05em; }
+.mock-rank { font-size:0.7rem; color:#FFD700; letter-spacing:0.08em; }
+
+/* Picker modal */
+.mock-picker { background:#1e1e1e; border-radius:12px; padding:16px; margin-top:16px; }
+.picker-title { color:#fff; font-size:0.75rem; letter-spacing:0.1em; margin-bottom:12px; }
+.picker-section { font-size:0.6rem; color:#666; letter-spacing:0.08em; text-transform:uppercase; margin: 10px 0 8px; }
+.picker-grid { display:flex; flex-wrap:wrap; gap:10px; }
+.picker-aura {
+  width:54px; height:54px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; cursor:pointer; position:relative;
+  border:2px solid transparent; transition:all 0.2s;
+}
+.picker-aura.active { outline: 3px solid #fff; outline-offset: 3px; }
+.picker-aura.locked {
+  filter:grayscale(100%); opacity:0.35;
+  animation:lock-pulse 2s ease-in-out infinite;
+}
+.picker-aura.locked::after {
+  content:'🔒'; position:absolute; font-size:14px;
+  bottom:-4px; right:-4px;
+}
+.picker-aura-name {
+  position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);
+  font-size:0.55rem; white-space:nowrap; color:#888;
+}
+.picker-aura-wrap { display:flex; flex-direction:column; align-items:center; gap:20px; position:relative; }
+
+/* Chat preview */
+.mock-chat { background:#161616; border-radius:12px; padding:12px; margin-top:12px; max-width:360px; margin:12px auto 0; }
+.chat-title { color:#666; font-size:0.6rem; letter-spacing:0.08em; margin-bottom:10px; }
+.chat-msg { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+.chat-avatar { position:relative; width:36px; height:36px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.chat-avatar-emoji { font-size:18px; position:relative; z-index:2; }
+.chat-bubble { background:#2a2a2a; border-radius:10px; padding:8px 12px; flex:1; }
+.chat-author { font-size:0.65rem; font-weight:bold; margin-bottom:2px; }
+.chat-text { font-size:0.72rem; color:#bbb; }
+</style>
+
+<div class="split">
+
+  <!-- Gauche: profile view -->
+  <div class="mockup">
+    <div class="mockup-header">Page Profil — avatar avec aura active</div>
+    <div class="mockup-body">
+      <div class="mock-profile">
+        <div class="mock-profile-top">
+          <!-- Avatar principal avec aura Expert -->
+          <div class="avatar-main">
+            <div style="position:absolute;width:80px;height:80px;border-radius:50%;border:2.5px solid #FFD700;animation:r4-pulse 2s ease-in-out infinite;"></div>
+            <div style="position:absolute;width:90px;height:90px;border-radius:50%;border:1.5px solid #FFD70055;"></div>
+            <span class="avatar-main-emoji">🐉</span>
+            <div class="avatar-edit-btn">✎</div>
+          </div>
+          <div class="mock-pseudo">DragonSlayer</div>
+          <div class="mock-rank">⭐ EXPERT</div>
+        </div>
+
+        <!-- Picker d'aura -->
+        <div class="mock-picker">
+          <div class="picker-title">✦ CHANGER L'AURA</div>
+
+          <div class="picker-section">Auras de rang débloquées</div>
+          <div class="picker-grid">
+            <div class="picker-aura-wrap">
+              <div class="picker-aura" style="animation:pulse-steel 3.5s ease-in-out infinite; border-color:#7B8FA1;">🦁
+                <span class="picker-aura-name" style="color:#7B8FA1;">Acier</span>
+              </div>
+            </div>
+            <div class="picker-aura-wrap">
+              <div class="picker-aura active" style="animation:r4-pulse 2s ease-in-out infinite; border-color:#FFD700;">🐉
+                <span class="picker-aura-name" style="color:#FFD700;">Dorée ✓</span>
+              </div>
+            </div>
+            <div class="picker-aura-wrap">
+              <div class="picker-aura locked" style="border-color:#FFFAF0;">👑
+                <span class="picker-aura-name" style="color:#FFFAF0;">Sacrée</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="picker-section">Auras spéciales</div>
+          <div class="picker-grid">
+            <div class="picker-aura-wrap">
+              <div class="picker-aura" style="animation:pulse-fire 2s ease-in-out infinite; border-color:#FF6B35;">🔥
+                <span class="picker-aura-name" style="color:#FF6B35;">Flammes</span>
+              </div>
+            </div>
+            <div class="picker-aura-wrap">
+              <div class="picker-aura locked" style="border-color:#00D4FF;">❄️
+                <span class="picker-aura-name" style="color:#00D4FF;">Blizzard</span>
+              </div>
+            </div>
+            <div class="picker-aura-wrap">
+              <div class="picker-aura locked" style="border-color:#FFFF00;">⚡
+                <span class="picker-aura-name" style="color:#FFFF00;">Foudre</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Droite: chat view -->
+  <div class="mockup">
+    <div class="mockup-header">Chat groupe — avatars avec auras</div>
+    <div class="mockup-body">
+      <div class="mock-chat">
+        <div class="chat-title">💬 GROUPE — WARRIORS</div>
+
+        <!-- Message 1: Expert avec aura Dorée -->
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFD700;box-shadow:0 0 8px #FFD700;"></div>
+            <span class="chat-avatar-emoji">🐉</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFD700;">DragonSlayer <span style="font-size:0.55rem;color:#666;">EXPERT</span></div>
+            <div class="chat-text">J'ai fini mes 5 habitudes aujourd'hui 🔥</div>
+          </div>
+        </div>
+
+        <!-- Message 2: Maître avec aura Sacrée -->
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FFFAF0;animation:r5-core 1.8s ease-in-out infinite;"></div>
+            <div style="position:absolute;width:42px;height:42px;border-radius:50%;border:1px dashed #FFD70088;animation:r3-spin 3s linear infinite;"></div>
+            <span class="chat-avatar-emoji">👑</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FFFAF0;">NightKing <span style="font-size:0.55rem;color:#666;">MAÎTRE</span></div>
+            <div class="chat-text">Streak de 47 jours 💪 Vous pouvez le faire !</div>
+          </div>
+        </div>
+
+        <!-- Message 3: Confirmé avec aura Flammes (badge) -->
+        <div class="chat-msg">
+          <div class="chat-avatar">
+            <div style="position:absolute;width:36px;height:36px;border-radius:50%;border:2px solid #FF6B35;box-shadow:0 0 8px #FF6B35;"></div>
+            <span class="chat-avatar-emoji">🦅</span>
+          </div>
+          <div class="chat-bubble">
+            <div class="chat-author" style="color:#FF6B35;">Phoenix <span style="font-size:0.55rem;color:#666;">CONFIRMÉ</span></div>
+            <div class="chat-text">L'aura Flammes est trop stylée 😤</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Le picker s'ouvre depuis le bouton ✎ sur l'avatar. Les auras verrouillées 🔒 s'affichent grisées avec leur condition. Le chat affiche l'aura en miniature. Est-ce que cette UI te convient ?</p>
