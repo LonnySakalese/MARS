@@ -8,6 +8,7 @@ import { db, isFirebaseConfigured } from '../config/firebase.js';
 import { loadBadges } from '../core/badges.js';
 import { rankSettings, getRank } from '../core/ranks.js';
 import { getAvgScore } from '../core/scores.js';
+import { renderCharacter, getAvatarConfig, DEFAULT_CONFIG } from './character.js';
 
 // ============================================================
 // CATALOGUE
@@ -84,18 +85,24 @@ export function setActiveAura(auraId) {
 // ============================================================
 
 /**
- * Génère le HTML d'un avatar avec son aura.
+ * Génère le HTML d'un avatar (personnage SVG + aura).
  * @param {Object} opts
- * @param {string}  [opts.emoji]    — emoji à afficher (défaut: profil courant)
- * @param {string|null} [opts.auraId] — ID de l'aura (défaut: aura active du profil)
- * @param {'large'|'small'} [opts.size] — taille (défaut: 'large')
- * @param {boolean} [opts.isMaitre]  — true si rang Maître (pour le chat)
- * @param {string}  [opts.id]        — id HTML du conteneur
+ * @param {Object|null|undefined} [opts.avatarConfig]
+ *   — undefined  : config du profil courant (page profil)
+ *   — null       : config par défaut (vieux messages chat sans config)
+ *   — { ... }    : config d'un autre utilisateur
+ * @param {string|null} [opts.auraId]  — ID de l'aura active
+ * @param {'large'|'small'} [opts.size]
+ * @param {boolean} [opts.isMaitre]
+ * @param {string}  [opts.id]
  */
-export function renderAvatar({ emoji, auraId, size = 'large', isMaitre = false, id = 'profileAvatarWrap' } = {}) {
-    const data = getData();
+export function renderAvatar({ avatarConfig, auraId, size = 'large', isMaitre = false, id = 'profileAvatarWrap' } = {}) {
+    const config = avatarConfig === undefined
+        ? getAvatarConfig()
+        : (avatarConfig || DEFAULT_CONFIG);
+
+    const data    = getData();
     const profile = data.profile || {};
-    const resolvedEmoji = emoji || profile.avatar || '🦁';
     const resolvedAuraId = auraId !== undefined ? auraId : (profile.activeAura || null);
     const aura = resolvedAuraId ? AURAS.find(a => a.id === resolvedAuraId) : null;
 
@@ -115,7 +122,7 @@ export function renderAvatar({ emoji, auraId, size = 'large', isMaitre = false, 
 
     return `<div class="${wrapClass}" id="${id}">
         <div class="${auraClass}">${ringsHtml}</div>
-        <span class="avatar-emoji">${resolvedEmoji}</span>
+        ${renderCharacter({ config, size })}
     </div>`;
 }
 
