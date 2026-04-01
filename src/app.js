@@ -70,12 +70,16 @@ import { quotes, displayRandomQuote, getGreeting } from './pages/motivation.js';
 import { checkAdminButton, loadAdminPanel } from './pages/admin.js';
 import { initNotifications, renderNotifSettings, checkDailyReminder } from './services/notifications.js';
 import {
-    renderProfile, openAvatarPicker, closeAvatarPicker, selectAvatar,
+    renderProfile,
     openEditPseudoModal, closeEditPseudoModal, saveProfilePseudo,
     checkNeedsPseudo, showSetupPseudoModal, saveSetupPseudo,
     loadProfileFromFirestore
 } from './pages/profile.js';
 import { openAuraPicker, closeAuraPicker, setActiveAura } from './ui/avatar.js';
+import {
+    openCharacterPicker, closeCharacterPicker,
+    selectCharacterOption, switchCharacterTab, saveCharacterConfig,
+} from './ui/character.js';
 import {
     renderGroups, openCreateGroupModal, closeCreateGroupModal, createGroup,
     openJoinGroupModal, closeJoinGroupModal, joinGroup, joinGroupByCode, toggleQRScanner,
@@ -736,7 +740,8 @@ Object.assign(window, {
     toggleBadgesVisibility,
 
     // Profile
-    openAvatarPicker, closeAvatarPicker, selectAvatar,
+    openCharacterPicker, closeCharacterPicker,
+    selectCharacterOption, switchCharacterTab, saveCharacterConfig,
     openAuraPicker, closeAuraPicker, setActiveAura,
     openEditPseudoModal, closeEditPseudoModal, saveProfilePseudo,
     saveSetupPseudo,
