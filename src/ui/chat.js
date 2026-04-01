@@ -438,7 +438,7 @@ async function renderMessages(docs) {
         // Sender pseudo at bottom (not me, last in group)
         if (!isMe && isLastInGroup) {
             const chatAvatarHtml = renderAvatar({
-                emoji: msg.senderAvatar || '👤',
+                avatarConfig: msg.senderAvatarConfig || null,
                 auraId: msg.senderAura || null,
                 size: 'small',
                 isMaitre: false,
@@ -509,6 +509,7 @@ export async function sendChatMessage(groupId) {
             senderPseudo: userData.pseudo || userData.profile?.pseudo || 'Anonyme',
             senderAvatar: userData.avatar || userData.profile?.avatar || '👤',
             senderAura: userData.profile?.activeAura || null,
+            senderAvatarConfig: userData.profile?.avatarConfig || null,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
@@ -945,6 +946,7 @@ async function autoSendAudio(groupId, base64, duration) {
             senderPseudo: userData.pseudo || userData.profile?.pseudo || 'Anonyme',
             senderAvatar: userData.avatar || userData.profile?.avatar || '👤',
             senderAura: userData.profile?.activeAura || null,
+            senderAvatarConfig: userData.profile?.avatarConfig || null,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
@@ -1073,6 +1075,7 @@ export async function sendPendingAudio() {
             senderPseudo: userData.pseudo || userData.profile?.pseudo || 'Anonyme',
             senderAvatar: userData.avatar || userData.profile?.avatar || '👤',
             senderAura: userData.profile?.activeAura || null,
+            senderAvatarConfig: userData.profile?.avatarConfig || null,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
