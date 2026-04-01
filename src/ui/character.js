@@ -133,3 +133,102 @@ export function renderCharacter({ config, size = 'large' } = {}) {
 
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="${dim}" height="${dim}" class="character-svg">${s}</svg>`;
 }
+
+// ============================================================
+// PICKER
+// ============================================================
+
+let _draftConfig  = null;
+let _activeTab    = 'skinTone';
+const TAB_ORDER   = ['skinTone', 'eyeStyle', 'hairStyle', 'hairColor', 'accessory', 'expression'];
+
+// ---- Rendu interne ----
+
+function _updatePickerPreview() {
+    const el = document.getElementById('characterPickerPreview');
+    if (!el) return;
+    el.innerHTML = renderCharacter({ config: _draftConfig, size: 'large' });
+}
+
+function _renderPickerGrid(tabName) {
+    const catalog       = CATALOG_MAP[tabName] || [];
+    const unlockedIds   = getUnlockedOptions(tabName);
+    const activeId      = _draftConfig[tabName];
+    const isSwatch      = tabName === 'skinTone' || tabName === 'hairColor';
+
+    const neutralPreview = { ...DEFAULT_CONFIG };
+
+    return catalog.map(option => {
+        const isUnlocked = unlockedIds.includes(option.id);
+        const isActive   = option.id === activeId;
+        const activeCls  = isActive    ? ' char-option--active' : '';
+        const lockedCls  = !isUnlocked ? ' char-option--locked' : '';
+        const onclick    = isUnlocked  ? `onclick="selectCharacterOption('${tabName}','${option.id}')"` : '';
+
+        let visual = '';
+        if (isSwatch) {
+            visual = `<div class="char-option-swatch" style="background:${option.hex};"></div>`;
+        } else {
+            const previewCfg = { ...neutralPreview, [tabName]: option.id };
+            visual = renderCharacter({ config: previewCfg, size: 'tiny' });
+        }
+
+        const lockHint = !isUnlocked
+            ? `<span class="char-option-lock">🔒 ${option.unlockCondition?.type === 'rank' ? 'Rang requis' : 'Badge requis'}</span>`
+            : '';
+
+        return `<div class="char-option${activeCls}${lockedCls}" ${onclick}>
+            ${visual}
+            <span class="char-option-label">${option.label}</span>
+            ${lockHint}
+        </div>`;
+    }).join('');
+}
+
+function _renderTabs() {
+    return TAB_ORDER.map(tab => {
+        const activeCls = tab === _activeTab ? ' char-tab--active' : '';
+        return `<button class="char-tab${activeCls}" onclick="switchCharacterTab('${tab}')">${CATEGORY_LABELS[tab]}</button>`;
+    }).join('');
+}
+
+// ---- API publique ----
+
+export function openCharacterPicker() {
+    _draftConfig = { ...getAvatarConfig() };
+    _activeTab   = 'skinTone';
+
+    const modal = document.getElementById('characterPickerModal');
+    if (!modal) return;
+
+    document.getElementById('characterPickerTabs').innerHTML  = _renderTabs();
+    document.getElementById('characterPickerGrid').innerHTML  = _renderPickerGrid(_activeTab);
+    _updatePickerPreview();
+
+    modal.classList.add('active');
+}
+
+export function closeCharacterPicker() {
+    const modal = document.getElementById('characterPickerModal');
+    if (modal) modal.classList.remove('active');
+}
+
+export function switchCharacterTab(tabName) {
+    _activeTab = tabName;
+    document.getElementById('characterPickerTabs').innerHTML = _renderTabs();
+    document.getElementById('characterPickerGrid').innerHTML = _renderPickerGrid(tabName);
+}
+
+export function selectCharacterOption(category, optionId) {
+    const unlockedIds = getUnlockedOptions(category);
+    if (!unlockedIds.includes(optionId)) return;
+    _draftConfig[category] = optionId;
+    _updatePickerPreview();
+    document.getElementById('characterPickerGrid').innerHTML = _renderPickerGrid(category);
+}
+
+export function saveCharacterConfig() {
+    if (!_draftConfig) return;
+    saveAvatarConfig(_draftConfig);
+    closeCharacterPicker();
+}
