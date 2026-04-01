@@ -5,20 +5,12 @@
 import { appState } from '../services/state.js';
 import { getData, saveData } from '../services/storage.js';
 import { auth, db, isFirebaseConfigured } from '../config/firebase.js';
-import { getAvgScore, getBestStreak, getPerfectDays, getTotalWins, getStreak } from '../core/scores.js';
+import { getAvgScore, getBestStreak, getPerfectDays } from '../core/scores.js';
 import { getRank } from '../core/ranks.js';
 import { showPopup } from '../ui/toast.js';
 import { validatePseudo } from '../services/pseudo-validator.js';
 import { loadBadges, BADGES } from '../core/badges.js';
 import { renderAvatar } from '../ui/avatar.js';
-
-// Liste d'emojis pour l'avatar
-const AVATAR_EMOJIS = [
-    '🦁', '🐺', '🦅', '🐉', '🦈', '🐅', '🦊', '🐻',
-    '🔥', '⚡', '💪', '🎯', '⭐', '💎', '👑', '🏆',
-    '⚔️', '🛡️', '🚀', '🌟', '🎖️', '🦾', '🧠', '❤️‍🔥',
-    '😎', '🤴', '👸', '🧙', '🥷', '🦸', '🏋️', '🥊'
-];
 
 // --- PROFILE DATA ---
 
@@ -124,25 +116,29 @@ export function renderProfile() {
     }
 
     // Stats fun
-    const totalWinsEl = document.getElementById('profileTotalWins');
-    if (totalWinsEl) totalWinsEl.textContent = getTotalWins();
-    
-    const currentStreak = getStreak();
-    const currentStreakEl = document.getElementById('profileCurrentStreak');
-    if (currentStreakEl) currentStreakEl.textContent = currentStreak;
-    
-    const streakLabel = document.getElementById('streakCardLabel');
-    if (streakLabel) streakLabel.textContent = currentStreak === 0 ? 'Commence ta série !' : 'Streak actuel';
-    
-    const streakIcon = document.getElementById('streakFlameIcon');
-    if (streakIcon) {
-        if (currentStreak >= 30) streakIcon.textContent = '◆';
-        else if (currentStreak >= 7) streakIcon.textContent = '⭐';
-        else streakIcon.textContent = '●';
+    const data = getData();
+    let totalChecked = 0;
+    if (data.days) {
+        for (const key in data.days) {
+            totalChecked += Object.values(data.days[key]).filter(Boolean).length;
+        }
     }
-    
-    const bestStreakFun = document.getElementById('profileBestStreakFun');
-    if (bestStreakFun) bestStreakFun.textContent = getBestStreak();
+    const totalCheckedEl = document.getElementById('profileTotalChecked');
+    if (totalCheckedEl) totalCheckedEl.textContent = totalChecked;
+
+    const daysTracked = data.days ? Object.keys(data.days).length : 0;
+    const daysTrackedEl = document.getElementById('profileDaysTracked');
+    if (daysTrackedEl) daysTrackedEl.textContent = daysTracked;
+
+    let firstTrackDate = '-';
+    if (data.days && Object.keys(data.days).length > 0) {
+        const sortedKeys = Object.keys(data.days).sort();
+        const firstKey = sortedKeys[0];
+        const [y, m, d] = firstKey.split('-');
+        firstTrackDate = `${d}/${m}/${y.slice(2)}`;
+    }
+    const firstTrackDateEl = document.getElementById('profileFirstTrackDate');
+    if (firstTrackDateEl) firstTrackDateEl.textContent = firstTrackDate;
 
     // Membre depuis
     const memberSinceEl = document.getElementById('profileMemberSince');
@@ -159,38 +155,6 @@ export function renderProfile() {
             memberSinceEl.textContent = '';
         }
     }
-}
-
-// --- AVATAR PICKER ---
-
-export function openAvatarPicker() {
-    const grid = document.getElementById('avatarPickerGrid');
-    const profile = getProfile();
-
-    grid.innerHTML = AVATAR_EMOJIS.map(emoji => `
-        <div class="avatar-option ${emoji === profile.avatar ? 'selected' : ''}"
-             onclick="selectAvatar('${emoji}')">
-            ${emoji}
-        </div>
-    `).join('');
-
-    document.getElementById('avatarPickerModal').classList.add('active');
-}
-
-export function closeAvatarPicker() {
-    document.getElementById('avatarPickerModal').classList.remove('active');
-}
-
-export function selectAvatar(emoji) {
-    const profile = getProfile();
-    profile.avatar = emoji;
-    saveProfile(profile);
-
-    closeAvatarPicker();
-    renderProfile();
-
-    if (navigator.vibrate) navigator.vibrate([30, 30]);
-    showPopup(`Avatar changé : ${emoji}`, 'success');
 }
 
 // --- EDIT PSEUDO ---

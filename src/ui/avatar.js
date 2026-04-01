@@ -178,3 +178,6 @@ export function closeAuraPicker() {
     const modal = document.getElementById('auraPickerModal');
     if (modal) modal.classList.remove('active');
 }
+
+// Expose renderAvatar pour le rafraîchissement du profil depuis character.js
+window._avatarModule = { renderAvatar };
