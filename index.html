@@ -63,6 +63,7 @@
   <link rel="stylesheet" href="responsive.css" />
   <link rel="stylesheet" href="src/ui/tactical-ux.css" />
   <link rel="stylesheet" href="src/ui/avatar.css">
+  <link rel="stylesheet" href="src/ui/character.css">
 </head>
 
 <body>
@@ -315,7 +316,7 @@
             <circle cx="12" cy="12" r="2" />
           </svg>
         </div>
-        <span class="missions-title" data-i18n="today.missions">MISSIONS DU JOUR</span>
+        <span class="missions-title">HABITUDES DU JOUR</span>
       </div>
       <div class="missions-count" id="completedCount">0/10</div>
     </div>
@@ -383,38 +384,30 @@
       </div>
     </div>
 
-    <!-- Mode Ranked — Coming Soon -->
-    <div class="ranked-coming-soon" onclick="showRankedTeaser()">
-      <div class="ranked-coming-soon-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7" />
-          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7" />
-          <path d="M4 22h16" />
-          <path d="M10 22V8h4v14" />
-          <path d="M6 14h12" />
-        </svg>
-      </div>
-      <div class="ranked-coming-soon-content">
-        <div class="ranked-coming-soon-title">MODE RANKED</div>
-        <div class="ranked-coming-soon-desc">
-          Saisons • Classements • Badges exclusifs
-        </div>
-      </div>
-      <div class="ranked-coming-soon-badge">PROCHAINEMENT</div>
-    </div>
-
     <!-- Section des Badges -->
     <div id="badgesContainer"></div>
 
     <!-- Heatmap 90 jours -->
 
     <!-- Grille de performance de la semaine -->
-    <div class="section-title" data-i18n="stats.thisWeek">CETTE SEMAINE</div>
+    <div class="section-title" data-i18n="stats.thisWeek">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      CETTE SEMAINE
+    </div>
     <div class="weekly-grid" id="weeklyGrid"></div>
 
     <!-- Section des graphiques de progression -->
-    <div class="section-title" data-i18n="stats.progression">PROGRESSION</div>
+    <div class="section-title" data-i18n="stats.progression">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+      </svg>
+      PROGRESSION
+    </div>
     <div class="chart-container">
       <div class="chart-wrapper">
         <div class="chart-title" data-i18n="stats.last7days">
@@ -422,15 +415,33 @@
         </div>
         <canvas id="weeklyChart"></canvas>
       </div>
-      <div class="chart-wrapper">
+      <div class="chart-wrapper" style="position: relative;">
         <div class="chart-title" data-i18n="stats.byHabit">
           Performance par habitude
         </div>
         <canvas id="habitsChart"></canvas>
+        <div id="habitsChartOverlay" class="chart-overlay-container">
+          <div class="chart-overlay-content">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <p>Disponible après 4 jours d'utilisation<br>et avec au moins 2 habitudes</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Grille des statistiques générales -->
+    <div class="section-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      VUE D'ENSEMBLE
+    </div>
     <div class="stats-grid">
       <div class="stat-card stat-card-green">
         <div class="stat-card-icon">
@@ -490,7 +501,14 @@
     </div>
 
     <!-- Analyses avancées -->
-    <div class="section-title">ANALYSES AVANCÉES</div>
+    <div class="section-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      ANALYSES AVANCÉES
+    </div>
     <div class="analytics-container" id="analyticsContainer">
       <!-- Rendu dynamique -->
     </div>
@@ -1135,7 +1153,7 @@
             <div></div>
             <span class="avatar-emoji">🦁</span>
         </div>
-        <button class="profile-change-avatar-btn" onclick="openAvatarPicker()">
+        <button class="profile-change-avatar-btn" onclick="openCharacterPicker()">
           Changer l'avatar
         </button>
         <button class="profile-change-avatar-btn" onclick="openAuraPicker()" style="margin-top:6px;">
@@ -1159,7 +1177,14 @@
       </div>
 
       <!-- Stats publiques — premium cards -->
-      <div class="section-title" data-i18n="profile.myStats">MES STATS</div>
+      <div class="section-title" data-i18n="profile.myStats">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+        </svg>
+        MES STATS
+      </div>
       <div class="stats-grid">
         <div class="stat-card stat-card-green">
           <div class="stat-card-icon">
@@ -1217,34 +1242,20 @@
       <!-- Stats fun -->
       <div class="section-title">STATS FUN</div>
       <div class="stats-grid stats-grid-3">
-        <div class="stat-card stat-card-orange">
-          <div class="stat-card-icon" id="streakFlameIcon">🔥</div>
-          <div class="stat-value" id="profileCurrentStreak">0</div>
-          <div class="stat-label" id="streakCardLabel">Streak actuel</div>
-        </div>
-        <div class="stat-card stat-card-purple">
-          <div class="stat-card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7" />
-              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7" />
-              <path d="M4 22h16" />
-              <path d="M10 22V8h4v14" />
-              <path d="M6 14h12" />
-            </svg>
-          </div>
-          <div class="stat-value" id="profileTotalWins">0</div>
-          <div class="stat-label">Victoires totales</div>
+        <div class="stat-card">
+          <div class="stat-card-icon">✅</div>
+          <div class="stat-value" id="profileTotalChecked">0</div>
+          <div class="stat-label">Habitudes cochées</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-          </div>
-          <div class="stat-value" id="profileBestStreakFun">0</div>
-          <div class="stat-label">Record streak</div>
+          <div class="stat-card-icon">📅</div>
+          <div class="stat-value" id="profileDaysTracked">0</div>
+          <div class="stat-label">Jours trackés</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">🕐</div>
+          <div class="stat-value" id="profileFirstTrackDate" style="font-size: 0.8rem; padding-top: 4px;">-</div>
+          <div class="stat-label">Premier jour</div>
         </div>
       </div>
 
@@ -1294,17 +1305,16 @@
     </div>
   </div>
 
-  <!-- Modal Avatar Picker -->
-  <div class="modal-overlay" id="avatarPickerModal">
-    <div class="modal">
-      <h3>CHOISIS TON AVATAR</h3>
-      <div class="avatar-picker-grid" id="avatarPickerGrid">
-        <!-- Rempli par JavaScript -->
-      </div>
-      <div class="modal-buttons">
-        <button class="modal-btn cancel" onclick="closeAvatarPicker()">
-          Fermer
-        </button>
+  <!-- Modal Character Picker -->
+  <div class="modal-overlay" id="characterPickerModal">
+    <div class="modal character-picker-modal">
+      <h3>PERSONNALISER L'AVATAR</h3>
+      <div class="character-picker-preview" id="characterPickerPreview"></div>
+      <div class="character-picker-tabs" id="characterPickerTabs"></div>
+      <div class="character-picker-grid" id="characterPickerGrid"></div>
+      <div class="character-picker-footer modal-buttons">
+        <button class="modal-btn cancel" onclick="closeCharacterPicker()">Annuler</button>
+        <button class="modal-btn confirm" onclick="saveCharacterConfig()">Enregistrer</button>
       </div>
     </div>
   </div>
