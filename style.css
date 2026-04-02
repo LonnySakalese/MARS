@@ -4710,33 +4710,125 @@ canvas {
 /* Group habits */
 .group-detail-habits {
     margin-bottom: 20px;
-    padding: 12px;
-    background: var(--charcoal);
-    border-radius: 10px;
+    background: transparent;
 }
 
-.group-detail-habits-title {
-    font-size: 0.75rem;
-    color: var(--accent-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-}
-
-.group-detail-habits-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.group-habit-tag {
-    display: inline-block;
-    padding: 4px 10px;
-    background: var(--dark-gray);
+.group-habits-panel {
+    padding: 14px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
     border: 1px solid var(--steel);
-    border-radius: 20px;
-    font-size: 0.78rem;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+}
+
+.group-habits-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.group-habits-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.group-habits-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
+    border: 1px solid var(--steel);
     color: var(--accent);
+}
+
+.group-habits-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.group-habits-count {
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+}
+
+.group-habits-chip {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--steel);
+    background: rgba(46,204,113,0.12);
+    color: #65e7a5;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.group-habits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px;
+}
+
+.group-habit-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--steel);
+    border-radius: 12px;
+    background: var(--charcoal);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.group-habit-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 6px rgba(46,204,113,0.15);
+}
+
+.group-habit-pill-name {
+    font-size: 0.9rem;
+    color: var(--accent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group-habits-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--accent-dim);
+    padding: 10px 0;
+    font-size: 0.85rem;
+}
+
+[data-theme="light"] .group-habits-panel {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.65));
+    border-color: #dbe2ea;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .group-habit-pill {
+    background: #f7f9fb;
+    border-color: #dbe2ea;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] .group-habits-chip {
+    background: rgba(46,204,113,0.16);
+    border-color: #2ecc71;
+    color: #1f9f54;
+}
+
+[data-theme="light"] .group-habit-dot {
+    box-shadow: 0 0 0 6px rgba(46,204,113,0.18);
 }
 
 /* Group members list */
@@ -4851,43 +4943,126 @@ canvas {
 }
 
 /* Habits selection in create modal */
-.group-habits-select {
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid var(--steel);
-    border-radius: 8px;
-    padding: 8px;
-    background: var(--charcoal);
-}
-
-.group-habit-checkbox {
+.group-habits-legend {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.group-habits-counter {
+    padding: 4px 12px;
+    border: 1px solid var(--steel);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+}
+
+.group-habits-select {
+    max-height: 220px;
+    overflow-y: auto;
+    border: 1px solid var(--steel);
+    border-radius: 12px;
+    padding: 10px;
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 8px;
-    padding: 8px 6px;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.15s;
 }
 
-.group-habit-checkbox:hover {
-    background: var(--dark-gray);
+.group-habit-card {
+    display: block;
+    position: relative;
 }
 
-.group-habit-checkbox input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--accent);
+.group-habit-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+}
+
+.group-habit-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 10px;
+    border: 1px solid var(--steel);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     cursor: pointer;
+    transition: all 0.18s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.group-habit-card:hover .group-habit-card-inner {
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.03);
+    transform: translateY(-1px);
+}
+
+.group-habit-card.selected .group-habit-card-inner {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(46,204,113,0.12), rgba(46,204,113,0.05));
+    box-shadow: 0 8px 20px rgba(46,204,113,0.2);
+}
+
+.group-habit-card.focus .group-habit-card-inner {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.group-habit-check {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid var(--steel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-dim);
+    background: rgba(255,255,255,0.01);
+    transition: all 0.18s ease;
+}
+
+.group-habit-card.selected .group-habit-check {
+    background: var(--accent);
+    color: #0f1320;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(46,204,113,0.18);
+}
+
+.group-habit-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
 }
 
 .group-habit-icon {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+}
+
+.group-habit-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
 }
 
 .group-habit-name {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.group-habit-sub {
+    font-size: 0.78rem;
+    color: var(--accent-dim);
 }
 
 /* Profile groups section */
@@ -5202,7 +5377,35 @@ button:active, .modal-btn:active, .auth-btn:active, .settings-btn:active, .form-
 
 /* Group habit select in light mode */
 [data-theme="light"] .group-habits-select {
+    background: #f7f9fb;
+    border-color: #dbe2ea;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .group-habit-card-inner {
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+    border-color: #dbe2ea;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .group-habit-card.selected .group-habit-card-inner {
+    background: linear-gradient(135deg, rgba(46,204,113,0.2), rgba(46,204,113,0.08));
+    border-color: #2ecc71;
+}
+
+[data-theme="light"] .group-habit-check {
+    border-color: #c5d0de;
+    color: #4a5568;
+}
+
+[data-theme="light"] .group-habit-card.selected .group-habit-check {
+    color: #0f1320;
+}
+
+[data-theme="light"] .group-habits-counter {
+    background: #ffffff;
+    border-color: #dbe2ea;
+    color: #4a5568;
 }
 
 /* ============================================================ */

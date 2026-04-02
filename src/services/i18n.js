@@ -51,7 +51,7 @@ const translations = {
     "settings.account": "Compte",
     "settings.logout": "Déconnexion",
     "settings.logoutDesc": "Se déconnecter de l'application",
-    "settings.logoutBtn": "Se déconnecter",
+    "settings.logoutBtn": "Deconnexion",
     "settings.deleteAccount": "Supprimer le compte",
     "settings.deleteDesc": "Action irréversible",
     "settings.deleteBtn": "Supprimer",

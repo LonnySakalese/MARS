@@ -229,14 +229,26 @@ export function openCreateGroupModal() {
       habitsListEl.innerHTML = habits
         .map(
           (h) => `
-                <label class="group-habit-checkbox">
+                <label class="group-habit-card">
                     <input type="checkbox" value="${h.id}" data-name="${escapeHtml(h.name)}">
-                    <span class="group-habit-icon">${h.icon || "•"}</span>
-                    <span class="group-habit-name">${escapeHtml(h.name)}</span>
+                    <div class="group-habit-card-inner">
+                        <div class="group-habit-check" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div class="group-habit-meta">
+                            <span class="group-habit-icon">${h.icon || "•"}</span>
+                            <div class="group-habit-text">
+                                <div class="group-habit-name">${escapeHtml(h.name)}</div>
+                                <div class="group-habit-sub">Clique pour sélectionner</div>
+                            </div>
+                        </div>
+                    </div>
                 </label>
             `,
         )
         .join("");
+      bindGroupHabitSelection();
+
     }
   }
 
@@ -246,7 +258,42 @@ export function openCreateGroupModal() {
   if (nameInput) nameInput.value = "";
   if (descInput) descInput.value = "";
 
+  updateGroupHabitSelection();
   modal.classList.add("active");
+}
+
+function bindGroupHabitSelection() {
+  const checkboxes = document.querySelectorAll(
+    '#createGroupHabits input[type="checkbox"]',
+  );
+  checkboxes.forEach((cb) => {
+    cb.addEventListener("change", updateGroupHabitSelection);
+    const card = cb.closest(".group-habit-card");
+    if (card) {
+      cb.addEventListener("focus", () => card.classList.add("focus"));
+      cb.addEventListener("blur", () => card.classList.remove("focus"));
+    }
+  });
+  updateGroupHabitSelection();
+}
+
+function updateGroupHabitSelection() {
+  const checkboxes = document.querySelectorAll(
+    '#createGroupHabits input[type="checkbox"]',
+  );
+  let count = 0;
+  checkboxes.forEach((cb) => {
+    const card = cb.closest(".group-habit-card");
+    if (card) card.classList.toggle("selected", cb.checked);
+    if (cb.checked) count++;
+  });
+  const counterEl = document.getElementById("createGroupHabitsCount");
+  if (counterEl) {
+    counterEl.textContent =
+      count === 0
+        ? "Aucune sélection"
+        : `${count} habitude${count > 1 ? "s" : ""} sélectionnée${count > 1 ? "s" : ""}`;
+  }
 }
 
 export function closeCreateGroupModal() {
@@ -723,16 +770,40 @@ export async function openGroupDetail(groupId) {
                 </div>
 
                 <div class="group-detail-habits">
-                    <div class="group-detail-habits-title">Habitudes du groupe</div>
-                    <div class="group-detail-habits-list">
-                        ${(g.habitNames || []).map((n) => `<span class="group-habit-tag">${escapeHtml(n)}</span>`).join("")}
+                    <div class="group-habits-panel">
+                        <div class="group-habits-header">
+                            <div class="group-habits-title">
+                                <div class="group-habits-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 1.9 5.8L20 9l-4.5 3.3L16 18l-4-2.7L8 18l.5-5.7L4 9l6.1-1.2L12 2Z"/></svg></div>
+                                <div>
+                                    <div class="group-habits-label">Habitudes du groupe</div>
+                                    <div class="group-habits-count">${(g.habitNames || []).length || 0} sélectionnée${(g.habitNames || []).length > 1 ? "s" : ""}</div>
+                                </div>
+                            </div>
+                            <div class="group-habits-chip">${(g.habitNames || []).length || 0} à suivre</div>
+                        </div>
+                        <div class="group-habits-grid">
+                            ${
+                              (g.habitNames || []).length
+                                ? (g.habitNames || [])
+                                    .map(
+                                      (n, idx) => `
+                                    <div class="group-habit-pill">
+                                        <span class="group-habit-dot"></span>
+                                        <span class="group-habit-pill-name">${escapeHtml(n)}</span>
+                                    </div>
+                                `,
+                                    )
+                                    .join("")
+                                : `<div class="group-habits-empty">Aucune habitude définie pour l'instant</div>`
+                            }
+                        </div>
                     </div>
                 </div>
 
                 <div class="group-tabs">
-                    <button class="group-tab active" data-tab="chat" onclick="switchGroupTab('chat', '${groupId}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Chat</button>
-                    <button class="group-tab" data-tab="leaderboard" onclick="switchGroupTab('leaderboard', '${groupId}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> Classement</button>
-                    <button class="group-tab" data-tab="challenges" onclick="switchGroupTab('challenges', '${groupId}')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg> Challenges</button>
+                    <button class="group-tab active" data-tab="chat" onclick="switchGroupTab('chat', '${groupId}')" aria-label="Chat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+                    <button class="group-tab" data-tab="leaderboard" onclick="switchGroupTab('leaderboard', '${groupId}')" aria-label="Classement"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></button>
+                    <button class="group-tab" data-tab="challenges" onclick="switchGroupTab('challenges', '${groupId}')" aria-label="Challenges"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></button>
                 </div>
 
                 <div class="group-tab-content" id="groupTabChat">
